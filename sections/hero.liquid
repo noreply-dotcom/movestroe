@@ -1,0 +1,218 @@
+<section class="hero-section">
+  <div class="hero-slider">
+    {% for block in section.blocks %}
+      <div class="hero-slide{% if forloop.first %} active{% endif %}" {{ block.shopify_attributes }}>
+        {% if block.settings.image %}
+          <img
+            src="{{ block.settings.image | image_url: width: 1200 }}"
+            srcset="
+              {{ block.settings.image | image_url: width: 600 }} 600w,
+              {{ block.settings.image | image_url: width: 900 }} 900w,
+              {{ block.settings.image | image_url: width: 1200 }} 1200w,
+              {{ block.settings.image | image_url: width: 1800 }} 1800w,
+              {{ block.settings.image | image_url: width: 2000 }} 2000w
+            "
+            sizes="100vw"
+            alt="{{ block.settings.image.alt | default: block.settings.title }}"
+            loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+            width="{{ block.settings.image.width }}"
+            height="{{ block.settings.image.height }}"
+          >
+        {% else %}
+          <div class="hero-slide-placeholder">
+            <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+              <rect width="80" height="80" rx="8" fill="#e8e8e8"/>
+              <path d="M20 55L32 40L42 50L52 38L60 55H20Z" fill="#ccc"/>
+              <circle cx="30" cy="30" r="6" fill="#ccc"/>
+            </svg>
+            <p>Upload a hero image in the theme customizer</p>
+          </div>
+        {% endif %}
+        <div class="hero-overlay"></div>
+
+        {% if block.settings.layout == 'split' %}
+          <div class="hero-content hero-content--split">
+            <div class="hero-split-left">
+              <h1 class="hero-title hero-title--large">{{ block.settings.title | newline_to_br }}</h1>
+            </div>
+            <div class="hero-split-right">
+              <h1 class="hero-title hero-title--large">{{ block.settings.title_right | newline_to_br }}</h1>
+            </div>
+          </div>
+          {% if block.settings.subtitle != blank %}
+            <div class="hero-content hero-content--top">
+              <p class="hero-subtitle">{{ block.settings.subtitle }}</p>
+            </div>
+          {% endif %}
+        {% else %}
+          <div class="hero-content hero-content--centered">
+            {% if block.settings.subtitle != blank %}
+              <p class="hero-subtitle">{{ block.settings.subtitle }}</p>
+            {% endif %}
+            <h1 class="hero-title hero-title--large">{{ block.settings.title | newline_to_br }}</h1>
+          </div>
+        {% endif %}
+
+        {% if block.settings.cta_text != blank %}
+          <div class="hero-cta-wrap">
+            <a href="{{ block.settings.cta_link | default: '/collections/all' }}" class="hero-cta-btn">{{ block.settings.cta_text }}</a>
+          </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+
+  {% if section.blocks.size > 1 %}
+    <!-- Navigation Arrows -->
+    <div class="hero-arrows">
+      <button class="hero-arrow hero-arrow--prev" aria-label="Previous slide">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M13 16L7 10L13 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <button class="hero-arrow hero-arrow--next" aria-label="Next slide">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M7 4L13 10L7 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Dot Indicators -->
+    <div class="hero-dots">
+      {% for block in section.blocks %}
+        <span class="dot{% if forloop.first %} active{% endif %}"></span>
+      {% endfor %}
+    </div>
+  {% endif %}
+</section>
+
+<style>
+  .hero-slide-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #f0f0f0;
+    gap: 16px;
+  }
+
+  .hero-slide-placeholder p {
+    color: #999;
+    font-size: 14px;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Hero Slider",
+  "tag": "div",
+  "class": "hero-section-wrapper",
+  "settings": [
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "label": "Autoplay speed (seconds)",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "default": 6,
+      "unit": "s"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Background image",
+          "info": "Recommended: 2000x1200px (3:2 ratio). Keep subject centered for best crop on all devices."
+        },
+        {
+          "type": "select",
+          "id": "layout",
+          "label": "Text layout",
+          "options": [
+            { "value": "centered", "label": "Centered" },
+            { "value": "split", "label": "Split (left & right)" }
+          ],
+          "default": "centered"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "SUBTITLE TEXT"
+        },
+        {
+          "type": "textarea",
+          "id": "title",
+          "label": "Title",
+          "default": "HERO TITLE",
+          "info": "Use line breaks for multi-line titles"
+        },
+        {
+          "type": "textarea",
+          "id": "title_right",
+          "label": "Right title (split layout only)",
+          "info": "Only used when layout is set to Split"
+        },
+        {
+          "type": "text",
+          "id": "cta_text",
+          "label": "Button text",
+          "default": "Shop Now"
+        },
+        {
+          "type": "url",
+          "id": "cta_link",
+          "label": "Button link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Slider",
+      "blocks": [
+        {
+          "type": "slide",
+          "settings": {
+            "layout": "centered",
+            "subtitle": "IVORY, MOCHA, STONE & BLACK",
+            "title": "EQUIP YOUR\nESSENTIALS",
+            "cta_text": "Shop Now"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "layout": "split",
+            "subtitle": "NEW SEASON COLLECTION",
+            "title": "BORN\nTO PLAY",
+            "title_right": "MADE\nTO SHINE",
+            "cta_text": "Shop Now"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "layout": "centered",
+            "subtitle": "PERFORMANCE MEETS STYLE",
+            "title": "MOVE\nTOGETHER",
+            "cta_text": "Shop Now"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
