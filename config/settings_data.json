@@ -1,0 +1,37 @@
+{
+  "current": {
+    "color_primary": "#369FFF",
+    "color_primary_dark": "#1A7FE8",
+    "color_text": "#1a1a1a",
+    "color_background": "#ffffff",
+    "color_background_alt": "#f0f0ff",
+    "color_text_light": "#666666",
+    "font_body": "system",
+    "font_heading": "system",
+    "font_size_base": 16,
+    "menu_main": "main-menu",
+    "show_search": true,
+    "social_facebook": "",
+    "social_instagram": "",
+    "social_tiktok": "",
+    "social_pinterest": "",
+    "image_size": "medium",
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "menu": "main-menu",
+          "logo_width": 100,
+          "show_search": true
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "show_newsletter": true,
+          "show_social": true
+        }
+      }
+    }
+  }
+}

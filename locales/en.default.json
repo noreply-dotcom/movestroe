@@ -1,0 +1,97 @@
+{
+  "general": {
+    "404": {
+      "title": "Page not found",
+      "subtext": "The page you were looking for does not exist"
+    },
+    "newsletter": {
+      "label": "Email address",
+      "success": "Thanks for subscribing",
+      "button": "Subscribe"
+    },
+    "search": {
+      "placeholder": "Search",
+      "results_for": "Search results for \"{terms}\"",
+      "no_results": "No results found for \"{terms}\""
+    }
+  },
+  "accessibility": {
+    "skip_to_text": "Skip to content",
+    "close_menu": "Close menu"
+  },
+  "header": {
+    "menu": "Menu",
+    "search": "Search",
+    "cart": "Cart",
+    "account": "Account"
+  },
+  "footer": {
+    "follow_us": "Follow us",
+    "newsletter_title": "Keep up with MoveTogether",
+    "newsletter_subtitle": "Tune in for the latest news & deals + get discount on your first MoveTogether order!",
+    "privacy_notice": "By entering your email you agree to our Privacy Policy and Terms & Conditions",
+    "copyright": "Copyright &copy; MoveTogether Store. All rights reserved."
+  },
+  "products": {
+    "product_title": "Product",
+    "price": "Price",
+    "add_to_cart": "Add to Cart",
+    "buy_now": "Buy Now",
+    "sold_out": "Sold Out",
+    "quantity": "Quantity",
+    "free_shipping": "Free delivery and free returns",
+    "color": "Color",
+    "size": "Size",
+    "variant": "Variant",
+    "features": "Features",
+    "specifications": "Specifications",
+    "reviews": "Reviews",
+    "faq": "Frequently Asked Questions"
+  },
+  "collection": {
+    "all_products": "All Products",
+    "no_products": "No products available",
+    "filters": "Filters",
+    "sort": "Sort by",
+    "price": "Price",
+    "newest": "Newest",
+    "popular": "Popular",
+    "rating": "Highest Rated"
+  },
+  "homepage": {
+    "hero_title": "BORN TO PLAY.",
+    "hero_subtitle": "28 BETTER LEAGUE COLLECTION",
+    "shop_now": "Shop Now",
+    "categories": "What Are You Looking For?",
+    "new_arrivals": "New Arrivals",
+    "equipment": "Equipment",
+    "view_all": "View All",
+    "featured_in": "As featured in",
+    "trusted_by": "Trusted by millions. Chosen for reliability.",
+    "shop_the_style": "Shop the style you admire!",
+    "meet_the_world": "Meet the MoveTogether World"
+  },
+  "product_page": {
+    "breadcrumb_home": "Home",
+    "technical_specs": "Technical Specification",
+    "important_disclaimers": "Important disclaimers",
+    "frequently_asked": "Frequently asked questions",
+    "feedback": "Feedback",
+    "users_say": "Here's what our users say",
+    "grab_yours": "Grab yours today!",
+    "water_resistant": "Water resistant. Ready for action.",
+    "high_quality_screen": "High quality screen. Vivid graphics.",
+    "smart_design": "Smart design for every lifestyle.",
+    "wellness_system": "Wellness support system on your wrist."
+  },
+  "cart": {
+    "title": "Shopping Cart",
+    "empty": "Your cart is empty",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "tax": "Tax",
+    "total": "Total",
+    "checkout": "Checkout",
+    "continue_shopping": "Continue Shopping"
+  }
+}

@@ -1,0 +1,320 @@
+<div class="fitness-tracker-page">
+
+  <!-- Product Hero Section -->
+  <section class="product-hero">
+    <div class="product-gallery">
+      <div class="main-image">
+        <img src="{{ product.featured_image | default: 'https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?w=600' | img_url: 'master' }}" alt="{{ product.title }}" id="mainImage">
+      </div>
+      <div class="product-info">
+        <div class="breadcrumbs">
+          <a href="/">Home</a> / <span>{{ product.title }}</span>
+        </div>
+        <h1 class="product-title">{{ product.title }}</h1>
+        <div class="price-section">
+          <span class="price">{{ product.price | money }}</span>
+          <span class="shipping-info">Free delivery and free returns</span>
+        </div>
+
+        <!-- Color Selector -->
+        <div class="color-selector">
+          <div class="color-options">
+            <button class="color-option active" data-color="pink" style="background: #FFB6C1;"></button>
+            <button class="color-option" data-color="black" style="background: #000;"></button>
+            <button class="color-option" data-color="purple" style="background: #9370DB;"></button>
+            <button class="color-option" data-color="gray" style="background: #708090;"></button>
+            <button class="color-option" data-color="mint" style="background: #98D8C8;"></button>
+            <button class="color-option" data-color="beige" style="background: #F5DEB3;"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- As Featured In -->
+  <section class="featured-in">
+    <h2>As featured in</h2>
+    <div class="media-logos">
+      <div class="media-card">
+        <h3>Forbes</h3>
+        <p>We evaluated weight loss programs to help you choose the best fit for your goals and lifestyle.</p>
+        <span class="year">2024</span>
+      </div>
+      <div class="media-card">
+        <h3>The Sun</h3>
+        <p>NEW YEAR, NEW YOU MoveTogether review: This health-tracking app is packed with useful features.</p>
+        <span class="year">2023</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Statistics -->
+  <section class="trust-stats">
+    <h2>Health and fitness</h2>
+    <h3>Trusted by millions. Chosen for reliability.</h3>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-number">150</div>
+        <div class="stat-unit">thousand</div>
+        <p>MoveTogether Fitness Trackers sold across the world</p>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">150</div>
+        <div class="stat-unit">million</div>
+        <p>People downloaded the MoveTogether: Health Coaching app</p>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">20</div>
+        <div class="stat-unit">million</div>
+        <p>Followers on social media across all platforms</p>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">1.2</div>
+        <div class="stat-unit">million</div>
+        <p>Ratings of MoveTogether: Health Coaching</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Product Features -->
+  <section class="product-features">
+
+    <!-- Water Resistant Feature -->
+    <div class="feature-block">
+      <div class="feature-content">
+        <span class="feature-icon">💧</span>
+        <h3>Water resistant.<br>Ready for action.<sup>[3]</sup></h3>
+        <div class="feature-image">
+          <img src="https://images.unsplash.com/photo-1576633587382-13ddf37b1fc1?w=600" alt="Water resistant">
+          <div class="waterproof-badge">
+            <span>IP68</span>
+            <small>WATERPROOF</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Display Feature -->
+    <div class="feature-block light-bg">
+      <div class="feature-content">
+        <span class="feature-icon">☀️</span>
+        <h3>High quality screen.<br>Vivid graphics.</h3>
+        <div class="feature-image">
+          <img src="https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=600" alt="AMOLED Display">
+        </div>
+        <div class="feature-specs">
+          <span class="spec-label">Display</span>
+          <h4>FULL TOUCH & AMOLED</h4>
+        </div>
+      </div>
+    </div>
+
+    <!-- Battery Feature -->
+    <div class="feature-block">
+      <div class="feature-content">
+        <h3>Smart design<br>for every lifestyle.</h3>
+        <div class="battery-feature">
+          <h4>Charges in minutes.<sup>[1]</sup><br>Lasts for days.</h4>
+          <div class="battery-stat">
+            <span>Up to</span>
+            <h2>7 days <sup>[1]</sup></h2>
+            <p>Stay on the move without being tied to the charger.</p>
+          </div>
+          <div class="charging-image">
+            <img src="https://images.unsplash.com/photo-1609205807107-e8ec6672f0b2?w=600" alt="Charging">
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Wellness System -->
+  <section class="wellness-system">
+    <h3>MoveTogether Fitness Tracker</h3>
+    <h2>Wellness support system on your wrist.</h2>
+
+    <div class="wellness-features">
+      <div class="wellness-image">
+        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800" alt="Sleep tracking">
+      </div>
+
+      <div class="metrics-display">
+        <div class="metric-card">
+          <h4>AVERAGE TIME ASLEEP</h4>
+          <p class="metric-value">7h 3min</p>
+          <div class="chart-placeholder"></div>
+        </div>
+        <div class="metric-card">
+          <h4>TOTAL STEPS</h4>
+          <p class="metric-value">12,246</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tracking-info">
+      <div class="tracking-section">
+        <h4>Sleep</h4>
+        <p>Keep achieving the right balance for a restful sleep! Continue tracking your goals each night.</p>
+      </div>
+      <div class="tracking-section">
+        <h4>Steps</h4>
+        <p>Don't forget to track your progress to meet your goal!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- App Integration -->
+  <section class="app-integration">
+    <h3>MoveTogether: Health Coaching</h3>
+    <h2>All in one app.<sup>[7]</sup></h2>
+
+    <div class="app-screens">
+      <img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=400" alt="App screen 1">
+      <img src="https://images.unsplash.com/photo-1611532736579-6b16e2786cfd?w=400" alt="App screen 2">
+      <img src="https://images.unsplash.com/photo-1611532736561-4b66b82b5b3e?w=400" alt="App screen 3">
+    </div>
+  </section>
+
+  <!-- Technical Specifications -->
+  <section class="tech-specs">
+    <h2>Technical Specification</h2>
+    <div class="specs-grid">
+      <div class="spec-item">
+        <span class="spec-label">CPU:</span>
+        <span class="spec-value">Realtek8762D</span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-label">Charging method:</span>
+        <span class="spec-value">Magnetic charging</span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-label">Battery type:</span>
+        <span class="spec-value">Polymer lithium battery</span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-label">Data transfer:</span>
+        <span class="spec-value">Bluetooth 5.1</span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-label">Device requirement:</span>
+        <span class="spec-value">Android 9.0/above; iOS 15.0/above</span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-label">Screen type:</span>
+        <span class="spec-value">Amoled</span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-label">Waterproof:</span>
+        <span class="spec-value">IP68</span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-label">Working temperature:</span>
+        <span class="spec-value">-5C ~ 45C</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Important Disclaimers -->
+  <section class="disclaimers">
+    <h2>Important disclaimers</h2>
+    <ol>
+      <li>The battery life of MoveTogether Fitness Tracker may vary depending on the manner of use, settings, operating conditions, and other factors.</li>
+      <li>MoveTogether Fitness Tracker is not a medical device. It is not intended to predict, diagnose, prevent, or cure any disease.</li>
+      <li>MoveTogether Fitness Tracker is rated with IP68 Water Resistance.</li>
+      <li>There's a detector monitoring your sleep at night.</li>
+      <li>All MoveTogether Fitness Tracker's images available above are used for illustrative purposes only.</li>
+      <li>In case you have a pacemaker, implantable cardioverter defibrillator, or other implanted device, we strongly recommend you consult your healthcare provider.</li>
+      <li>The screens presented are available only with a paid subscription in MoveTogether app.</li>
+    </ol>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq-section">
+    <h2>Frequently asked questions</h2>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>What is the delivery time for MoveTogether Fitness Tracker?</summary>
+        <p>Standard delivery takes 5-7 business days. Express shipping options are available at checkout.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Do you ship internationally?</summary>
+        <p>Yes, we ship to most countries worldwide. Shipping costs and delivery times vary by location.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Does MoveTogether Fitness Tracker work without a phone?</summary>
+        <p>The tracker can record basic metrics independently, but requires phone connection for full functionality.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Does MoveTogether Fitness Tracker work both with iOS and Android?</summary>
+        <p>Yes, it's compatible with Android 9.0/above and iOS 15.0/above.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Is MoveTogether Fitness Tracker waterproof for swimming?</summary>
+        <p>The tracker has IP68 water resistance but we don't recommend using it in salt or chlorinated water.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Can I wear my MoveTogether Fitness Tracker in the shower?</summary>
+        <p>We don't recommend using the band in hot showers/baths, saunas, or high-temperature environments.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What should I pay attention to when wearing?</summary>
+        <p>Ensure proper fit - not too tight or loose. Clean the band regularly and let your skin breathe periodically.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- Reviews Section -->
+  <section class="reviews-section">
+    <h2>Feedback</h2>
+    <h3>Here's what our users say</h3>
+
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-header">
+          <span class="reviewer-name">Georja V.</span>
+          <div class="stars">⭐⭐⭐⭐⭐</div>
+        </div>
+        <h4>Absolutely perfect!</h4>
+        <p>Absolutely perfect! It's on charge plugged into my laptop right now.</p>
+      </div>
+
+      <div class="review-card">
+        <div class="review-header">
+          <span class="reviewer-name">Lisa S.</span>
+          <div class="stars">⭐⭐⭐⭐⭐</div>
+        </div>
+        <h4>MoveTogether is the Best!</h4>
+        <p>MoveTogether is the Best! The MoveTogether app is intuitive and requires no time to get started!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <h2>Grab yours today!</h2>
+    <div class="cta-product">
+      <img src="{{ product.featured_image | default: 'https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?w=400' | img_url: 'master' }}" alt="{{ product.title }}">
+      <div class="color-selector-cta">
+        <button class="color-option active" style="background: #FFB6C1;"></button>
+        <button class="color-option" style="background: #000;"></button>
+        <button class="color-option" style="background: #9370DB;"></button>
+        <button class="color-option" style="background: #708090;"></button>
+        <button class="color-option" style="background: #98D8C8;"></button>
+        <button class="color-option" style="background: #F5DEB3;"></button>
+      </div>
+      <p class="price-cta">{{ product.price | money }}</p>
+    </div>
+  </section>
+
+  <!-- Footer is rendered by theme.liquid via sections/footer.liquid -->
+
+  <!-- Sticky Buy Button -->
+  <div class="sticky-buy-button">
+    <form action="/cart/add" method="post">
+      <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+      <button type="submit" class="buy-now-btn">Buy Now - {{ product.price | money }}</button>
+    </form>
+  </div>
+
+</div>
