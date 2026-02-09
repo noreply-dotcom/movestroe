@@ -36,7 +36,7 @@
           "slide_1": {
             "type": "slide",
             "settings": {
-              "image": "shopify://shop_images/LA_Style.webp",
+              "image": "shopify://shop_images/WearMT.webp",
               "layout": "centered",
               "subtitle": "IVORY, MOCHA, STONE & BLACK",
               "title": "EQUIP YOUR\nESSENTIALS",
@@ -48,7 +48,7 @@
           "slide_2": {
             "type": "slide",
             "settings": {
-              "image": "shopify://shop_images/WearMT.webp",
+              "image": "shopify://shop_images/LA_Style.webp",
               "layout": "split",
               "subtitle": "NEW SEASON COLLECTION",
               "title": "BORN\nTO PLAY",
@@ -76,7 +76,7 @@
           "slide_3"
         ],
         "settings": {
-          "autoplay_speed": 6
+          "autoplay_speed": 3
         }
       },
       "footer": {
