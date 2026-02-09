@@ -134,9 +134,9 @@
   </div>
 
   <!-- Cart Drawer -->
-  <div class="cart-drawer" aria-label="Shopping cart">
+  <div class="cart-drawer" id="cart-drawer" aria-label="Shopping cart">
     <div class="cart-drawer-header">
-      <h2 class="cart-drawer-title">Shopping cart</h2>
+      <h2 class="cart-drawer-title">Shopping cart <span class="cart-drawer-count"></span></h2>
       <button class="cart-drawer-close" aria-label="Close cart">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
           <line x1="5" y1="5" x2="19" y2="19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
@@ -144,20 +144,24 @@
         </svg>
       </button>
     </div>
-    <div class="cart-drawer-body">
-      <div class="cart-empty-state">
-        <h3>Your Cart is Empty</h3>
-        <p>There doesn't seem to be anything here.</p>
-        <svg class="cart-empty-icon" width="80" height="90" viewBox="0 0 80 90" fill="none">
-          <rect x="15" y="10" width="50" height="55" rx="6" fill="#e8e8e8"/>
-          <circle cx="28" cy="20" r="3" fill="#ccc"/>
-          <circle cx="52" cy="20" r="3" fill="#ccc"/>
-          <path d="M28 15C28 12 32 8 40 8C48 8 52 12 52 15" stroke="#ccc" stroke-width="2" fill="none"/>
-          <circle cx="50" cy="60" r="18" fill="#e0e0e0"/>
-          <circle cx="50" cy="60" r="10" stroke="#ccc" stroke-width="2" fill="none"/>
-          <line x1="57" y1="67" x2="65" y2="75" stroke="#ccc" stroke-width="3" stroke-linecap="round"/>
-        </svg>
-        <a href="/collections/all" class="cart-start-shopping">Start Shopping</a>
+    <div class="cart-drawer-body" id="cart-drawer-body">
+      <!-- Items rendered dynamically by JS -->
+    </div>
+    <div class="cart-drawer-footer" id="cart-drawer-footer" style="display:none;">
+      <div class="cd-shipping-bar" id="cd-shipping-bar">
+        <div class="cd-shipping-track"><div class="cd-shipping-fill" id="cd-shipping-fill"></div></div>
+        <p class="cd-shipping-msg" id="cd-shipping-msg"></p>
+      </div>
+      <div class="cart-drawer-subtotal">
+        <span>Subtotal</span>
+        <span class="cart-drawer-total-price" id="cart-drawer-total"></span>
+      </div>
+      <a href="/checkout" class="cart-drawer-checkout-btn" id="cart-drawer-checkout">Checkout</a>
+      <a href="/cart" class="cart-drawer-viewcart">View Cart</a>
+      <div class="cd-trust">
+        <span>🔒 Secure checkout</span>
+        <span>🚚 Free shipping over $75</span>
+        <span>↩ 30-day returns</span>
       </div>
     </div>
   </div>
@@ -551,11 +555,17 @@
   .cart-drawer-body {
     flex: 1;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 0;
+  }
+
+  .cart-drawer-body.is-empty {
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
+  /* Empty state */
   .cart-empty-state {
     text-align: center;
     padding: 40px 24px;
@@ -571,11 +581,6 @@
     font-size: 14px;
     color: #999;
     margin-bottom: 30px;
-  }
-
-  .cart-empty-icon {
-    display: block;
-    margin: 0 auto 30px;
   }
 
   .cart-start-shopping {
@@ -598,6 +603,237 @@
     background: #333;
   }
 
+  /* Cart drawer items */
+  .cd-item {
+    display: flex;
+    gap: 16px;
+    padding: 16px 24px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .cd-item-image {
+    width: 72px;
+    height: 72px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #f5f5f5;
+    flex-shrink: 0;
+  }
+
+  .cd-item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .cd-item-details {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .cd-item-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 4px;
+    text-decoration: none;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .cd-item-variant {
+    font-size: 12px;
+    color: #999;
+    margin-bottom: 8px;
+  }
+
+  .cd-item-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .cd-qty {
+    display: flex;
+    align-items: center;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 980px;
+    overflow: hidden;
+  }
+
+  .cd-qty button {
+    width: 30px;
+    height: 30px;
+    border: none;
+    background: none;
+    font-size: 16px;
+    cursor: pointer;
+    color: #1a1a1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .cd-qty button:hover {
+    background: #f5f5f5;
+  }
+
+  .cd-qty span {
+    width: 28px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .cd-item-price {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .cd-item-remove {
+    font-size: 11px;
+    color: #bbb;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 0;
+    margin-top: 4px;
+    display: block;
+  }
+
+  .cd-item-remove:hover {
+    color: #e53935;
+  }
+
+  /* Cart drawer footer */
+  .cart-drawer-footer {
+    border-top: 1px solid #e8e8e8;
+    padding: 20px 24px;
+    background: white;
+  }
+
+  .cart-drawer-subtotal {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 4px;
+  }
+
+  .cart-drawer-subtotal span:first-child {
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  .cart-drawer-total-price {
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .cart-drawer-note {
+    font-size: 12px;
+    color: #999;
+    margin-bottom: 16px;
+  }
+
+  .cart-drawer-checkout-btn {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    background: #369FFF;
+    color: white;
+    text-decoration: none;
+    border-radius: 980px;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    transition: background 0.2s, transform 0.2s;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  .cart-drawer-checkout-btn:hover {
+    background: #1a7fe8;
+    transform: scale(1.02);
+  }
+
+  .cart-drawer-viewcart {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 13px;
+    color: #666;
+    text-decoration: underline;
+  }
+
+  .cart-drawer-viewcart:hover {
+    color: #1a1a1a;
+  }
+
+  .cart-drawer-count {
+    font-size: 14px;
+    font-weight: 400;
+    color: #999;
+  }
+
+  /* Shipping progress bar */
+  .cd-shipping-bar {
+    margin-bottom: 16px;
+  }
+
+  .cd-shipping-track {
+    height: 4px;
+    background: #e8e8e8;
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 8px;
+  }
+
+  .cd-shipping-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #369FFF, #36deff);
+    border-radius: 2px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+
+  .cd-shipping-fill.cd-shipping-full {
+    background: #22c55e;
+  }
+
+  .cd-shipping-msg {
+    font-size: 12px;
+    color: #666;
+    text-align: center;
+    margin: 0;
+  }
+
+  .cd-shipping-msg.cd-shipping-earned {
+    color: #22c55e;
+    font-weight: 600;
+  }
+
+  /* Trust signals */
+  .cd-trust {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid #f0f0f0;
+    flex-wrap: wrap;
+  }
+
+  .cd-trust span {
+    font-size: 11px;
+    color: #999;
+    white-space: nowrap;
+  }
+
   /* Cart drawer overlay */
   .cart-overlay {
     display: none;
@@ -606,10 +842,8 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.4);
+    background: rgba(0,0,0,0.5);
     z-index: 299;
-    backdrop-filter: blur(2px);
-    -webkit-backdrop-filter: blur(2px);
   }
 
   .cart-overlay.active {

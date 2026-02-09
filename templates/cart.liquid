@@ -1,8 +1,23 @@
 <div class="cart-page">
   <div class="cart-container">
     {% if cart.item_count > 0 %}
-      <h1 class="cart-title">Your Cart</h1>
-      <form action="/cart" method="post" novalidate>
+      <h1 class="cart-title">Your Cart ({{ cart.item_count }})</h1>
+
+      <!-- Free shipping progress bar -->
+      <div class="cart-shipping-bar">
+        {% assign threshold = 7500 %}
+        {% assign remaining_cents = threshold | minus: cart.total_price %}
+        {% if cart.total_price >= threshold %}
+          <div class="cart-shipping-track"><div class="cart-shipping-fill cart-shipping-full" style="width:100%"></div></div>
+          <p class="cart-shipping-msg cart-shipping-earned">✓ You've earned free shipping!</p>
+        {% else %}
+          {% assign pct = cart.total_price | times: 100 | divided_by: threshold %}
+          <div class="cart-shipping-track"><div class="cart-shipping-fill" style="width:{{ pct }}%"></div></div>
+          <p class="cart-shipping-msg">You're {{ remaining_cents | money }} away from free shipping</p>
+        {% endif %}
+      </div>
+
+      <form action="/cart" method="post" novalidate id="cart-form">
         <div class="cart-items">
           {% for item in cart.items %}
             <div class="cart-item">
@@ -22,19 +37,19 @@
                 {% unless item.variant.title == 'Default Title' %}
                   <p class="cart-item-variant">{{ item.variant.title }}</p>
                 {% endunless %}
-                <p class="cart-item-price">{{ item.price | money }}</p>
+                <p class="cart-item-price">{{ item.original_price | money }}</p>
               </div>
               <div class="cart-item-quantity">
                 <label for="updates_{{ item.key }}" class="visually-hidden">Quantity</label>
                 <div class="quantity-selector">
-                  <button type="button" class="qty-btn qty-minus" aria-label="Decrease quantity" data-key="{{ item.key }}">−</button>
+                  <button type="button" class="qty-btn qty-minus" data-key="{{ item.key }}" aria-label="Decrease quantity">−</button>
                   <input type="number" name="updates[]" id="updates_{{ item.key }}" value="{{ item.quantity }}" min="0" class="qty-input" data-key="{{ item.key }}">
-                  <button type="button" class="qty-btn qty-plus" aria-label="Increase quantity" data-key="{{ item.key }}">+</button>
+                  <button type="button" class="qty-btn qty-plus" data-key="{{ item.key }}" aria-label="Increase quantity">+</button>
                 </div>
               </div>
               <div class="cart-item-total">
-                <span>{{ item.line_price | money }}</span>
-                <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0" class="cart-item-remove" aria-label="Remove {{ item.title }}">Remove</a>
+                <span>{{ item.final_line_price | money }}</span>
+                <button type="button" class="cart-item-remove" data-key="{{ item.key }}" aria-label="Remove {{ item.title }}">Remove</button>
               </div>
             </div>
           {% endfor %}
@@ -50,6 +65,24 @@
           <a href="/collections/all" class="cart-continue">Continue Shopping</a>
         </div>
       </form>
+
+      <div class="cart-trust">
+        <span>🔒 Secure checkout</span>
+        <span>🚚 Free shipping over $75</span>
+        <span>↩ 30-day returns</span>
+      </div>
+      <div class="cart-payments">
+        <span class="cart-payments-label">We accept</span>
+        <div class="cart-payment-icons">
+          <span class="pay-icon">Visa</span>
+          <span class="pay-icon">Mastercard</span>
+          <span class="pay-icon">Amex</span>
+          <span class="pay-icon">PayPal</span>
+          <span class="pay-icon">Apple Pay</span>
+          <span class="pay-icon">Google Pay</span>
+          <span class="pay-icon">Shop Pay</span>
+        </div>
+      </div>
     {% else %}
       <div class="cart-empty">
         <h1 class="cart-title">Your Cart is Empty</h1>
@@ -65,8 +98,21 @@
 .cart-container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
 .cart-title {
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: 36px; font-weight: 700; margin-bottom: 40px; color: #1a1a1a;
+  font-size: 36px; font-weight: 700; margin-bottom: 24px; color: #1a1a1a;
 }
+/* Shipping bar */
+.cart-shipping-bar { margin-bottom: 32px; }
+.cart-shipping-track {
+  height: 4px; background: #e0e0e0; border-radius: 2px; overflow: hidden; margin-bottom: 8px;
+}
+.cart-shipping-fill {
+  height: 100%; background: linear-gradient(90deg, #369FFF, #36deff); border-radius: 2px;
+  transition: width 0.4s ease;
+}
+.cart-shipping-full { background: #22c55e; }
+.cart-shipping-msg { font-size: 13px; color: #666; text-align: center; margin: 0; }
+.cart-shipping-earned { color: #22c55e; font-weight: 600; }
+
 .cart-items { display: flex; flex-direction: column; gap: 0; }
 .cart-item {
   display: grid; grid-template-columns: 100px 1fr auto auto;
@@ -107,6 +153,7 @@
 .cart-item-remove {
   font-size: 13px; color: #999; text-decoration: underline;
   margin-top: 8px; display: inline-block; transition: color 0.2s;
+  background: none; border: none; cursor: pointer; padding: 0;
 }
 .cart-item-remove:hover { color: #e53935; }
 .cart-footer { margin-top: 40px; text-align: right; }
@@ -123,19 +170,34 @@
   border-radius: 980px; font-size: 17px; font-weight: 600;
   cursor: pointer; transition: background 0.3s, transform 0.3s;
   text-decoration: none; font-family: inherit;
+  width: 100%;
+  text-align: center;
 }
-.cart-checkout-btn:hover { background: #1a7fe8; transform: scale(1.03); }
+.cart-checkout-btn:hover { background: #1a7fe8; transform: scale(1.02); }
 .cart-continue {
   display: block; margin-top: 16px; font-size: 14px;
-  color: #666; text-decoration: underline;
+  color: #666; text-decoration: underline; text-align: center;
 }
 .cart-continue:hover { color: #1a1a1a; }
 .cart-empty { text-align: center; padding: 80px 0; }
 .cart-empty p { font-size: 17px; color: #888; margin: 16px 0 32px; }
+.cart-empty .cart-checkout-btn { width: auto; }
 .visually-hidden {
   position: absolute; width: 1px; height: 1px;
   padding: 0; margin: -1px; overflow: hidden;
   clip: rect(0, 0, 0, 0); border: 0;
+}
+/* Trust & payment */
+.cart-trust {
+  display: flex; gap: 20px; justify-content: center; margin-top: 32px; flex-wrap: wrap;
+}
+.cart-trust span { font-size: 13px; color: #888; }
+.cart-payments { text-align: center; margin-top: 20px; }
+.cart-payments-label { font-size: 11px; color: #bbb; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 10px; }
+.cart-payment-icons { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+.pay-icon {
+  padding: 4px 10px; border: 1px solid #e0e0e0; border-radius: 4px;
+  font-size: 11px; font-weight: 600; color: #888; background: #fff;
 }
 @media (max-width: 768px) {
   .cart-item { grid-template-columns: 80px 1fr; gap: 16px; }
@@ -148,19 +210,49 @@
 
 <script>
 (function() {
-  // Quantity +/- buttons
+  // AJAX quantity updates for cart page
+  function updateCartItem(key, qty) {
+    fetch('/cart/change.js', {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: key, quantity: qty })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function() {
+      window.location.reload();
+    })
+    .catch(function() {
+      window.location.reload();
+    });
+  }
+
   document.querySelectorAll('.qty-minus').forEach(function(btn) {
     btn.addEventListener('click', function() {
+      var key = this.getAttribute('data-key');
       var input = this.parentNode.querySelector('.qty-input');
       var val = parseInt(input.value, 10);
-      if (val > 0) { input.value = val - 1; input.closest('form').submit(); }
+      if (val > 0) {
+        input.value = val - 1;
+        updateCartItem(key, val - 1);
+      }
     });
   });
+
   document.querySelectorAll('.qty-plus').forEach(function(btn) {
     btn.addEventListener('click', function() {
+      var key = this.getAttribute('data-key');
       var input = this.parentNode.querySelector('.qty-input');
-      input.value = parseInt(input.value, 10) + 1;
-      input.closest('form').submit();
+      var val = parseInt(input.value, 10);
+      input.value = val + 1;
+      updateCartItem(key, val + 1);
+    });
+  });
+
+  document.querySelectorAll('.cart-item-remove').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var key = this.getAttribute('data-key');
+      updateCartItem(key, 0);
     });
   });
 })();

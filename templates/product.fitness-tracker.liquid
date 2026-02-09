@@ -16,16 +16,31 @@
           <span class="shipping-info">Free delivery and free returns</span>
         </div>
 
-        <!-- Color Selector -->
-        <div class="color-selector">
-          <div class="color-options">
-            <button class="color-option active" data-color="pink" style="background: #FFB6C1;"></button>
-            <button class="color-option" data-color="black" style="background: #000;"></button>
-            <button class="color-option" data-color="purple" style="background: #9370DB;"></button>
-            <button class="color-option" data-color="gray" style="background: #708090;"></button>
-            <button class="color-option" data-color="mint" style="background: #98D8C8;"></button>
-            <button class="color-option" data-color="beige" style="background: #F5DEB3;"></button>
+        <!-- Variant Selector -->
+        {% if product.variants.size > 1 %}
+          <div class="color-selector">
+            <div class="color-options">
+              {% for variant in product.variants %}
+                <label class="variant-label{% if forloop.first %} active{% endif %}">
+                  <input type="radio" name="variant-select" value="{{ variant.id }}" {% if forloop.first %}checked{% endif %}>
+                  <span>{{ variant.title }}</span>
+                </label>
+              {% endfor %}
+            </div>
           </div>
+        {% endif %}
+
+        <!-- Add to Cart Form -->
+        <form action="/cart/add" method="post" class="product-add-form">
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" id="ft-variant-id">
+          <button type="submit" class="add-to-cart-btn">
+            Add to Cart — {{ product.price | money }}
+          </button>
+        </form>
+        <div class="product-trust-signals">
+          <span>🔒 Secure checkout</span>
+          <span>🚚 Free shipping over $75</span>
+          <span>↩ 30-day returns</span>
         </div>
       </div>
     </div>
@@ -295,15 +310,11 @@
     <h2>Grab yours today!</h2>
     <div class="cta-product">
       <img src="{{ product.featured_image | default: 'https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?w=400' | img_url: 'master' }}" alt="{{ product.title }}">
-      <div class="color-selector-cta">
-        <button class="color-option active" style="background: #FFB6C1;"></button>
-        <button class="color-option" style="background: #000;"></button>
-        <button class="color-option" style="background: #9370DB;"></button>
-        <button class="color-option" style="background: #708090;"></button>
-        <button class="color-option" style="background: #98D8C8;"></button>
-        <button class="color-option" style="background: #F5DEB3;"></button>
-      </div>
       <p class="price-cta">{{ product.price | money }}</p>
+      <form action="/cart/add" method="post" class="cta-add-form">
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+      </form>
     </div>
   </section>
 
@@ -318,3 +329,71 @@
   </div>
 
 </div>
+
+<style>
+.product-add-form {
+  margin-top: 24px;
+}
+.add-to-cart-btn {
+  display: block;
+  width: 100%;
+  padding: 16px 32px;
+  background: #369FFF;
+  color: white;
+  border: none;
+  border-radius: 980px;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+  font-family: inherit;
+}
+.add-to-cart-btn:hover {
+  background: #1a7fe8;
+  transform: scale(1.03);
+}
+.variant-label {
+  display: inline-block;
+  cursor: pointer;
+  margin: 0 4px 8px 0;
+}
+.variant-label input { display: none; }
+.variant-label span {
+  display: inline-block;
+  padding: 8px 20px;
+  border: 1.5px solid #ddd;
+  border-radius: 980px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+.variant-label input:checked + span {
+  border-color: #1a1a1a;
+  background: #1a1a1a;
+  color: white;
+}
+.product-trust-signals {
+  display: flex; gap: 14px; margin-top: 16px; flex-wrap: wrap;
+}
+.product-trust-signals span {
+  font-size: 12px; color: #999; white-space: nowrap;
+}
+.cta-add-form { margin-top: 16px; }
+.cta-add-form .add-to-cart-btn { max-width: 300px; margin: 0 auto; }
+</style>
+
+<script>
+(function() {
+  var variantRadios = document.querySelectorAll('input[name="variant-select"]');
+  var variantInputs = document.querySelectorAll('input[name="id"]');
+  if (variantRadios.length > 0) {
+    variantRadios.forEach(function(radio) {
+      radio.addEventListener('change', function() {
+        variantInputs.forEach(function(input) { input.value = radio.value; });
+        document.querySelectorAll('.variant-label').forEach(function(l) { l.classList.remove('active'); });
+        radio.parentNode.classList.add('active');
+      });
+    });
+  }
+})();
+</script>
