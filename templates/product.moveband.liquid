@@ -1,0 +1,1132 @@
+<div class="mb-page">
+
+<!-- ============================================================
+     SECTION 1: HERO — Full viewport, dark, floating product
+     ============================================================ -->
+<section class="mb-hero">
+  <div class="mb-hero-glow"></div>
+  <div class="mb-hero-product mb-reveal mb-reveal--scale" data-delay="200">
+    <!-- UPLOAD: Product hero shot — transparent PNG of MoveBand, ~1000x1000px -->
+    <div class="mb-media-slot mb-media-slot--hero" data-label="Product Hero Image">
+      {% if product.featured_image %}
+        <img
+          src="{{ product.featured_image | image_url: width: 1000 }}"
+          srcset="{{ product.featured_image | image_url: width: 500 }} 500w, {{ product.featured_image | image_url: width: 800 }} 800w, {{ product.featured_image | image_url: width: 1000 }} 1000w"
+          sizes="(max-width: 768px) 280px, 440px"
+          alt="{{ product.title }}"
+          loading="eager"
+        >
+      {% else %}
+        <div class="mb-placeholder mb-placeholder--dark">
+          <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><rect x="20" y="4" width="24" height="56" rx="12" stroke="#444" stroke-width="2"/><rect x="24" y="16" width="16" height="20" rx="3" stroke="#555" stroke-width="1.5"/><circle cx="32" cy="48" r="3" stroke="#555" stroke-width="1.5"/></svg>
+          <span>Product Hero Image</span>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+  <div class="mb-hero-content">
+    <p class="mb-hero-eyebrow mb-reveal mb-reveal--up">Introducing</p>
+    <h1 class="mb-hero-title mb-reveal mb-reveal--up" data-delay="100">MoveBand</h1>
+    <p class="mb-hero-tagline mb-reveal mb-reveal--up" data-delay="200">Move Smarter. Live Better.</p>
+    <div class="mb-hero-price mb-reveal mb-reveal--up" data-delay="300">
+      <span>From {{ product.price | money }}</span>
+    </div>
+    <a href="#mb-buy" class="mb-hero-cta mb-reveal mb-reveal--up" data-delay="400">Buy</a>
+  </div>
+  <div class="mb-scroll-indicator">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 5V19M12 19L5 12M12 19L19 12" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 2: STATEMENT — Big text reveal
+     ============================================================ -->
+<section class="mb-statement">
+  <div class="mb-container">
+    <h2 class="mb-statement-text mb-reveal mb-reveal--up">
+      The most advanced<br>fitness tracker<br>we've ever created.
+    </h2>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 3: HEALTH MONITORING — Split layout
+     ============================================================ -->
+<section class="mb-section mb-section--dark">
+  <div class="mb-container">
+    <div class="mb-split">
+      <div class="mb-split-media mb-reveal mb-reveal--left">
+        <!-- UPLOAD: Close-up of MoveBand showing heart rate screen — 800x1000px -->
+        <div class="mb-media-slot mb-media-slot--portrait" data-label="Health Monitoring Image">
+          <div class="mb-placeholder mb-placeholder--light">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><path d="M24 42S6 30 6 18C6 10 12 6 18 6C21 6 23 7.5 24 9C25 7.5 27 6 30 6C36 6 42 10 42 18C42 30 24 42 24 42Z" stroke="#999" stroke-width="2"/></svg>
+            <span>Health Screen Close-up</span>
+          </div>
+        </div>
+      </div>
+      <div class="mb-split-content mb-reveal mb-reveal--right">
+        <p class="mb-section-eyebrow">Health</p>
+        <h2 class="mb-section-title">Your health.<br>Always in focus.</h2>
+        <p class="mb-section-body">Advanced sensors work around the clock so you can understand your body better than ever before.</p>
+        <div class="mb-feature-list">
+          <div class="mb-feature-item">
+            <div class="mb-feature-icon">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M14 24S4 18 4 11C4 7 7.5 4 11 4C12.8 4 14 5 14 5S15.2 4 17 4C20.5 4 24 7 24 11C24 18 14 24 14 24Z" stroke="currentColor" stroke-width="1.5"/><path d="M4 14H10L12 10L15 18L17 14H24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div>
+              <h4>Heart Rate Monitoring</h4>
+              <p>24/7 continuous tracking with real-time alerts</p>
+            </div>
+          </div>
+          <div class="mb-feature-item">
+            <div class="mb-feature-icon">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M14 8V14L18 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="14" cy="14" r="2" fill="currentColor"/></svg>
+            </div>
+            <div>
+              <h4>Blood Oxygen (SpO2)</h4>
+              <p>Measure your blood oxygen levels anytime</p>
+            </div>
+          </div>
+          <div class="mb-feature-item">
+            <div class="mb-feature-icon">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M6 20C6 20 8 12 14 12C20 12 22 20 22 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M3 20H25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="14" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg>
+            </div>
+            <div>
+              <h4>Sleep Tracking</h4>
+              <p>Deep, light & REM sleep analysis every night</p>
+            </div>
+          </div>
+          <div class="mb-feature-item">
+            <div class="mb-feature-icon">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M14 9V14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="14" cy="19" r="1.5" fill="currentColor"/></svg>
+            </div>
+            <div>
+              <h4>Stress Management</h4>
+              <p>Guided breathing and stress level monitoring</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 4: DISPLAY — Full-width showcase
+     ============================================================ -->
+<section class="mb-section mb-section--light">
+  <div class="mb-container">
+    <div class="mb-centered-header mb-reveal mb-reveal--up">
+      <p class="mb-section-eyebrow">Display</p>
+      <h2 class="mb-section-title">Brilliant<br>in every light.</h2>
+    </div>
+  </div>
+  <div class="mb-full-media mb-reveal mb-reveal--scale">
+    <!-- UPLOAD: Full-width close-up of AMOLED screen — 2000x900px -->
+    <div class="mb-media-slot mb-media-slot--wide" data-label="Display Close-up">
+      <div class="mb-placeholder mb-placeholder--dark">
+        <svg width="64" height="40" viewBox="0 0 64 40" fill="none"><rect x="4" y="2" width="56" height="36" rx="4" stroke="#444" stroke-width="2"/><rect x="10" y="8" width="20" height="10" rx="2" fill="#333"/><rect x="10" y="22" width="44" height="3" rx="1.5" fill="#333"/><rect x="10" y="28" width="30" height="3" rx="1.5" fill="#333"/></svg>
+        <span>AMOLED Display Close-up</span>
+      </div>
+    </div>
+  </div>
+  <div class="mb-container">
+    <div class="mb-pill-row mb-reveal mb-reveal--up" data-delay="200">
+      <span class="mb-pill">AMOLED</span>
+      <span class="mb-pill">Always-On Display</span>
+      <span class="mb-pill">1000 nits</span>
+      <span class="mb-pill">Gorilla Glass</span>
+    </div>
+    <p class="mb-section-body mb-centered-body mb-reveal mb-reveal--up" data-delay="300">
+      A vivid, edge-to-edge AMOLED display delivers crisp visuals even in direct sunlight. Raise your wrist and your stats are right there — always on, always beautiful.
+    </p>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 5: FITNESS & ACTIVITY — Reversed split
+     ============================================================ -->
+<section class="mb-section mb-section--dark">
+  <div class="mb-container">
+    <div class="mb-split mb-split--reverse">
+      <div class="mb-split-media mb-reveal mb-reveal--right">
+        <!-- UPLOAD: Person working out wearing MoveBand — 800x1000px -->
+        <div class="mb-media-slot mb-media-slot--portrait" data-label="Fitness & Activity Image">
+          <div class="mb-placeholder mb-placeholder--light">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="12" r="6" stroke="#999" stroke-width="2"/><path d="M12 44V32C12 28 16 24 24 24C32 24 36 28 36 32V44" stroke="#999" stroke-width="2"/><path d="M18 32L24 38L30 32" stroke="#999" stroke-width="2" stroke-linecap="round"/></svg>
+            <span>Workout / Activity Shot</span>
+          </div>
+        </div>
+      </div>
+      <div class="mb-split-content mb-reveal mb-reveal--left">
+        <p class="mb-section-eyebrow">Fitness</p>
+        <h2 class="mb-section-title">Built for<br>every workout.</h2>
+        <p class="mb-section-body">From HIIT to yoga, swimming to cycling — MoveBand tracks it all with precision.</p>
+        <div class="mb-stats-row">
+          <div class="mb-stat">
+            <span class="mb-stat-number" data-count="100">0</span><span class="mb-stat-suffix">+</span>
+            <p>Workout Modes</p>
+          </div>
+          <div class="mb-stat">
+            <span class="mb-stat-number" data-count="5">0</span><span class="mb-stat-suffix">ATM</span>
+            <p>Water Resistance</p>
+          </div>
+          <div class="mb-stat">
+            <span class="mb-stat-label">Built-in</span>
+            <span class="mb-stat-big">GPS</span>
+            <p>Route Tracking</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 6: VIDEO / LIFESTYLE — Immersive full-width
+     ============================================================ -->
+<section class="mb-video-section">
+  <div class="mb-video-wrap">
+    <!-- UPLOAD: Lifestyle/promotional video — MP4, 1920x1080, <20MB -->
+    <div class="mb-media-slot mb-media-slot--video" data-label="Promotional Video">
+      <div class="mb-placeholder mb-placeholder--dark mb-placeholder--video">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="24" stroke="#444" stroke-width="2"/><path d="M26 20V44L46 32L26 20Z" fill="#444"/></svg>
+        <span>Promotional Video (MP4)</span>
+      </div>
+    </div>
+  </div>
+  <div class="mb-video-overlay">
+    <h2 class="mb-reveal mb-reveal--up">Designed to move with you.</h2>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 7: DESIGN & MATERIALS
+     ============================================================ -->
+<section class="mb-section mb-section--light">
+  <div class="mb-container">
+    <div class="mb-centered-header mb-reveal mb-reveal--up">
+      <p class="mb-section-eyebrow">Design</p>
+      <h2 class="mb-section-title">Worn all day.<br>Loved every second.</h2>
+      <p class="mb-section-body mb-centered-body">Featherlight, skin-friendly, and available in colors that match your style. Swap bands in seconds for a whole new look.</p>
+    </div>
+    <div class="mb-band-gallery">
+      <!-- UPLOAD: 3 product shots showing different band colors — 600x600px each -->
+      <div class="mb-band-card mb-reveal mb-reveal--up" data-delay="0">
+        <div class="mb-media-slot mb-media-slot--square" data-label="Band Color 1">
+          <div class="mb-placeholder mb-placeholder--subtle">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect x="12" y="2" width="16" height="36" rx="8" stroke="#ccc" stroke-width="1.5"/></svg>
+            <span>Midnight Black</span>
+          </div>
+        </div>
+        <p class="mb-band-name">Midnight Black</p>
+      </div>
+      <div class="mb-band-card mb-reveal mb-reveal--up" data-delay="150">
+        <div class="mb-media-slot mb-media-slot--square" data-label="Band Color 2">
+          <div class="mb-placeholder mb-placeholder--subtle">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect x="12" y="2" width="16" height="36" rx="8" stroke="#ccc" stroke-width="1.5"/></svg>
+            <span>Sand Rose</span>
+          </div>
+        </div>
+        <p class="mb-band-name">Sand Rose</p>
+      </div>
+      <div class="mb-band-card mb-reveal mb-reveal--up" data-delay="300">
+        <div class="mb-media-slot mb-media-slot--square" data-label="Band Color 3">
+          <div class="mb-placeholder mb-placeholder--subtle">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect x="12" y="2" width="16" height="36" rx="8" stroke="#ccc" stroke-width="1.5"/></svg>
+            <span>Arctic Grey</span>
+          </div>
+        </div>
+        <p class="mb-band-name">Arctic Grey</p>
+      </div>
+    </div>
+    <div class="mb-material-pills mb-reveal mb-reveal--up">
+      <span class="mb-pill mb-pill--outline">Ultra-light: 28g</span>
+      <span class="mb-pill mb-pill--outline">Skin-friendly silicone</span>
+      <span class="mb-pill mb-pill--outline">Interchangeable bands</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 8: BATTERY — Big number hero
+     ============================================================ -->
+<section class="mb-battery">
+  <div class="mb-container">
+    <p class="mb-section-eyebrow mb-reveal mb-reveal--up">Battery</p>
+    <div class="mb-battery-hero mb-reveal mb-reveal--scale">
+      <span class="mb-battery-number" data-count="14">0</span>
+      <span class="mb-battery-unit">days</span>
+    </div>
+    <h2 class="mb-battery-sub mb-reveal mb-reveal--up">of battery life on a single charge.</h2>
+    <p class="mb-section-body mb-centered-body mb-reveal mb-reveal--up" data-delay="100">
+      Magnetic fast charging gets you from 0 to 80% in just 45 minutes.<br>Less time on the charger, more time moving.
+    </p>
+    <div class="mb-battery-visual mb-reveal mb-reveal--up" data-delay="200">
+      <!-- UPLOAD: Charging dock/cable close-up — 800x500px -->
+      <div class="mb-media-slot mb-media-slot--wide-sm" data-label="Charging Dock Image">
+        <div class="mb-placeholder mb-placeholder--light">
+          <svg width="48" height="28" viewBox="0 0 48 28" fill="none"><rect x="8" y="4" width="32" height="20" rx="4" stroke="#999" stroke-width="1.5"/><path d="M20 10V18M24 8V20M28 11V17" stroke="#999" stroke-width="2" stroke-linecap="round"/></svg>
+          <span>Charging Dock Close-up</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 9: SMART FEATURES — Icon grid
+     ============================================================ -->
+<section class="mb-section mb-section--light">
+  <div class="mb-container">
+    <div class="mb-centered-header mb-reveal mb-reveal--up">
+      <p class="mb-section-eyebrow">Smart</p>
+      <h2 class="mb-section-title">Intelligence<br>on your wrist.</h2>
+    </div>
+    <div class="mb-smart-grid">
+      <div class="mb-smart-card mb-reveal mb-reveal--up" data-delay="0">
+        <div class="mb-smart-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="6" y="2" width="20" height="28" rx="4" stroke="currentColor" stroke-width="1.5"/><circle cx="16" cy="24" r="2" fill="currentColor"/><path d="M12 8H20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <h4>Notifications</h4>
+        <p>Calls, texts & app alerts right on your wrist</p>
+      </div>
+      <div class="mb-smart-card mb-reveal mb-reveal--up" data-delay="100">
+        <div class="mb-smart-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="1.5"/><path d="M12 12L14 18L16 14L18 18L20 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h4>Music Control</h4>
+        <p>Play, pause & skip without reaching for your phone</p>
+      </div>
+      <div class="mb-smart-card mb-reveal mb-reveal--up" data-delay="200">
+        <div class="mb-smart-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="14" r="8" stroke="currentColor" stroke-width="1.5"/><path d="M16 22V28" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M10 28H22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M16 6V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M12 8L14 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M20 8L18 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <h4>Find My Phone</h4>
+        <p>Trigger a sound on your phone when you can't find it</p>
+      </div>
+      <div class="mb-smart-card mb-reveal mb-reveal--up" data-delay="300">
+        <div class="mb-smart-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M16 4L18 10H24L19 14L21 20L16 16L11 20L13 14L8 10H14L16 4Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M6 26H26" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M8 22H24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <h4>Weather</h4>
+        <p>Real-time forecasts and conditions at a glance</p>
+      </div>
+      <div class="mb-smart-card mb-reveal mb-reveal--up" data-delay="400">
+        <div class="mb-smart-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="1.5"/><path d="M16 8V16L20 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <h4>Alarms & Timers</h4>
+        <p>Silent vibration alarms that won't disturb anyone</p>
+      </div>
+      <div class="mb-smart-card mb-reveal mb-reveal--up" data-delay="500">
+        <div class="mb-smart-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="4" y="8" width="24" height="16" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="M10 14H14M22 14H18M16 12V16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M10 18H22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <h4>Camera Remote</h4>
+        <p>Trigger your phone's camera from your wrist</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 10: APP INTEGRATION — Phone + Watch
+     ============================================================ -->
+<section class="mb-section mb-section--dark">
+  <div class="mb-container">
+    <div class="mb-split">
+      <div class="mb-split-media mb-reveal mb-reveal--left">
+        <!-- UPLOAD: App screens on phone + watch side by side — 800x1000px -->
+        <div class="mb-media-slot mb-media-slot--portrait" data-label="App Integration Screenshot">
+          <div class="mb-placeholder mb-placeholder--light">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><rect x="14" y="4" width="20" height="40" rx="4" stroke="#999" stroke-width="1.5"/><rect x="18" y="8" width="12" height="28" rx="1" fill="#ddd"/><circle cx="24" cy="40" r="2" stroke="#999" stroke-width="1"/></svg>
+            <span>App + Watch Screenshot</span>
+          </div>
+        </div>
+      </div>
+      <div class="mb-split-content mb-reveal mb-reveal--right">
+        <p class="mb-section-eyebrow">App</p>
+        <h2 class="mb-section-title">All your data.<br>One beautiful app.</h2>
+        <p class="mb-section-body">Sync your MoveBand with the MoveTogether app for detailed analytics, personalized coaching plans, challenges with friends, and more.</p>
+        <div class="mb-app-badges">
+          <span class="mb-pill">iOS 15+</span>
+          <span class="mb-pill">Android 9+</span>
+          <span class="mb-pill">Bluetooth 5.1</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 11: TECH SPECS — Clean grid
+     ============================================================ -->
+<section class="mb-specs">
+  <div class="mb-container">
+    <div class="mb-centered-header mb-reveal mb-reveal--up">
+      <p class="mb-section-eyebrow">Tech Specs</p>
+      <h2 class="mb-section-title">Under the hood.</h2>
+    </div>
+    <div class="mb-specs-grid mb-reveal mb-reveal--up" data-delay="200">
+      <div class="mb-spec-item">
+        <span class="mb-spec-label">Display</span>
+        <span class="mb-spec-value">1.62" AMOLED, 490 x 192px</span>
+      </div>
+      <div class="mb-spec-item">
+        <span class="mb-spec-label">Brightness</span>
+        <span class="mb-spec-value">Up to 1000 nits</span>
+      </div>
+      <div class="mb-spec-item">
+        <span class="mb-spec-label">Protection</span>
+        <span class="mb-spec-value">Corning Gorilla Glass</span>
+      </div>
+      <div class="mb-spec-item">
+        <span class="mb-spec-label">Processor</span>
+        <span class="mb-spec-value">Realtek RTL8762D</span>
+      </div>
+      <div class="mb-spec-item">
+        <span class="mb-spec-label">Connectivity</span>
+        <span class="mb-spec-value">Bluetooth 5.1</span>
+      </div>
+      <div class="mb-spec-item">
+        <span class="mb-spec-label">Sensors</span>
+        <span class="mb-spec-value">Heart rate, SpO2, Accelerometer, Gyroscope</span>
+      </div>
+      <div class="mb-spec-item">
+        <span class="mb-spec-label">Battery</span>
+        <span class="mb-spec-value">230mAh Li-Polymer</span>
+      </div>
+      <div class="mb-spec-item">
+        <span class="mb-spec-label">Battery Life</span>
+        <span class="mb-spec-value">Up to 14 days typical use</span>
+      </div>
+      <div class="mb-spec-item">
+        <span class="mb-spec-label">Charging</span>
+        <span class="mb-spec-value">Magnetic, 0-80% in 45 min</span>
+      </div>
+      <div class="mb-spec-item">
+        <span class="mb-spec-label">Water Resistance</span>
+        <span class="mb-spec-value">5ATM (50 meters)</span>
+      </div>
+      <div class="mb-spec-item">
+        <span class="mb-spec-label">Weight</span>
+        <span class="mb-spec-value">28g (without band)</span>
+      </div>
+      <div class="mb-spec-item">
+        <span class="mb-spec-label">Compatibility</span>
+        <span class="mb-spec-value">iOS 15+ / Android 9+</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 12: REVIEWS
+     ============================================================ -->
+<section class="mb-section mb-section--light">
+  <div class="mb-container">
+    <div class="mb-centered-header mb-reveal mb-reveal--up">
+      <p class="mb-section-eyebrow">Reviews</p>
+      <h2 class="mb-section-title">Loved by thousands.</h2>
+    </div>
+    <div class="mb-reviews-grid">
+      <div class="mb-review-card mb-reveal mb-reveal--up" data-delay="0">
+        <div class="mb-review-stars">★★★★★</div>
+        <h4>"Best fitness tracker I've owned"</h4>
+        <p>The battery life is insane — I charge it once every two weeks. Heart rate tracking is accurate and the app is super clean.</p>
+        <span class="mb-review-author">— Sarah M.</span>
+      </div>
+      <div class="mb-review-card mb-reveal mb-reveal--up" data-delay="150">
+        <div class="mb-review-stars">★★★★★</div>
+        <h4>"Beautiful screen, lightweight"</h4>
+        <p>I wear it 24/7 and forget it's there. Sleep tracking has completely changed my bedtime routine. Highly recommend!</p>
+        <span class="mb-review-author">— James T.</span>
+      </div>
+      <div class="mb-review-card mb-reveal mb-reveal--up" data-delay="300">
+        <div class="mb-review-stars">★★★★★</div>
+        <h4>"Worth every penny"</h4>
+        <p>Swim, shower, gym — this thing handles everything. GPS tracking for my runs is spot on. Absolutely love it.</p>
+        <span class="mb-review-author">— Alex R.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 13: FAQ
+     ============================================================ -->
+<section class="mb-faq">
+  <div class="mb-container">
+    <div class="mb-centered-header mb-reveal mb-reveal--up">
+      <h2 class="mb-section-title">Frequently Asked Questions</h2>
+    </div>
+    <div class="mb-faq-list mb-reveal mb-reveal--up" data-delay="100">
+      <details class="mb-faq-item">
+        <summary>What is the battery life of MoveBand?</summary>
+        <p>MoveBand lasts up to 14 days on a single charge with typical use. Heavy GPS and always-on display usage may reduce this to around 7 days.</p>
+      </details>
+      <details class="mb-faq-item">
+        <summary>Is MoveBand waterproof?</summary>
+        <p>MoveBand has a 5ATM water resistance rating, meaning it's safe for swimming, showering, and rain. We recommend avoiding hot tubs, saunas, and high-pressure water.</p>
+      </details>
+      <details class="mb-faq-item">
+        <summary>Does it work with both iPhone and Android?</summary>
+        <p>Yes! MoveBand works with iOS 15 and above, and Android 9 and above via the MoveTogether app available on both the App Store and Google Play.</p>
+      </details>
+      <details class="mb-faq-item">
+        <summary>Can I change the watch bands?</summary>
+        <p>Absolutely. MoveBand features a quick-release band system. Swap between silicone, woven, and leather bands in seconds — no tools required.</p>
+      </details>
+      <details class="mb-faq-item">
+        <summary>Is MoveBand a medical device?</summary>
+        <p>MoveBand is not a medical device. While it provides health insights like heart rate and blood oxygen, it is not intended to diagnose, prevent, or treat any medical condition.</p>
+      </details>
+      <details class="mb-faq-item">
+        <summary>What's included in the box?</summary>
+        <p>MoveBand comes with the tracker, a silicone band (size S/M and M/L), magnetic charging cable, and a quick start guide.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 14: BUY — Final CTA with product form
+     ============================================================ -->
+<section class="mb-buy" id="mb-buy">
+  <div class="mb-container">
+    <div class="mb-buy-inner">
+      <div class="mb-buy-media mb-reveal mb-reveal--left">
+        <!-- UPLOAD: Product beauty shot on white/clean bg — 800x800px -->
+        <div class="mb-media-slot mb-media-slot--square" data-label="Product Beauty Shot">
+          {% if product.featured_image %}
+            <img
+              src="{{ product.featured_image | image_url: width: 800 }}"
+              srcset="{{ product.featured_image | image_url: width: 400 }} 400w, {{ product.featured_image | image_url: width: 600 }} 600w, {{ product.featured_image | image_url: width: 800 }} 800w"
+              sizes="(max-width: 768px) 100vw, 400px"
+              alt="{{ product.title }}"
+            >
+          {% else %}
+            <div class="mb-placeholder mb-placeholder--subtle">
+              <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><rect x="20" y="4" width="24" height="56" rx="12" stroke="#ccc" stroke-width="2"/><rect x="24" y="16" width="16" height="20" rx="3" stroke="#ccc" stroke-width="1.5"/></svg>
+              <span>Product Beauty Shot</span>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+      <div class="mb-buy-content mb-reveal mb-reveal--right">
+        <p class="mb-section-eyebrow">Get Yours</p>
+        <h2 class="mb-buy-title">MoveBand</h2>
+        <p class="mb-buy-price">{{ product.price | money }}</p>
+        <p class="mb-buy-shipping">Free shipping & 30-day returns</p>
+
+        {% if product.variants.size > 1 %}
+          <div class="mb-buy-variants">
+            {% for variant in product.variants %}
+              <label class="mb-variant-option">
+                <input type="radio" name="variant" value="{{ variant.id }}" {% if forloop.first %}checked{% endif %}>
+                <span>{{ variant.title }}</span>
+              </label>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        <form action="/cart/add" method="post">
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" id="mb-variant-id">
+          <button type="submit" class="mb-buy-btn">
+            <span>Add to Cart</span>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10H16M16 10L10 4M16 10L10 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sticky Buy Bar -->
+<div class="mb-sticky-bar" id="mb-sticky-bar">
+  <div class="mb-sticky-inner">
+    <div class="mb-sticky-info">
+      <strong>MoveBand</strong>
+      <span>{{ product.price | money }}</span>
+    </div>
+    <a href="#mb-buy" class="mb-sticky-btn">Buy</a>
+  </div>
+</div>
+
+</div><!-- /.mb-page -->
+
+<!-- ============================================================
+     MOVEBAND CSS
+     ============================================================ -->
+<style>
+/* ===== PAGE RESET ===== */
+.mb-page { overflow-x: hidden; }
+.mb-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+/* ===== SCROLL REVEAL ===== */
+.mb-reveal {
+  opacity: 0;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.mb-reveal--up { transform: translateY(60px); }
+.mb-reveal--scale { transform: scale(0.92); }
+.mb-reveal--left { transform: translateX(-60px); }
+.mb-reveal--right { transform: translateX(60px); }
+.mb-reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ===== PLACEHOLDERS ===== */
+.mb-media-slot { width: 100%; overflow: hidden; border-radius: 16px; }
+.mb-placeholder {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 12px; padding: 60px 20px; text-align: center;
+}
+.mb-placeholder span { font-size: 13px; font-weight: 500; letter-spacing: 0.5px; }
+.mb-placeholder--dark { background: #1a1a1a; color: #555; }
+.mb-placeholder--light { background: #f0f0f0; color: #999; }
+.mb-placeholder--subtle { background: #f5f5f5; color: #bbb; }
+.mb-placeholder--video { padding: 120px 20px; }
+.mb-media-slot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* ===== HERO ===== */
+.mb-hero {
+  position: relative; min-height: 100vh; min-height: 100dvh;
+  background: #0a0a0a; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center;
+  padding: 100px 24px 80px; overflow: hidden;
+}
+.mb-hero-glow {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -60%);
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(54, 159, 255, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+.mb-hero-product {
+  position: relative; z-index: 2;
+  width: 280px; height: 280px; margin-bottom: 40px;
+}
+.mb-hero-product .mb-media-slot { border-radius: 0; background: transparent; }
+.mb-hero-product .mb-placeholder { background: transparent; }
+.mb-hero-product .mb-media-slot--hero { width: 100%; height: 100%; }
+.mb-hero-product img { object-fit: contain; }
+.mb-hero-content { position: relative; z-index: 2; }
+.mb-hero-eyebrow {
+  font-size: 14px; font-weight: 500; letter-spacing: 3px;
+  text-transform: uppercase; color: rgba(255,255,255,0.5);
+  margin-bottom: 12px;
+}
+.mb-hero-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 64px; font-weight: 700; color: white;
+  line-height: 1; margin-bottom: 16px;
+  letter-spacing: -1px;
+}
+.mb-hero-tagline {
+  font-size: 20px; color: rgba(255,255,255,0.6);
+  font-weight: 300; margin-bottom: 24px;
+}
+.mb-hero-price {
+  font-size: 18px; color: rgba(255,255,255,0.8);
+  margin-bottom: 32px; font-weight: 500;
+}
+.mb-hero-cta {
+  display: inline-block; padding: 14px 48px;
+  background: #369FFF; color: white; text-decoration: none;
+  border-radius: 980px; font-size: 17px; font-weight: 600;
+  transition: background 0.3s, transform 0.3s;
+}
+.mb-hero-cta:hover { background: #1a7fe8; transform: scale(1.05); }
+.mb-scroll-indicator {
+  position: absolute; bottom: 30px; left: 50%;
+  transform: translateX(-50%);
+  animation: mb-bounce 2s ease infinite;
+  color: rgba(255,255,255,0.3);
+}
+@keyframes mb-bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(10px); }
+}
+
+/* ===== STATEMENT ===== */
+.mb-statement {
+  padding: 140px 24px; background: #fafafa; text-align: center;
+}
+.mb-statement-text {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 48px; line-height: 1.2; font-weight: 600;
+  color: #1a1a1a; max-width: 800px; margin: 0 auto;
+}
+
+/* ===== SECTIONS ===== */
+.mb-section { padding: 120px 0; }
+.mb-section--dark { background: #0a0a0a; color: white; }
+.mb-section--dark .mb-section-eyebrow { color: #369FFF; }
+.mb-section--dark .mb-section-body { color: rgba(255,255,255,0.6); }
+.mb-section--dark .mb-feature-item p { color: rgba(255,255,255,0.5); }
+.mb-section--light { background: #fafafa; color: #1a1a1a; }
+.mb-section--light .mb-section-eyebrow { color: #369FFF; }
+
+.mb-section-eyebrow {
+  font-size: 14px; font-weight: 600; letter-spacing: 3px;
+  text-transform: uppercase; color: #369FFF;
+  margin-bottom: 16px;
+}
+.mb-section-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 48px; font-weight: 600; line-height: 1.15;
+  margin-bottom: 20px;
+}
+.mb-section-body {
+  font-size: 18px; line-height: 1.7; color: #666;
+  max-width: 520px;
+}
+.mb-centered-header { text-align: center; margin-bottom: 60px; }
+.mb-centered-header .mb-section-title { margin-left: auto; margin-right: auto; }
+.mb-centered-body { text-align: center; max-width: 600px; margin-left: auto; margin-right: auto; }
+
+/* ===== SPLIT LAYOUT ===== */
+.mb-split {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: center;
+}
+.mb-split--reverse .mb-split-content { order: -1; }
+.mb-split-media .mb-media-slot--portrait { aspect-ratio: 4/5; }
+
+/* ===== FEATURE LIST ===== */
+.mb-feature-list { margin-top: 40px; display: flex; flex-direction: column; gap: 28px; }
+.mb-feature-item { display: flex; gap: 16px; align-items: flex-start; }
+.mb-feature-icon {
+  width: 48px; height: 48px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 12px; background: rgba(54, 159, 255, 0.1);
+  color: #369FFF;
+}
+.mb-feature-item h4 { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+.mb-feature-item p { font-size: 14px; line-height: 1.5; margin: 0; }
+
+/* ===== FULL-WIDTH MEDIA ===== */
+.mb-full-media {
+  width: 100%; max-width: 1400px; margin: 0 auto 60px;
+  padding: 0 24px;
+}
+.mb-media-slot--wide { aspect-ratio: 21/9; }
+
+/* ===== PILLS ===== */
+.mb-pill-row {
+  display: flex; flex-wrap: wrap; gap: 12px;
+  justify-content: center; margin-bottom: 32px;
+}
+.mb-pill {
+  padding: 8px 20px; border-radius: 980px;
+  font-size: 13px; font-weight: 600; letter-spacing: 0.5px;
+  background: #1a1a1a; color: white;
+}
+.mb-section--dark .mb-pill { background: rgba(255,255,255,0.1); color: white; }
+.mb-pill--outline {
+  background: transparent; border: 1.5px solid #ccc; color: #666;
+}
+
+/* ===== STATS ROW ===== */
+.mb-stats-row { display: flex; gap: 40px; margin-top: 48px; }
+.mb-stat { text-align: center; }
+.mb-stat-number {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 48px; font-weight: 700; line-height: 1;
+}
+.mb-stat-suffix { font-size: 24px; font-weight: 600; }
+.mb-stat-label { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.5); display: block; }
+.mb-stat-big {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 48px; font-weight: 700; line-height: 1; display: block;
+}
+.mb-stat p { font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 6px; }
+
+/* ===== VIDEO SECTION ===== */
+.mb-video-section { position: relative; min-height: 70vh; background: #0a0a0a; overflow: hidden; }
+.mb-video-wrap { position: absolute; inset: 0; }
+.mb-video-wrap video,
+.mb-video-wrap .mb-media-slot { width: 100%; height: 100%; }
+.mb-video-wrap .mb-media-slot { border-radius: 0; }
+.mb-video-wrap .mb-placeholder { height: 100%; }
+.mb-video-overlay {
+  position: relative; z-index: 2; display: flex;
+  align-items: center; justify-content: center;
+  min-height: 70vh; background: rgba(0,0,0,0.4);
+  padding: 40px 24px;
+}
+.mb-video-overlay h2 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 56px; font-weight: 600; color: white;
+  text-align: center; max-width: 700px; line-height: 1.15;
+}
+
+/* ===== BAND GALLERY ===== */
+.mb-band-gallery {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 32px; margin-bottom: 48px;
+}
+.mb-band-card .mb-media-slot--square { aspect-ratio: 1; }
+.mb-band-name {
+  text-align: center; font-size: 15px; font-weight: 500;
+  margin-top: 16px; color: #666;
+}
+.mb-material-pills {
+  display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;
+}
+
+/* ===== BATTERY ===== */
+.mb-battery {
+  padding: 140px 0; background: #0a0a0a; color: white; text-align: center;
+}
+.mb-battery .mb-section-eyebrow { color: #369FFF; }
+.mb-battery-hero {
+  display: flex; align-items: baseline;
+  justify-content: center; gap: 12px;
+  margin: 20px 0 24px;
+}
+.mb-battery-number {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 160px; font-weight: 700; line-height: 1;
+  background: linear-gradient(135deg, #369FFF, #36deff);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.mb-battery-unit {
+  font-size: 48px; font-weight: 300; color: rgba(255,255,255,0.5);
+}
+.mb-battery-sub {
+  font-size: 24px; font-weight: 400; color: rgba(255,255,255,0.7);
+  margin-bottom: 24px;
+}
+.mb-battery .mb-section-body { color: rgba(255,255,255,0.5); }
+.mb-battery-visual {
+  max-width: 700px; margin: 48px auto 0;
+}
+.mb-media-slot--wide-sm { aspect-ratio: 16/10; }
+
+/* ===== SMART GRID ===== */
+.mb-smart-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+.mb-smart-card {
+  background: white; border-radius: 20px; padding: 36px 28px;
+  text-align: center; box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.mb-smart-card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
+.mb-smart-icon {
+  width: 56px; height: 56px; margin: 0 auto 20px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 16px; background: #f0f7ff; color: #369FFF;
+}
+.mb-smart-card h4 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+.mb-smart-card p { font-size: 14px; color: #888; line-height: 1.5; }
+
+/* ===== SPECS ===== */
+.mb-specs {
+  padding: 120px 0; background: #0a0a0a; color: white;
+}
+.mb-specs .mb-section-eyebrow { color: #369FFF; }
+.mb-specs-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+.mb-spec-item {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding-right: 40px;
+}
+.mb-spec-item:nth-child(even) { padding-left: 40px; padding-right: 0; }
+.mb-spec-label { font-size: 14px; color: rgba(255,255,255,0.4); font-weight: 500; }
+.mb-spec-value { font-size: 14px; font-weight: 500; text-align: right; }
+
+/* ===== REVIEWS ===== */
+.mb-reviews-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;
+}
+.mb-review-card {
+  background: white; border-radius: 20px; padding: 36px;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+}
+.mb-review-stars { color: #f5a623; font-size: 16px; margin-bottom: 16px; letter-spacing: 2px; }
+.mb-review-card h4 { font-size: 17px; font-weight: 600; margin-bottom: 12px; }
+.mb-review-card p { font-size: 14px; color: #666; line-height: 1.7; margin-bottom: 16px; }
+.mb-review-author { font-size: 13px; font-weight: 600; color: #999; }
+
+/* ===== FAQ ===== */
+.mb-faq { padding: 120px 0; background: #fafafa; }
+.mb-faq-list { max-width: 800px; margin: 0 auto; }
+.mb-faq-item {
+  border-bottom: 1px solid #e0e0e0; overflow: hidden;
+}
+.mb-faq-item summary {
+  padding: 24px 0; font-size: 17px; font-weight: 500;
+  cursor: pointer; list-style: none; display: flex;
+  justify-content: space-between; align-items: center;
+  transition: color 0.2s;
+}
+.mb-faq-item summary::-webkit-details-marker { display: none; }
+.mb-faq-item summary::after {
+  content: '+'; font-size: 24px; font-weight: 300; color: #999;
+  transition: transform 0.3s;
+}
+.mb-faq-item[open] summary::after { transform: rotate(45deg); }
+.mb-faq-item[open] summary { color: #369FFF; }
+.mb-faq-item p {
+  padding: 0 0 24px; font-size: 15px; color: #666; line-height: 1.7;
+}
+
+/* ===== BUY SECTION ===== */
+.mb-buy { padding: 120px 0; background: white; }
+.mb-buy-inner {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: center;
+}
+.mb-buy-media .mb-media-slot--square { aspect-ratio: 1; border-radius: 24px; overflow: hidden; }
+.mb-buy-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 40px; font-weight: 700; margin-bottom: 12px;
+}
+.mb-buy-price {
+  font-size: 32px; font-weight: 700; margin-bottom: 8px;
+}
+.mb-buy-shipping {
+  font-size: 14px; color: #888; margin-bottom: 32px;
+}
+.mb-buy-variants {
+  display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 32px;
+}
+.mb-variant-option {
+  cursor: pointer;
+}
+.mb-variant-option input { display: none; }
+.mb-variant-option span {
+  display: block; padding: 10px 24px;
+  border: 1.5px solid #ddd; border-radius: 980px;
+  font-size: 14px; font-weight: 500; transition: all 0.2s;
+}
+.mb-variant-option input:checked + span {
+  border-color: #1a1a1a; background: #1a1a1a; color: white;
+}
+.mb-variant-option:hover span { border-color: #999; }
+.mb-buy-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 18px 48px; background: #369FFF; color: white;
+  border: none; border-radius: 980px; font-size: 17px;
+  font-weight: 600; cursor: pointer; transition: all 0.3s;
+  font-family: inherit;
+}
+.mb-buy-btn:hover { background: #1a7fe8; transform: scale(1.03); }
+
+/* ===== STICKY BAR ===== */
+.mb-sticky-bar {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: rgba(255,255,255,0.92); backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(0,0,0,0.08);
+  z-index: 40; transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.mb-sticky-bar.visible { transform: translateY(0); }
+.mb-sticky-inner {
+  max-width: 1200px; margin: 0 auto; padding: 14px 24px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.mb-sticky-info { display: flex; align-items: center; gap: 16px; }
+.mb-sticky-info strong { font-size: 16px; }
+.mb-sticky-info span { font-size: 16px; color: #666; }
+.mb-sticky-btn {
+  padding: 12px 36px; background: #369FFF; color: white;
+  text-decoration: none; border-radius: 980px; font-size: 15px;
+  font-weight: 600; transition: background 0.3s;
+}
+.mb-sticky-btn:hover { background: #1a7fe8; }
+
+/* ===== APP BADGES ===== */
+.mb-app-badges { display: flex; gap: 10px; margin-top: 32px; flex-wrap: wrap; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1024px) {
+  .mb-hero-title { font-size: 52px; }
+  .mb-statement-text { font-size: 40px; }
+  .mb-section-title { font-size: 40px; }
+  .mb-video-overlay h2 { font-size: 44px; }
+  .mb-battery-number { font-size: 120px; }
+  .mb-smart-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .mb-hero { padding: 80px 24px 60px; min-height: 90vh; }
+  .mb-hero-product { width: 220px; height: 220px; margin-bottom: 32px; }
+  .mb-hero-title { font-size: 44px; }
+  .mb-hero-tagline { font-size: 17px; }
+  .mb-hero-glow { width: 300px; height: 300px; }
+
+  .mb-statement { padding: 100px 24px; }
+  .mb-statement-text { font-size: 32px; }
+
+  .mb-section { padding: 80px 0; }
+  .mb-section-title { font-size: 34px; }
+
+  .mb-split { grid-template-columns: 1fr; gap: 48px; }
+  .mb-split--reverse .mb-split-content { order: 0; }
+
+  .mb-full-media { padding: 0 16px; }
+
+  .mb-video-section { min-height: 50vh; }
+  .mb-video-overlay { min-height: 50vh; }
+  .mb-video-overlay h2 { font-size: 32px; }
+
+  .mb-band-gallery { grid-template-columns: 1fr; max-width: 320px; margin-left: auto; margin-right: auto; margin-bottom: 48px; }
+
+  .mb-battery { padding: 100px 0; }
+  .mb-battery-number { font-size: 100px; }
+  .mb-battery-unit { font-size: 32px; }
+  .mb-battery-sub { font-size: 20px; }
+
+  .mb-smart-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+
+  .mb-specs-grid { grid-template-columns: 1fr; }
+  .mb-spec-item { padding-right: 0 !important; padding-left: 0 !important; }
+
+  .mb-reviews-grid { grid-template-columns: 1fr; }
+
+  .mb-buy-inner { grid-template-columns: 1fr; gap: 48px; }
+
+  .mb-stats-row { gap: 24px; }
+  .mb-stat-number { font-size: 36px; }
+  .mb-stat-big { font-size: 36px; }
+
+  .mb-sticky-info strong { font-size: 14px; }
+  .mb-sticky-info span { font-size: 14px; }
+}
+
+@media (max-width: 480px) {
+  .mb-hero-title { font-size: 36px; }
+  .mb-statement-text { font-size: 28px; }
+  .mb-section-title { font-size: 28px; }
+  .mb-battery-number { font-size: 80px; }
+  .mb-stats-row { flex-wrap: wrap; }
+  .mb-pill-row { gap: 8px; }
+  .mb-pill { font-size: 12px; padding: 6px 14px; }
+}
+
+/* Large screens */
+@media (min-width: 1200px) {
+  .mb-hero-title { font-size: 80px; }
+  .mb-hero-product { width: 440px; height: 440px; }
+  .mb-statement-text { font-size: 60px; }
+  .mb-section-title { font-size: 56px; }
+  .mb-video-overlay h2 { font-size: 64px; }
+  .mb-battery-number { font-size: 200px; }
+}
+</style>
+
+<!-- ============================================================
+     MOVEBAND JAVASCRIPT — Scroll animations, counters, sticky bar
+     ============================================================ -->
+<script>
+(function() {
+  // Scroll reveal with IntersectionObserver
+  var reveals = document.querySelectorAll('.mb-reveal');
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var el = entry.target;
+          var delay = parseInt(el.getAttribute('data-delay') || '0', 10);
+          setTimeout(function() { el.classList.add('visible'); }, delay);
+          observer.unobserve(el);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(function(el) { observer.observe(el); });
+  } else {
+    reveals.forEach(function(el) { el.classList.add('visible'); });
+  }
+
+  // Animated counters
+  var counters = document.querySelectorAll('[data-count]');
+  if ('IntersectionObserver' in window) {
+    var counterObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var el = entry.target;
+          var target = parseInt(el.getAttribute('data-count'), 10);
+          var duration = 1500;
+          var start = 0;
+          var startTime = null;
+          function step(timestamp) {
+            if (!startTime) startTime = timestamp;
+            var progress = Math.min((timestamp - startTime) / duration, 1);
+            var eased = 1 - Math.pow(1 - progress, 3);
+            el.textContent = Math.floor(eased * target);
+            if (progress < 1) {
+              requestAnimationFrame(step);
+            } else {
+              el.textContent = target;
+            }
+          }
+          requestAnimationFrame(step);
+          counterObserver.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(function(el) { counterObserver.observe(el); });
+  }
+
+  // Sticky buy bar — show after scrolling past hero
+  var stickyBar = document.getElementById('mb-sticky-bar');
+  var buySection = document.getElementById('mb-buy');
+  if (stickyBar) {
+    var lastScroll = 0;
+    var ticking = false;
+    window.addEventListener('scroll', function() {
+      lastScroll = window.scrollY;
+      if (!ticking) {
+        requestAnimationFrame(function() {
+          var showAfter = window.innerHeight * 0.8;
+          var buyTop = buySection ? buySection.getBoundingClientRect().top + window.scrollY - window.innerHeight : Infinity;
+          if (lastScroll > showAfter && lastScroll < buyTop) {
+            stickyBar.classList.add('visible');
+          } else {
+            stickyBar.classList.remove('visible');
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+  }
+
+  // Variant selector for buy section
+  var variantInputs = document.querySelectorAll('.mb-variant-option input');
+  var hiddenVariantId = document.getElementById('mb-variant-id');
+  if (variantInputs.length > 0 && hiddenVariantId) {
+    variantInputs.forEach(function(input) {
+      input.addEventListener('change', function() {
+        hiddenVariantId.value = this.value;
+      });
+    });
+  }
+
+  // Smooth scroll for anchor links within page
+  document.querySelectorAll('.mb-page a[href^="#"]').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      var target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+})();
+</script>
