@@ -88,8 +88,10 @@
     transition: all 0.3s ease;
   }
 
-  .product-card:hover {
-    transform: translateY(-5px);
+  @media (hover: hover) {
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
   }
 
   .product-badge-sale {
@@ -170,8 +172,10 @@
     border: 2px solid #1a1a1a;
   }
 
-  .color-dot:hover {
-    transform: scale(1.2);
+  @media (hover: hover) {
+    .color-dot:hover {
+      transform: scale(1.2);
+    }
   }
 
   .color-more {
@@ -239,13 +243,23 @@
     transition: all 0.3s;
   }
 
-  .product-card-link:hover {
-    background: #369FFF;
-  }
-
   .product-card-button.disabled {
     background: #e0e0e0;
     color: #999;
     cursor: not-allowed;
+  }
+
+  @media (hover: hover) {
+    .product-card-link:hover {
+      background: #369FFF;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .product-card-link,
+    .product-card-button {
+      padding: 10px;
+      font-size: 13px;
+    }
   }
 </style>
