@@ -9,6 +9,10 @@
 
   {{ content_for_header }}
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
   <link rel="canonical" href="{{ canonical_url }}">
 
   {% if settings.favicon != blank %}
@@ -22,6 +26,15 @@
   <a class="skip-to-content-link button" href="#MainContent">
     {{ "accessibility.skip_to_text" | t }}
   </a>
+
+  <!-- Announcement Bar -->
+  <div class="announcement-bar">
+    <div class="announcement-bar-inner">
+      <a href="/collections/all" class="announcement-bar-link">
+        {{ "homepage.announcement_text" | t | default: "FREE SHIPPING ON ORDERS OVER $75. SHOP NOW" }}
+      </a>
+    </div>
+  </div>
 
   {% section 'header' %}
 
