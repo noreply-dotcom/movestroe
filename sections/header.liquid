@@ -133,39 +133,40 @@
     {% endif %}
   </div>
 
-  <!-- Cart Drawer -->
-  <div class="cart-drawer" id="cart-drawer" aria-label="Shopping cart">
-    <div class="cart-drawer-header">
-      <h2 class="cart-drawer-title">Shopping cart <span class="cart-drawer-count"></span></h2>
-      <button class="cart-drawer-close" aria-label="Close cart">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-          <line x1="5" y1="5" x2="19" y2="19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          <line x1="19" y1="5" x2="5" y2="19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-      </button>
+</header>
+
+<!-- Cart Drawer (outside header to avoid stacking context) -->
+<div class="cart-drawer" id="cart-drawer" aria-label="Shopping cart">
+  <div class="cart-drawer-header">
+    <h2 class="cart-drawer-title">Shopping cart <span class="cart-drawer-count"></span></h2>
+    <button class="cart-drawer-close" aria-label="Close cart">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <line x1="5" y1="5" x2="19" y2="19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="19" y1="5" x2="5" y2="19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+  <div class="cart-drawer-body" id="cart-drawer-body">
+    <!-- Items rendered dynamically by JS -->
+  </div>
+  <div class="cart-drawer-footer" id="cart-drawer-footer" style="display:none;">
+    <div class="cd-shipping-bar" id="cd-shipping-bar">
+      <div class="cd-shipping-track"><div class="cd-shipping-fill" id="cd-shipping-fill"></div></div>
+      <p class="cd-shipping-msg" id="cd-shipping-msg"></p>
     </div>
-    <div class="cart-drawer-body" id="cart-drawer-body">
-      <!-- Items rendered dynamically by JS -->
+    <div class="cart-drawer-subtotal">
+      <span>Subtotal</span>
+      <span class="cart-drawer-total-price" id="cart-drawer-total"></span>
     </div>
-    <div class="cart-drawer-footer" id="cart-drawer-footer" style="display:none;">
-      <div class="cd-shipping-bar" id="cd-shipping-bar">
-        <div class="cd-shipping-track"><div class="cd-shipping-fill" id="cd-shipping-fill"></div></div>
-        <p class="cd-shipping-msg" id="cd-shipping-msg"></p>
-      </div>
-      <div class="cart-drawer-subtotal">
-        <span>Subtotal</span>
-        <span class="cart-drawer-total-price" id="cart-drawer-total"></span>
-      </div>
-      <a href="/checkout" class="cart-drawer-checkout-btn" id="cart-drawer-checkout">Checkout</a>
-      <a href="/cart" class="cart-drawer-viewcart">View Cart</a>
-      <div class="cd-trust">
-        <span>🔒 Secure checkout</span>
-        <span>🚚 Free shipping over $75</span>
-        <span>↩ 30-day returns</span>
-      </div>
+    <a href="/checkout" class="cart-drawer-checkout-btn" id="cart-drawer-checkout">Checkout</a>
+    <a href="/cart" class="cart-drawer-viewcart">View Cart</a>
+    <div class="cd-trust">
+      <span>🔒 Secure checkout</span>
+      <span>🚚 Free shipping over $75</span>
+      <span>↩ 30-day returns</span>
     </div>
   </div>
-</header>
+</div>
 
 <style>
   .site-header {
