@@ -1,4 +1,20 @@
 // MoveTogether Store JavaScript
+
+// Utility function for debouncing (defined first so it's available everywhere)
+function debounce(func, wait) {
+  var timeout;
+  return function executedFunction() {
+    var context = this;
+    var args = arguments;
+    var later = function() {
+      clearTimeout(timeout);
+      func.apply(context, args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
 document.addEventListener('DOMContentLoaded', function() {
 
   // Hero slider dots (Homepage)
@@ -33,28 +49,35 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // Sticky buy button visibility
+  // Sticky buy button visibility (debounced)
   const stickyButton = document.querySelector('.sticky-buy-button');
   if (stickyButton) {
-    window.addEventListener('scroll', function() {
-      if (window.scrollY > 100) {
-        stickyButton.classList.add('visible');
-      } else {
-        stickyButton.classList.remove('visible');
+    var stickyVisible = false;
+    window.addEventListener('scroll', debounce(function() {
+      var shouldShow = window.scrollY > 100;
+      if (shouldShow !== stickyVisible) {
+        stickyVisible = shouldShow;
+        if (shouldShow) {
+          stickyButton.classList.add('visible');
+        } else {
+          stickyButton.classList.remove('visible');
+        }
       }
-    });
+    }, 50));
   }
 
-  // Product card hover effects
-  const productCards = document.querySelectorAll('.product-card');
-  productCards.forEach(card => {
-    card.addEventListener('mouseenter', function() {
-      this.style.transform = 'translateY(-5px)';
+  // Product card hover effects (only on non-touch devices)
+  if (window.matchMedia('(hover: hover)').matches) {
+    const productCards = document.querySelectorAll('.product-card');
+    productCards.forEach(card => {
+      card.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-5px)';
+      });
+      card.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0)';
+      });
     });
-    card.addEventListener('mouseleave', function() {
-      this.style.transform = 'translateY(0)';
-    });
-  });
+  }
 
   // FAQ accordion is handled by HTML5 details/summary elements
 
@@ -116,15 +139,46 @@ document.addEventListener('DOMContentLoaded', function() {
   // Initialize any sliders/carousels
   initializeSliders();
 
-  // Mobile menu toggle (if you add a mobile menu)
+  // Mobile menu toggle
   const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
   const mobileMenu = document.querySelector('.mobile-menu');
 
   if (mobileMenuToggle && mobileMenu) {
+    // Create overlay element for closing menu by tapping outside
+    var overlay = document.createElement('div');
+    overlay.className = 'mobile-menu-overlay';
+    document.body.appendChild(overlay);
+
+    function openMobileMenu() {
+      mobileMenu.classList.add('active');
+      mobileMenuToggle.classList.add('active');
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobileMenu() {
+      mobileMenu.classList.remove('active');
+      mobileMenuToggle.classList.remove('active');
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
     mobileMenuToggle.addEventListener('click', function() {
-      mobileMenu.classList.toggle('active');
-      this.classList.toggle('active');
+      if (mobileMenu.classList.contains('active')) {
+        closeMobileMenu();
+      } else {
+        openMobileMenu();
+      }
     });
+
+    overlay.addEventListener('click', closeMobileMenu);
+
+    // Close menu on window resize to desktop
+    window.addEventListener('resize', debounce(function() {
+      if (window.innerWidth > 768 && mobileMenu.classList.contains('active')) {
+        closeMobileMenu();
+      }
+    }, 150));
   }
 });
 
@@ -175,19 +229,6 @@ function updateProductVariant(variantId) {
   // Update price display
   // This would integrate with Shopify's variant pricing
   console.log('Updated variant:', variantId);
-}
-
-// Utility function for debouncing
-function debounce(func, wait) {
-  let timeout;
-  return function executedFunction(...args) {
-    const later = () => {
-      clearTimeout(timeout);
-      func(...args);
-    };
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-  };
 }
 
 // Lazy loading images

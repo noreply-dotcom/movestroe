@@ -9,6 +9,13 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
   color: #1a1a1a;
   background: #ffffff;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }
 
 /* ===== HOMEPAGE STYLES ===== */
@@ -32,6 +39,7 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  max-width: none;
 }
 
 .hero-content {
@@ -87,12 +95,25 @@ body {
 }
 
 .dot {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background: rgba(255,255,255,0.5);
   cursor: pointer;
   transition: background 0.3s;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  /* Increase touch target without changing visual size */
+  position: relative;
+}
+
+.dot::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
 }
 
 .dot.active {
@@ -153,7 +174,7 @@ body {
 .capsule-section {
   position: relative;
   width: 100%;
-  height: 400px;
+  height: 300px;
   margin: 20px 0;
   overflow: hidden;
 }
@@ -162,6 +183,7 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  max-width: none;
 }
 
 .capsule-content {
@@ -174,9 +196,9 @@ body {
 }
 
 .capsule-content h2 {
-  font-size: 42px;
+  font-size: 28px;
   font-weight: 600;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   line-height: 1.1;
 }
 
@@ -201,6 +223,8 @@ body {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .section-header .section-title {
@@ -225,8 +249,8 @@ body {
 
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
 }
 
 .product-card {
@@ -406,13 +430,14 @@ body {
   position: relative;
   border-radius: 16px;
   overflow: hidden;
-  height: 400px;
+  height: 300px;
 }
 
 .world-card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  max-width: none;
 }
 
 .world-label {
@@ -437,9 +462,9 @@ body {
 }
 
 .world-content h3 {
-  font-size: 32px;
+  font-size: 22px;
   font-weight: 600;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   line-height: 1.1;
 }
 
@@ -459,8 +484,21 @@ body {
 }
 
 .product-gallery {
-  max-width: 600px;
+  max-width: 1000px;
   margin: 0 auto;
+}
+
+.product-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.product-info .product-title {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  line-height: 1.2;
 }
 
 .main-image {
@@ -547,8 +585,8 @@ body {
 }
 
 .media-card {
-  flex: 1;
-  min-width: 280px;
+  flex: 1 1 100%;
+  min-width: 0;
   padding: 20px;
   background: white;
   border-radius: 12px;
@@ -588,9 +626,9 @@ body {
 }
 
 .trust-stats h3 {
-  font-size: 36px;
+  font-size: 24px;
   font-weight: 600;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
@@ -598,28 +636,28 @@ body {
 
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
   max-width: 1000px;
   margin: 0 auto;
 }
 
 .stat-card {
-  padding: 30px;
+  padding: 20px;
   background: #f0f0ff;
   border-radius: 16px;
 }
 
 .stat-number {
-  font-size: 72px;
+  font-size: 40px;
   font-weight: 700;
   line-height: 1;
 }
 
 .stat-unit {
-  font-size: 32px;
+  font-size: 20px;
   font-weight: 400;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .stat-card p {
@@ -649,9 +687,9 @@ body {
 }
 
 .feature-block h3 {
-  font-size: 32px;
+  font-size: 24px;
   font-weight: 600;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   line-height: 1.2;
 }
 
@@ -723,7 +761,7 @@ body {
 }
 
 .battery-stat h2 {
-  font-size: 48px;
+  font-size: 32px;
   font-weight: 700;
   margin: 10px 0;
 }
@@ -732,6 +770,16 @@ body {
   font-size: 16px;
   color: #666;
   line-height: 1.5;
+}
+
+.charging-image {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.charging-image img {
+  width: 100%;
+  border-radius: 16px;
 }
 
 /* Wellness System */
@@ -748,10 +796,10 @@ body {
 }
 
 .wellness-system h2 {
-  font-size: 36px;
+  font-size: 24px;
   font-weight: 600;
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 .wellness-features {
@@ -821,24 +869,26 @@ body {
 }
 
 .app-integration h2 {
-  font-size: 36px;
+  font-size: 24px;
   font-weight: 600;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 .app-screens {
   display: flex;
-  gap: 20px;
+  gap: 15px;
   overflow-x: auto;
   padding: 20px 0;
-  justify-content: center;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
 }
 
 .app-screens img {
-  width: 250px;
+  width: 200px;
   height: auto;
-  border-radius: 20px;
+  border-radius: 16px;
   flex-shrink: 0;
+  scroll-snap-align: center;
 }
 
 /* Tech Specs */
@@ -863,6 +913,13 @@ body {
   justify-content: space-between;
   padding: 15px 0;
   border-bottom: 1px solid #e0e0e0;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.spec-item .spec-label {
+  margin-bottom: 0;
+  font-weight: 500;
 }
 
 .spec-value {
@@ -900,9 +957,9 @@ body {
 }
 
 .faq-section h2 {
-  font-size: 32px;
+  font-size: 24px;
   font-weight: 600;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
   text-align: center;
 }
 
@@ -919,12 +976,16 @@ body {
 }
 
 .faq-item summary {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
   cursor: pointer;
   list-style: none;
   position: relative;
   padding-right: 30px;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
 }
 
 .faq-item summary::after {
@@ -959,15 +1020,15 @@ body {
 }
 
 .reviews-section h3 {
-  font-size: 36px;
+  font-size: 24px;
   font-weight: 600;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 .reviews-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
+  grid-template-columns: 1fr;
+  gap: 20px;
   max-width: 900px;
   margin: 0 auto 30px;
 }
@@ -1015,9 +1076,9 @@ body {
 }
 
 .cta-section h2 {
-  font-size: 36px;
+  font-size: 24px;
   font-weight: 600;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 .cta-product img {
@@ -1034,7 +1095,7 @@ body {
 }
 
 .price-cta {
-  font-size: 32px;
+  font-size: 28px;
   font-weight: 700;
 }
 
@@ -1163,6 +1224,24 @@ body {
 }
 
 /* Responsive Design */
+@media (min-width: 480px) {
+  .capsule-content h2 {
+    font-size: 34px;
+  }
+
+  .stat-number {
+    font-size: 52px;
+  }
+
+  .stat-unit {
+    font-size: 24px;
+  }
+
+  .app-screens img {
+    width: 220px;
+  }
+}
+
 @media (min-width: 768px) {
   .category-grid {
     grid-template-columns: repeat(4, 1fr);
@@ -1171,6 +1250,7 @@ body {
 
   .products-grid {
     grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
     max-width: 900px;
     margin: 0 auto;
   }
@@ -1185,12 +1265,89 @@ body {
     font-size: 48px;
   }
 
+  .capsule-section {
+    height: 500px;
+  }
+
+  .capsule-content h2 {
+    font-size: 42px;
+  }
+
+  .section-title {
+    font-size: 32px;
+  }
+
+  .trust-stats h3 {
+    font-size: 36px;
+  }
+
+  .stat-number {
+    font-size: 72px;
+  }
+
+  .stat-unit {
+    font-size: 32px;
+  }
+
+  .stat-card {
+    padding: 30px;
+  }
+
+  .feature-block h3 {
+    font-size: 32px;
+  }
+
+  .battery-stat h2 {
+    font-size: 48px;
+  }
+
+  .wellness-system h2 {
+    font-size: 36px;
+  }
+
   .wellness-features {
     grid-template-columns: 1fr 1fr;
   }
 
   .tracking-info {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .app-integration h2 {
+    font-size: 36px;
+  }
+
+  .app-screens {
+    justify-content: center;
+  }
+
+  .app-screens img {
+    width: 250px;
+  }
+
+  .faq-section h2 {
+    font-size: 32px;
+  }
+
+  .reviews-section h3 {
+    font-size: 36px;
+  }
+
+  .reviews-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+
+  .cta-section h2 {
+    font-size: 36px;
+  }
+
+  .world-card {
+    height: 400px;
+  }
+
+  .world-content h3 {
+    font-size: 32px;
   }
 
   .sticky-buy-button {
@@ -1201,6 +1358,19 @@ body {
     max-width: 400px;
     margin: 0 auto;
     display: block;
+  }
+
+  .product-gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    max-width: 1000px;
+    align-items: start;
+  }
+
+  .media-card {
+    flex: 1 1 0;
+    min-width: 0;
   }
 }
 
@@ -1216,11 +1386,23 @@ body {
   .stats-grid {
     grid-template-columns: repeat(4, 1fr);
   }
+
+  .feature-image {
+    max-width: 500px;
+  }
+
+  .charging-image {
+    max-width: 500px;
+  }
 }
 
 @media (min-width: 1200px) {
   .products-grid {
     grid-template-columns: repeat(4, 1fr);
     max-width: 1200px;
+  }
+
+  .product-gallery {
+    max-width: 1100px;
   }
 }
