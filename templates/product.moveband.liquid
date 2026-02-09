@@ -1,12 +1,14 @@
 <div class="mb-page">
 
+<!-- Page progress bar -->
+<div class="mb-progress"></div>
+
 <!-- ============================================================
-     SECTION 1: HERO — Full viewport, dark, floating product
+     SECTION 1: HERO — Full viewport, parallax on scroll
      ============================================================ -->
-<section class="mb-hero">
+<section class="mb-hero" data-scroll="hero">
   <div class="mb-hero-glow"></div>
-  <div class="mb-hero-product mb-reveal mb-reveal--scale" data-delay="200">
-    <!-- UPLOAD: Product hero shot — transparent PNG of MoveBand, ~1000x1000px -->
+  <div class="mb-hero-product">
     <div class="mb-media-slot mb-media-slot--hero" data-label="Product Hero Image">
       {% if product.featured_image %}
         <img
@@ -25,13 +27,13 @@
     </div>
   </div>
   <div class="mb-hero-content">
-    <p class="mb-hero-eyebrow mb-reveal mb-reveal--up">Introducing</p>
-    <h1 class="mb-hero-title mb-reveal mb-reveal--up" data-delay="100">MoveBand</h1>
-    <p class="mb-hero-tagline mb-reveal mb-reveal--up" data-delay="200">Move Smarter. Live Better.</p>
-    <div class="mb-hero-price mb-reveal mb-reveal--up" data-delay="300">
+    <p class="mb-hero-eyebrow">Introducing</p>
+    <h1 class="mb-hero-title">MoveBand</h1>
+    <p class="mb-hero-tagline">Your partner in every step toward a healthier you.</p>
+    <div class="mb-hero-price">
       <span>From {{ product.price | money }}</span>
     </div>
-    <a href="#mb-buy" class="mb-hero-cta mb-reveal mb-reveal--up" data-delay="400">Buy</a>
+    <a href="#mb-buy" class="mb-hero-cta">Buy</a>
   </div>
   <div class="mb-scroll-indicator">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 5V19M12 19L5 12M12 19L19 12" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -39,12 +41,15 @@
 </section>
 
 <!-- ============================================================
-     SECTION 2: STATEMENT — Big text reveal
+     SECTION 2: STATEMENT — Sticky word-by-word reveal
      ============================================================ -->
-<section class="mb-statement">
-  <div class="mb-container">
-    <h2 class="mb-statement-text mb-reveal mb-reveal--up">
-      The most advanced<br>fitness tracker<br>we've ever created.
+<section class="mb-statement" data-scroll="statement">
+  <div class="mb-statement-sticky">
+    <h2 class="mb-statement-text">
+      <span class="mb-word">Every</span> <span class="mb-word">step</span> <span class="mb-word">you</span> <span class="mb-word">take</span><br>
+      <span class="mb-word">brings</span> <span class="mb-word">you</span> <span class="mb-word">closer</span><br>
+      <span class="mb-word">to</span> <span class="mb-word">the</span> <span class="mb-word">person</span><br>
+      <span class="mb-word">you</span> <span class="mb-word">want</span> <span class="mb-word">to</span> <span class="mb-word">be.</span>
     </h2>
   </div>
 </section>
@@ -55,7 +60,7 @@
 <section class="mb-section mb-section--dark">
   <div class="mb-container">
     <div class="mb-split">
-      <div class="mb-split-media mb-reveal mb-reveal--left">
+      <div class="mb-split-media" data-scroll="parallax">
         <!-- UPLOAD: Close-up of MoveBand showing heart rate screen — 800x1000px -->
         <div class="mb-media-slot mb-media-slot--portrait" data-label="Health Monitoring Image">
           <div class="mb-placeholder mb-placeholder--light">
@@ -65,44 +70,44 @@
         </div>
       </div>
       <div class="mb-split-content mb-reveal mb-reveal--right">
-        <p class="mb-section-eyebrow">Health</p>
-        <h2 class="mb-section-title">Your health.<br>Always in focus.</h2>
-        <p class="mb-section-body">Advanced sensors work around the clock so you can understand your body better than ever before.</p>
+        <p class="mb-section-eyebrow">Know Yourself</p>
+        <h2 class="mb-section-title">Understand your body.<br>Transform your habits.</h2>
+        <p class="mb-section-body">Weight loss isn't about guesswork. With 24/7 health insights powered by the HX3918 sensor, you'll know exactly what your body needs — and when.</p>
         <div class="mb-feature-list">
-          <div class="mb-feature-item">
+          <div class="mb-feature-item mb-reveal mb-reveal--up" data-delay="0">
             <div class="mb-feature-icon">
               <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M14 24S4 18 4 11C4 7 7.5 4 11 4C12.8 4 14 5 14 5S15.2 4 17 4C20.5 4 24 7 24 11C24 18 14 24 14 24Z" stroke="currentColor" stroke-width="1.5"/><path d="M4 14H10L12 10L15 18L17 14H24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </div>
             <div>
-              <h4>Heart Rate Monitoring</h4>
-              <p>24/7 continuous tracking with real-time alerts</p>
+              <h4>24/7 Heart Rate</h4>
+              <p>See how your heart responds to workouts — know when you're burning fat vs. carbs</p>
             </div>
           </div>
-          <div class="mb-feature-item">
+          <div class="mb-feature-item mb-reveal mb-reveal--up" data-delay="120">
             <div class="mb-feature-icon">
               <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M14 8V14L18 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="14" cy="14" r="2" fill="currentColor"/></svg>
             </div>
             <div>
-              <h4>Blood Oxygen (SpO2)</h4>
-              <p>Measure your blood oxygen levels anytime</p>
+              <h4>Real Blood Oxygen</h4>
+              <p>Better oxygen levels mean better energy, better workouts, and faster recovery</p>
             </div>
           </div>
-          <div class="mb-feature-item">
+          <div class="mb-feature-item mb-reveal mb-reveal--up" data-delay="240">
             <div class="mb-feature-icon">
               <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M6 20C6 20 8 12 14 12C20 12 22 20 22 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M3 20H25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="14" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg>
             </div>
             <div>
-              <h4>Sleep Tracking</h4>
-              <p>Deep, light & REM sleep analysis every night</p>
+              <h4>Sleep Quality Insights</h4>
+              <p>Poor sleep sabotages weight loss. Track deep, light & REM stages to build better rest habits</p>
             </div>
           </div>
-          <div class="mb-feature-item">
+          <div class="mb-feature-item mb-reveal mb-reveal--up" data-delay="360">
             <div class="mb-feature-icon">
               <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M14 9V14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="14" cy="19" r="1.5" fill="currentColor"/></svg>
             </div>
             <div>
-              <h4>Stress Management</h4>
-              <p>Guided breathing and stress level monitoring</p>
+              <h4>MAI Health Vitality Index</h4>
+              <p>One number that tells you how your overall wellness is trending — your daily motivation check</p>
             </div>
           </div>
         </div>
@@ -117,28 +122,28 @@
 <section class="mb-section mb-section--light">
   <div class="mb-container">
     <div class="mb-centered-header mb-reveal mb-reveal--up">
-      <p class="mb-section-eyebrow">Display</p>
-      <h2 class="mb-section-title">Brilliant<br>in every light.</h2>
+      <p class="mb-section-eyebrow">Your Daily Coach</p>
+      <h2 class="mb-section-title">Glance down.<br>Stay on track.</h2>
     </div>
   </div>
-  <div class="mb-full-media mb-reveal mb-reveal--scale">
-    <!-- UPLOAD: Full-width close-up of AMOLED screen — 2000x900px -->
+  <div class="mb-full-media" data-scroll="zoom">
+    <!-- UPLOAD: Full-width close-up of screen showing progress — 2000x900px -->
     <div class="mb-media-slot mb-media-slot--wide" data-label="Display Close-up">
       <div class="mb-placeholder mb-placeholder--dark">
         <svg width="64" height="40" viewBox="0 0 64 40" fill="none"><rect x="4" y="2" width="56" height="36" rx="4" stroke="#444" stroke-width="2"/><rect x="10" y="8" width="20" height="10" rx="2" fill="#333"/><rect x="10" y="22" width="44" height="3" rx="1.5" fill="#333"/><rect x="10" y="28" width="30" height="3" rx="1.5" fill="#333"/></svg>
-        <span>AMOLED Display Close-up</span>
+        <span>Display Close-up</span>
       </div>
     </div>
   </div>
   <div class="mb-container">
     <div class="mb-pill-row mb-reveal mb-reveal--up" data-delay="200">
-      <span class="mb-pill">AMOLED</span>
-      <span class="mb-pill">Always-On Display</span>
-      <span class="mb-pill">1000 nits</span>
-      <span class="mb-pill">Gorilla Glass</span>
+      <span class="mb-pill">1.47" TFT Color</span>
+      <span class="mb-pill">Full Touch</span>
+      <span class="mb-pill">172 x 320px</span>
+      <span class="mb-pill">200+ Watch Faces</span>
     </div>
     <p class="mb-section-body mb-centered-body mb-reveal mb-reveal--up" data-delay="300">
-      A vivid, edge-to-edge AMOLED display delivers crisp visuals even in direct sunlight. Raise your wrist and your stats are right there — always on, always beautiful.
+      Your calories burned, steps taken, and daily goals — all visible with a quick glance at the vivid 1.47" full-touch color display. Choose from 200+ watch faces to make every check-in feel personal. The screen that keeps you accountable, not distracted.
     </p>
   </div>
 </section>
@@ -149,7 +154,7 @@
 <section class="mb-section mb-section--dark">
   <div class="mb-container">
     <div class="mb-split mb-split--reverse">
-      <div class="mb-split-media mb-reveal mb-reveal--right">
+      <div class="mb-split-media" data-scroll="parallax">
         <!-- UPLOAD: Person working out wearing MoveBand — 800x1000px -->
         <div class="mb-media-slot mb-media-slot--portrait" data-label="Fitness & Activity Image">
           <div class="mb-placeholder mb-placeholder--light">
@@ -159,20 +164,21 @@
         </div>
       </div>
       <div class="mb-split-content mb-reveal mb-reveal--left">
-        <p class="mb-section-eyebrow">Fitness</p>
-        <h2 class="mb-section-title">Built for<br>every workout.</h2>
-        <p class="mb-section-body">From HIIT to yoga, swimming to cycling — MoveBand tracks it all with precision.</p>
+        <p class="mb-section-eyebrow">Move More</p>
+        <h2 class="mb-section-title">Every calorie<br>counts. Literally.</h2>
+        <p class="mb-section-body">Whether you're walking the dog, swimming laps, or crushing a HIIT session — MoveBand tracks your calories, distance, and progress across 100+ sports modes. No workout goes unnoticed.</p>
         <div class="mb-stats-row">
           <div class="mb-stat">
             <span class="mb-stat-number" data-count="100">0</span><span class="mb-stat-suffix">+</span>
-            <p>Workout Modes</p>
+            <p>Sports Modes</p>
           </div>
           <div class="mb-stat">
-            <span class="mb-stat-number" data-count="5">0</span><span class="mb-stat-suffix">ATM</span>
-            <p>Water Resistance</p>
+            <span class="mb-stat-label">IP68</span>
+            <span class="mb-stat-big">WR</span>
+            <p>Waterproof</p>
           </div>
           <div class="mb-stat">
-            <span class="mb-stat-label">Built-in</span>
+            <span class="mb-stat-label">In-App</span>
             <span class="mb-stat-big">GPS</span>
             <p>Route Tracking</p>
           </div>
@@ -185,7 +191,7 @@
 <!-- ============================================================
      SECTION 6: VIDEO / LIFESTYLE — Immersive full-width
      ============================================================ -->
-<section class="mb-video-section">
+<section class="mb-video-section" data-scroll="video">
   <div class="mb-video-wrap">
     <!-- UPLOAD: Lifestyle/promotional video — MP4, 1920x1080, <20MB -->
     <div class="mb-media-slot mb-media-slot--video" data-label="Promotional Video">
@@ -196,7 +202,7 @@
     </div>
   </div>
   <div class="mb-video-overlay">
-    <h2 class="mb-reveal mb-reveal--up">Designed to move with you.</h2>
+    <h2 class="mb-reveal mb-reveal--up">Your journey. Your pace. Your results.</h2>
   </div>
 </section>
 
@@ -206,44 +212,53 @@
 <section class="mb-section mb-section--light">
   <div class="mb-container">
     <div class="mb-centered-header mb-reveal mb-reveal--up">
-      <p class="mb-section-eyebrow">Design</p>
-      <h2 class="mb-section-title">Worn all day.<br>Loved every second.</h2>
-      <p class="mb-section-body mb-centered-body">Featherlight, skin-friendly, and available in colors that match your style. Swap bands in seconds for a whole new look.</p>
+      <p class="mb-section-eyebrow">Wear It Everywhere</p>
+      <h2 class="mb-section-title">So light you'll<br>forget it's there.</h2>
+      <p class="mb-section-body mb-centered-body">At just 24.5g with a soft TPU strap, MoveBand is comfortable enough to wear 24/7 — from your morning run to your midnight sleep tracking. Choose the color that matches your motivation.</p>
     </div>
     <div class="mb-band-gallery">
-      <!-- UPLOAD: 3 product shots showing different band colors — 600x600px each -->
+      <!-- UPLOAD: 4 product shots showing different band colors — 600x600px each -->
       <div class="mb-band-card mb-reveal mb-reveal--up" data-delay="0">
         <div class="mb-media-slot mb-media-slot--square" data-label="Band Color 1">
           <div class="mb-placeholder mb-placeholder--subtle">
             <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect x="12" y="2" width="16" height="36" rx="8" stroke="#ccc" stroke-width="1.5"/></svg>
-            <span>Midnight Black</span>
+            <span>Black</span>
           </div>
         </div>
-        <p class="mb-band-name">Midnight Black</p>
+        <p class="mb-band-name">Black</p>
       </div>
-      <div class="mb-band-card mb-reveal mb-reveal--up" data-delay="150">
+      <div class="mb-band-card mb-reveal mb-reveal--up" data-delay="100">
         <div class="mb-media-slot mb-media-slot--square" data-label="Band Color 2">
           <div class="mb-placeholder mb-placeholder--subtle">
             <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect x="12" y="2" width="16" height="36" rx="8" stroke="#ccc" stroke-width="1.5"/></svg>
-            <span>Sand Rose</span>
+            <span>Light Grey</span>
           </div>
         </div>
-        <p class="mb-band-name">Sand Rose</p>
+        <p class="mb-band-name">Light Grey</p>
       </div>
-      <div class="mb-band-card mb-reveal mb-reveal--up" data-delay="300">
+      <div class="mb-band-card mb-reveal mb-reveal--up" data-delay="200">
         <div class="mb-media-slot mb-media-slot--square" data-label="Band Color 3">
           <div class="mb-placeholder mb-placeholder--subtle">
             <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect x="12" y="2" width="16" height="36" rx="8" stroke="#ccc" stroke-width="1.5"/></svg>
-            <span>Arctic Grey</span>
+            <span>Pink</span>
           </div>
         </div>
-        <p class="mb-band-name">Arctic Grey</p>
+        <p class="mb-band-name">Pink</p>
+      </div>
+      <div class="mb-band-card mb-reveal mb-reveal--up" data-delay="300">
+        <div class="mb-media-slot mb-media-slot--square" data-label="Band Color 4">
+          <div class="mb-placeholder mb-placeholder--subtle">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect x="12" y="2" width="16" height="36" rx="8" stroke="#ccc" stroke-width="1.5"/></svg>
+            <span>Blue</span>
+          </div>
+        </div>
+        <p class="mb-band-name">Blue</p>
       </div>
     </div>
     <div class="mb-material-pills mb-reveal mb-reveal--up">
-      <span class="mb-pill mb-pill--outline">Ultra-light: 28g</span>
-      <span class="mb-pill mb-pill--outline">Skin-friendly silicone</span>
-      <span class="mb-pill mb-pill--outline">Interchangeable bands</span>
+      <span class="mb-pill mb-pill--outline">Ultra-light: 24.5g</span>
+      <span class="mb-pill mb-pill--outline">Soft TPU strap</span>
+      <span class="mb-pill mb-pill--outline">IP68 Waterproof</span>
     </div>
   </div>
 </section>
@@ -251,16 +266,16 @@
 <!-- ============================================================
      SECTION 8: BATTERY — Big number hero
      ============================================================ -->
-<section class="mb-battery">
+<section class="mb-battery" data-scroll="battery">
   <div class="mb-container">
-    <p class="mb-section-eyebrow mb-reveal mb-reveal--up">Battery</p>
-    <div class="mb-battery-hero mb-reveal mb-reveal--scale">
-      <span class="mb-battery-number" data-count="14">0</span>
+    <p class="mb-section-eyebrow mb-reveal mb-reveal--up">Never Stops</p>
+    <div class="mb-battery-hero">
+      <span class="mb-battery-number" data-count="10">0</span>
       <span class="mb-battery-unit">days</span>
     </div>
-    <h2 class="mb-battery-sub mb-reveal mb-reveal--up">of battery life on a single charge.</h2>
+    <h2 class="mb-battery-sub mb-reveal mb-reveal--up">of motivation on a single charge.</h2>
     <p class="mb-section-body mb-centered-body mb-reveal mb-reveal--up" data-delay="100">
-      Magnetic fast charging gets you from 0 to 80% in just 45 minutes.<br>Less time on the charger, more time moving.
+      A 245mAh battery keeps MoveBand running for 7–10 days of daily use — and up to 45 days on standby. Only 2 hours to fully recharge via magnetic charging. Your commitment doesn't take breaks, and neither does your band.
     </p>
     <div class="mb-battery-visual mb-reveal mb-reveal--up" data-delay="200">
       <!-- UPLOAD: Charging dock/cable close-up — 800x500px -->
@@ -280,51 +295,51 @@
 <section class="mb-section mb-section--light">
   <div class="mb-container">
     <div class="mb-centered-header mb-reveal mb-reveal--up">
-      <p class="mb-section-eyebrow">Smart</p>
-      <h2 class="mb-section-title">Intelligence<br>on your wrist.</h2>
+      <p class="mb-section-eyebrow">Your Accountability Partner</p>
+      <h2 class="mb-section-title">Gentle nudges<br>that change habits.</h2>
     </div>
     <div class="mb-smart-grid">
       <div class="mb-smart-card mb-reveal mb-reveal--up" data-delay="0">
         <div class="mb-smart-icon">
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="6" y="2" width="20" height="28" rx="4" stroke="currentColor" stroke-width="1.5"/><circle cx="16" cy="24" r="2" fill="currentColor"/><path d="M12 8H20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M16 6C10 6 6 10 6 16C6 22 10 26 16 26C22 26 26 22 26 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M16 10V16L12 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
         </div>
-        <h4>Notifications</h4>
-        <p>Calls, texts & app alerts right on your wrist</p>
+        <h4>Sedentary Reminder</h4>
+        <p>Sitting too long? A gentle buzz reminds you to move — small walks add up to big results</p>
       </div>
       <div class="mb-smart-card mb-reveal mb-reveal--up" data-delay="100">
         <div class="mb-smart-icon">
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="1.5"/><path d="M12 12L14 18L16 14L18 18L20 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M16 4V8M16 24V28M8 16H4M28 16H24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="16" cy="16" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M16 13V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
         </div>
-        <h4>Music Control</h4>
-        <p>Play, pause & skip without reaching for your phone</p>
+        <h4>Water Reminders</h4>
+        <p>Staying hydrated boosts metabolism. MoveBand reminds you to drink throughout the day</p>
       </div>
       <div class="mb-smart-card mb-reveal mb-reveal--up" data-delay="200">
         <div class="mb-smart-icon">
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="14" r="8" stroke="currentColor" stroke-width="1.5"/><path d="M16 22V28" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M10 28H22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M16 6V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M12 8L14 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M20 8L18 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="12" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M16 18C10 18 6 22 6 26" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M16 18C22 18 26 22 26 26" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M12 28H20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
         </div>
-        <h4>Find My Phone</h4>
-        <p>Trigger a sound on your phone when you can't find it</p>
+        <h4>Mood Monitoring</h4>
+        <p>Track how you feel alongside what you do — understand emotional eating triggers</p>
       </div>
       <div class="mb-smart-card mb-reveal mb-reveal--up" data-delay="300">
         <div class="mb-smart-icon">
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M16 4L18 10H24L19 14L21 20L16 16L11 20L13 14L8 10H14L16 4Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M6 26H26" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M8 22H24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M6 20C6 20 8 12 16 12C24 12 26 20 26 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M4 20H28" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M10 24H22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
         </div>
-        <h4>Weather</h4>
-        <p>Real-time forecasts and conditions at a glance</p>
+        <h4>Sleep Coaching</h4>
+        <p>Better sleep = less cravings. Monitor deep, light & REM stages every night automatically</p>
       </div>
       <div class="mb-smart-card mb-reveal mb-reveal--up" data-delay="400">
         <div class="mb-smart-icon">
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="1.5"/><path d="M16 8V16L20 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M14 8H18V14L22 18L20 20L16 16V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="1.5"/></svg>
         </div>
-        <h4>Alarms & Timers</h4>
-        <p>Silent vibration alarms that won't disturb anyone</p>
+        <h4>Blood Pressure & Glucose Study</h4>
+        <p>Keep a pulse on the metrics that matter most for metabolic health</p>
       </div>
       <div class="mb-smart-card mb-reveal mb-reveal--up" data-delay="500">
         <div class="mb-smart-icon">
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="4" y="8" width="24" height="16" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="M10 14H14M22 14H18M16 12V16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M10 18H22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="6" y="2" width="20" height="28" rx="4" stroke="currentColor" stroke-width="1.5"/><circle cx="16" cy="24" r="2" fill="currentColor"/><path d="M12 8H20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
         </div>
-        <h4>Camera Remote</h4>
-        <p>Trigger your phone's camera from your wrist</p>
+        <h4>Smart Notifications</h4>
+        <p>Calls, texts & app alerts on your wrist — stay connected without losing your focus</p>
       </div>
     </div>
   </div>
@@ -336,7 +351,7 @@
 <section class="mb-section mb-section--dark">
   <div class="mb-container">
     <div class="mb-split">
-      <div class="mb-split-media mb-reveal mb-reveal--left">
+      <div class="mb-split-media" data-scroll="parallax">
         <!-- UPLOAD: App screens on phone + watch side by side — 800x1000px -->
         <div class="mb-media-slot mb-media-slot--portrait" data-label="App Integration Screenshot">
           <div class="mb-placeholder mb-placeholder--light">
@@ -346,13 +361,13 @@
         </div>
       </div>
       <div class="mb-split-content mb-reveal mb-reveal--right">
-        <p class="mb-section-eyebrow">App</p>
-        <h2 class="mb-section-title">All your data.<br>One beautiful app.</h2>
-        <p class="mb-section-body">Sync your MoveBand with the MoveTogether app for detailed analytics, personalized coaching plans, challenges with friends, and more.</p>
+        <p class="mb-section-eyebrow">Your Command Center</p>
+        <h2 class="mb-section-title">See your progress.<br>Stay motivated.</h2>
+        <p class="mb-section-body">Sync MoveBand with the Runmefit app to see your full picture — calories burned, steps walked, sleep quality, weight trends, and personalized insights that help you reach your goals faster. Your entire journey in one place.</p>
         <div class="mb-app-badges">
-          <span class="mb-pill">iOS 15+</span>
-          <span class="mb-pill">Android 9+</span>
-          <span class="mb-pill">Bluetooth 5.1</span>
+          <span class="mb-pill">iOS 9.0+</span>
+          <span class="mb-pill">Android 4.4+</span>
+          <span class="mb-pill">Bluetooth 5.3</span>
         </div>
       </div>
     </div>
@@ -371,51 +386,67 @@
     <div class="mb-specs-grid mb-reveal mb-reveal--up" data-delay="200">
       <div class="mb-spec-item">
         <span class="mb-spec-label">Display</span>
-        <span class="mb-spec-value">1.62" AMOLED, 490 x 192px</span>
+        <span class="mb-spec-value">1.47" TFT Color, 172 x 320px</span>
       </div>
       <div class="mb-spec-item">
-        <span class="mb-spec-label">Brightness</span>
-        <span class="mb-spec-value">Up to 1000 nits</span>
+        <span class="mb-spec-label">Touch</span>
+        <span class="mb-spec-value">Full Touch Screen</span>
       </div>
       <div class="mb-spec-item">
-        <span class="mb-spec-label">Protection</span>
-        <span class="mb-spec-value">Corning Gorilla Glass</span>
+        <span class="mb-spec-label">Chipset</span>
+        <span class="mb-spec-value">JL7012</span>
       </div>
       <div class="mb-spec-item">
-        <span class="mb-spec-label">Processor</span>
-        <span class="mb-spec-value">Realtek RTL8762D</span>
+        <span class="mb-spec-label">Sensor</span>
+        <span class="mb-spec-value">HX3918 (HR + SpO2)</span>
       </div>
       <div class="mb-spec-item">
         <span class="mb-spec-label">Connectivity</span>
-        <span class="mb-spec-value">Bluetooth 5.1</span>
-      </div>
-      <div class="mb-spec-item">
-        <span class="mb-spec-label">Sensors</span>
-        <span class="mb-spec-value">Heart rate, SpO2, Accelerometer, Gyroscope</span>
+        <span class="mb-spec-value">Bluetooth 5.3</span>
       </div>
       <div class="mb-spec-item">
         <span class="mb-spec-label">Battery</span>
-        <span class="mb-spec-value">230mAh Li-Polymer</span>
+        <span class="mb-spec-value">245mAh Polymer Lithium</span>
       </div>
       <div class="mb-spec-item">
         <span class="mb-spec-label">Battery Life</span>
-        <span class="mb-spec-value">Up to 14 days typical use</span>
+        <span class="mb-spec-value">7–10 days use / 45 days standby</span>
       </div>
       <div class="mb-spec-item">
         <span class="mb-spec-label">Charging</span>
-        <span class="mb-spec-value">Magnetic, 0-80% in 45 min</span>
+        <span class="mb-spec-value">Magnetic, ~2 hours full</span>
       </div>
       <div class="mb-spec-item">
         <span class="mb-spec-label">Water Resistance</span>
-        <span class="mb-spec-value">5ATM (50 meters)</span>
+        <span class="mb-spec-value">IP68</span>
       </div>
       <div class="mb-spec-item">
         <span class="mb-spec-label">Weight</span>
-        <span class="mb-spec-value">28g (without band)</span>
+        <span class="mb-spec-value">24.5g (with strap)</span>
+      </div>
+      <div class="mb-spec-item">
+        <span class="mb-spec-label">Strap Material</span>
+        <span class="mb-spec-value">TPU</span>
       </div>
       <div class="mb-spec-item">
         <span class="mb-spec-label">Compatibility</span>
-        <span class="mb-spec-value">iOS 15+ / Android 9+</span>
+        <span class="mb-spec-value">iOS 9.0+ / Android 4.4+</span>
+      </div>
+      <div class="mb-spec-item">
+        <span class="mb-spec-label">Sports Modes</span>
+        <span class="mb-spec-value">100+</span>
+      </div>
+      <div class="mb-spec-item">
+        <span class="mb-spec-label">Watch Faces</span>
+        <span class="mb-spec-value">200+</span>
+      </div>
+      <div class="mb-spec-item">
+        <span class="mb-spec-label">App</span>
+        <span class="mb-spec-value">Runmefit</span>
+      </div>
+      <div class="mb-spec-item">
+        <span class="mb-spec-label">Colors</span>
+        <span class="mb-spec-value">Black / Light Grey / Pink / Blue</span>
       </div>
     </div>
   </div>
@@ -427,27 +458,27 @@
 <section class="mb-section mb-section--light">
   <div class="mb-container">
     <div class="mb-centered-header mb-reveal mb-reveal--up">
-      <p class="mb-section-eyebrow">Reviews</p>
-      <h2 class="mb-section-title">Loved by thousands.</h2>
+      <p class="mb-section-eyebrow">Real Stories</p>
+      <h2 class="mb-section-title">They started. They stayed. They transformed.</h2>
     </div>
     <div class="mb-reviews-grid">
       <div class="mb-review-card mb-reveal mb-reveal--up" data-delay="0">
         <div class="mb-review-stars">★★★★★</div>
-        <h4>"Best fitness tracker I've owned"</h4>
-        <p>The battery life is insane — I charge it once every two weeks. Heart rate tracking is accurate and the app is super clean.</p>
-        <span class="mb-review-author">— Sarah M.</span>
+        <h4>"Down 12kg and counting"</h4>
+        <p>The sedentary reminders were a game changer. I started taking short walks every hour at work, and the weight just started falling off. The water reminders help too — I actually drink 2L a day now.</p>
+        <span class="mb-review-author">— Rachel K.</span>
       </div>
       <div class="mb-review-card mb-reveal mb-reveal--up" data-delay="150">
         <div class="mb-review-stars">★★★★★</div>
-        <h4>"Beautiful screen, lightweight"</h4>
-        <p>I wear it 24/7 and forget it's there. Sleep tracking has completely changed my bedtime routine. Highly recommend!</p>
-        <span class="mb-review-author">— James T.</span>
+        <h4>"I finally fixed my sleep"</h4>
+        <p>I didn't realize how badly I was sleeping until MoveBand showed me. Fixed my routine, started sleeping 7+ hours, and the late-night cravings just disappeared. Best investment in my health.</p>
+        <span class="mb-review-author">— David P.</span>
       </div>
       <div class="mb-review-card mb-reveal mb-reveal--up" data-delay="300">
         <div class="mb-review-stars">★★★★★</div>
-        <h4>"Worth every penny"</h4>
-        <p>Swim, shower, gym — this thing handles everything. GPS tracking for my runs is spot on. Absolutely love it.</p>
-        <span class="mb-review-author">— Alex R.</span>
+        <h4>"My daily accountability partner"</h4>
+        <p>Seeing my steps, calories burned, and heart rate zones throughout the day keeps me honest. I've lost 8kg in 3 months just by being more aware. And it lasts a full week on one charge!</p>
+        <span class="mb-review-author">— Maria L.</span>
       </div>
     </div>
   </div>
@@ -463,28 +494,32 @@
     </div>
     <div class="mb-faq-list mb-reveal mb-reveal--up" data-delay="100">
       <details class="mb-faq-item">
-        <summary>What is the battery life of MoveBand?</summary>
-        <p>MoveBand lasts up to 14 days on a single charge with typical use. Heavy GPS and always-on display usage may reduce this to around 7 days.</p>
+        <summary>How can MoveBand help me lose weight?</summary>
+        <p>MoveBand combines 24/7 heart rate monitoring, calorie tracking across 100+ sports modes, sedentary reminders to keep you moving, water reminders to boost metabolism, and sleep tracking to reduce cravings. It's a complete accountability system on your wrist.</p>
+      </details>
+      <details class="mb-faq-item">
+        <summary>How long does the battery last?</summary>
+        <p>MoveBand lasts 7–10 days on a single charge with daily use, and up to 45 days on standby. A full charge takes about 2 hours via the magnetic charger.</p>
       </details>
       <details class="mb-faq-item">
         <summary>Is MoveBand waterproof?</summary>
-        <p>MoveBand has a 5ATM water resistance rating, meaning it's safe for swimming, showering, and rain. We recommend avoiding hot tubs, saunas, and high-pressure water.</p>
+        <p>Yes — MoveBand is IP68 water resistant, so it handles sweat, rain, and splashes without issue. We recommend avoiding hot showers, saunas, and submersion in salt or chlorinated water.</p>
       </details>
       <details class="mb-faq-item">
-        <summary>Does it work with both iPhone and Android?</summary>
-        <p>Yes! MoveBand works with iOS 15 and above, and Android 9 and above via the MoveTogether app available on both the App Store and Google Play.</p>
+        <summary>What app does MoveBand connect to?</summary>
+        <p>MoveBand syncs with the Runmefit app via Bluetooth 5.3. The app is available on iOS 9.0+ and Android 4.4+, giving you detailed dashboards for steps, calories, sleep, heart rate, and more.</p>
       </details>
       <details class="mb-faq-item">
-        <summary>Can I change the watch bands?</summary>
-        <p>Absolutely. MoveBand features a quick-release band system. Swap between silicone, woven, and leather bands in seconds — no tools required.</p>
+        <summary>Does it track calories burned?</summary>
+        <p>Absolutely. MoveBand tracks calories burned throughout the day — during workouts and at rest. Combined with heart rate zone data, you can see exactly when your body is in fat-burning mode.</p>
+      </details>
+      <details class="mb-faq-item">
+        <summary>Can I wear it while sleeping?</summary>
+        <p>Yes, and you should! At just 24.5g with a soft TPU strap, MoveBand is comfortable enough to wear overnight. It tracks deep, light, and REM sleep stages so you can build healthier rest habits — a key factor in weight loss.</p>
       </details>
       <details class="mb-faq-item">
         <summary>Is MoveBand a medical device?</summary>
-        <p>MoveBand is not a medical device. While it provides health insights like heart rate and blood oxygen, it is not intended to diagnose, prevent, or treat any medical condition.</p>
-      </details>
-      <details class="mb-faq-item">
-        <summary>What's included in the box?</summary>
-        <p>MoveBand comes with the tracker, a silicone band (size S/M and M/L), magnetic charging cable, and a quick start guide.</p>
+        <p>MoveBand is not a medical device. Features like blood pressure study and blood glucose study are for wellness reference only and are not intended to diagnose or treat any medical condition. Always consult a healthcare professional for medical advice.</p>
       </details>
     </div>
   </div>
@@ -515,8 +550,9 @@
         </div>
       </div>
       <div class="mb-buy-content mb-reveal mb-reveal--right">
-        <p class="mb-section-eyebrow">Get Yours</p>
+        <p class="mb-section-eyebrow">Start Your Journey</p>
         <h2 class="mb-buy-title">MoveBand</h2>
+        <p class="mb-buy-subtitle">Your accountability partner for every step, every day.</p>
         <p class="mb-buy-price">{{ product.price | money }}</p>
         <p class="mb-buy-shipping">Free shipping & 30-day returns</p>
 
@@ -564,20 +600,26 @@
 .mb-page { overflow-x: hidden; }
 .mb-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
-/* ===== SCROLL REVEAL ===== */
+/* ===== PROGRESS BAR ===== */
+.mb-progress {
+  position: fixed; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, #369FFF, #36deff);
+  transform-origin: left; transform: scaleX(0);
+  z-index: 9999; pointer-events: none;
+  will-change: transform;
+}
+
+/* ===== SCROLL REVEAL (trigger-based) ===== */
 .mb-reveal {
   opacity: 0;
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
-.mb-reveal--up { transform: translateY(60px); }
+.mb-reveal--up { transform: translateY(50px); }
 .mb-reveal--scale { transform: scale(0.92); }
-.mb-reveal--left { transform: translateX(-60px); }
-.mb-reveal--right { transform: translateX(60px); }
-.mb-reveal.visible {
-  opacity: 1;
-  transform: none;
-}
+.mb-reveal--left { transform: translateX(-50px); }
+.mb-reveal--right { transform: translateX(50px); }
+.mb-reveal.visible { opacity: 1; transform: none; }
 
 /* ===== PLACEHOLDERS ===== */
 .mb-media-slot { width: 100%; overflow: hidden; border-radius: 16px; }
@@ -592,7 +634,7 @@
 .mb-placeholder--video { padding: 120px 20px; }
 .mb-media-slot img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-/* ===== HERO ===== */
+/* ===== HERO (scroll-driven parallax) ===== */
 .mb-hero {
   position: relative; min-height: 100vh; min-height: 100dvh;
   background: #ffffff; display: flex; flex-direction: column;
@@ -604,17 +646,18 @@
   transform: translate(-50%, -60%);
   width: 500px; height: 500px;
   background: radial-gradient(circle, rgba(54, 159, 255, 0.08) 0%, transparent 70%);
-  pointer-events: none;
+  pointer-events: none; will-change: transform;
 }
 .mb-hero-product {
   position: relative; z-index: 2;
   width: 280px; height: 280px; margin-bottom: 40px;
+  will-change: transform;
 }
 .mb-hero-product .mb-media-slot { border-radius: 0; background: transparent; }
 .mb-hero-product .mb-placeholder { background: transparent; }
 .mb-hero-product .mb-media-slot--hero { width: 100%; height: 100%; }
 .mb-hero-product img { object-fit: contain; }
-.mb-hero-content { position: relative; z-index: 2; }
+.mb-hero-content { position: relative; z-index: 2; will-change: transform, opacity; }
 .mb-hero-eyebrow {
   font-size: 14px; font-weight: 500; letter-spacing: 3px;
   text-transform: uppercase; color: rgba(0,0,0,0.4);
@@ -623,8 +666,7 @@
 .mb-hero-title {
   font-family: 'Playfair Display', Georgia, serif;
   font-size: 64px; font-weight: 700; color: #1a1a1a;
-  line-height: 1; margin-bottom: 16px;
-  letter-spacing: -1px;
+  line-height: 1; margin-bottom: 16px; letter-spacing: -1px;
 }
 .mb-hero-tagline {
   font-size: 20px; color: rgba(0,0,0,0.5);
@@ -645,21 +687,37 @@
   position: absolute; bottom: 30px; left: 50%;
   transform: translateX(-50%);
   animation: mb-bounce 2s ease infinite;
-  color: rgba(0,0,0,0.25);
+  color: rgba(0,0,0,0.25); will-change: opacity;
 }
 @keyframes mb-bounce {
   0%, 100% { transform: translateX(-50%) translateY(0); }
   50% { transform: translateX(-50%) translateY(10px); }
 }
 
-/* ===== STATEMENT ===== */
+/* ===== STATEMENT (sticky word reveal) ===== */
 .mb-statement {
-  padding: 140px 24px; background: #fafafa; text-align: center;
+  min-height: 250vh; position: relative;
+  background: #fafafa;
+}
+.mb-statement-sticky {
+  position: sticky; top: 0; min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  padding: 40px 24px;
 }
 .mb-statement-text {
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: 48px; line-height: 1.2; font-weight: 600;
-  color: #1a1a1a; max-width: 800px; margin: 0 auto;
+  font-size: 48px; line-height: 1.25; font-weight: 600;
+  color: #1a1a1a; max-width: 800px; text-align: center;
+}
+.mb-word {
+  opacity: 0.12;
+  filter: blur(5px);
+  transition: opacity 0.15s ease, filter 0.15s ease;
+  display: inline-block;
+}
+.mb-word.revealed {
+  opacity: 1;
+  filter: blur(0);
 }
 
 /* ===== SECTIONS ===== */
@@ -673,17 +731,14 @@
 
 .mb-section-eyebrow {
   font-size: 14px; font-weight: 600; letter-spacing: 3px;
-  text-transform: uppercase; color: #369FFF;
-  margin-bottom: 16px;
+  text-transform: uppercase; color: #369FFF; margin-bottom: 16px;
 }
 .mb-section-title {
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: 48px; font-weight: 600; line-height: 1.15;
-  margin-bottom: 20px;
+  font-size: 48px; font-weight: 600; line-height: 1.15; margin-bottom: 20px;
 }
 .mb-section-body {
-  font-size: 18px; line-height: 1.7; color: #666;
-  max-width: 520px;
+  font-size: 18px; line-height: 1.7; color: #666; max-width: 520px;
 }
 .mb-centered-header { text-align: center; margin-bottom: 60px; }
 .mb-centered-header .mb-section-title { margin-left: auto; margin-right: auto; }
@@ -695,6 +750,7 @@
   gap: 80px; align-items: center;
 }
 .mb-split--reverse .mb-split-content { order: -1; }
+.mb-split-media { will-change: transform, opacity; }
 .mb-split-media .mb-media-slot--portrait { aspect-ratio: 4/5; }
 
 /* ===== FEATURE LIST ===== */
@@ -703,16 +759,20 @@
 .mb-feature-icon {
   width: 48px; height: 48px; flex-shrink: 0;
   display: flex; align-items: center; justify-content: center;
-  border-radius: 12px; background: rgba(54, 159, 255, 0.1);
-  color: #369FFF;
+  border-radius: 12px; background: rgba(54, 159, 255, 0.1); color: #369FFF;
 }
 .mb-feature-item h4 { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
 .mb-feature-item p { font-size: 14px; line-height: 1.5; margin: 0; }
 
-/* ===== FULL-WIDTH MEDIA ===== */
+/* ===== FULL-WIDTH MEDIA (scroll zoom) ===== */
 .mb-full-media {
   width: 100%; max-width: 1400px; margin: 0 auto 60px;
-  padding: 0 24px;
+  padding: 0 24px; overflow: hidden;
+}
+.mb-full-media .mb-media-slot {
+  will-change: transform;
+  transform: scale(1.15);
+  transition: none;
 }
 .mb-media-slot--wide { aspect-ratio: 21/9; }
 
@@ -746,9 +806,12 @@
 }
 .mb-stat p { font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 6px; }
 
-/* ===== VIDEO SECTION ===== */
+/* ===== VIDEO SECTION (parallax bg) ===== */
 .mb-video-section { position: relative; min-height: 70vh; background: #0a0a0a; overflow: hidden; }
-.mb-video-wrap { position: absolute; inset: 0; }
+.mb-video-wrap {
+  position: absolute; inset: -60px 0;
+  will-change: transform;
+}
 .mb-video-wrap video,
 .mb-video-wrap .mb-media-slot { width: 100%; height: 100%; }
 .mb-video-wrap .mb-media-slot { border-radius: 0; }
@@ -767,8 +830,8 @@
 
 /* ===== BAND GALLERY ===== */
 .mb-band-gallery {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 32px; margin-bottom: 48px;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 28px; margin-bottom: 48px;
 }
 .mb-band-card .mb-media-slot--square { aspect-ratio: 1; }
 .mb-band-name {
@@ -779,15 +842,18 @@
   display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;
 }
 
-/* ===== BATTERY ===== */
+/* ===== BATTERY (scroll-driven scale) ===== */
 .mb-battery {
   padding: 140px 0; background: #0a0a0a; color: white; text-align: center;
+  overflow: hidden;
 }
 .mb-battery .mb-section-eyebrow { color: #369FFF; }
 .mb-battery-hero {
   display: flex; align-items: baseline;
   justify-content: center; gap: 12px;
   margin: 20px 0 24px;
+  will-change: transform, opacity;
+  transform: scale(0.3); opacity: 0;
 }
 .mb-battery-number {
   font-family: 'Playfair Display', Georgia, serif;
@@ -804,15 +870,12 @@
   margin-bottom: 24px;
 }
 .mb-battery .mb-section-body { color: rgba(255,255,255,0.5); }
-.mb-battery-visual {
-  max-width: 700px; margin: 48px auto 0;
-}
+.mb-battery-visual { max-width: 700px; margin: 48px auto 0; }
 .mb-media-slot--wide-sm { aspect-ratio: 16/10; }
 
 /* ===== SMART GRID ===== */
 .mb-smart-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
 }
 .mb-smart-card {
   background: white; border-radius: 20px; padding: 36px 28px;
@@ -829,9 +892,7 @@
 .mb-smart-card p { font-size: 14px; color: #888; line-height: 1.5; }
 
 /* ===== SPECS ===== */
-.mb-specs {
-  padding: 120px 0; background: #0a0a0a; color: white;
-}
+.mb-specs { padding: 120px 0; background: #0a0a0a; color: white; }
 .mb-specs .mb-section-eyebrow { color: #369FFF; }
 .mb-specs-grid {
   display: grid; grid-template-columns: 1fr 1fr;
@@ -862,9 +923,7 @@
 /* ===== FAQ ===== */
 .mb-faq { padding: 120px 0; background: #fafafa; }
 .mb-faq-list { max-width: 800px; margin: 0 auto; }
-.mb-faq-item {
-  border-bottom: 1px solid #e0e0e0; overflow: hidden;
-}
+.mb-faq-item { border-bottom: 1px solid #e0e0e0; overflow: hidden; }
 .mb-faq-item summary {
   padding: 24px 0; font-size: 17px; font-weight: 500;
   cursor: pointer; list-style: none; display: flex;
@@ -878,9 +937,7 @@
 }
 .mb-faq-item[open] summary::after { transform: rotate(45deg); }
 .mb-faq-item[open] summary { color: #369FFF; }
-.mb-faq-item p {
-  padding: 0 0 24px; font-size: 15px; color: #666; line-height: 1.7;
-}
+.mb-faq-item p { padding: 0 0 24px; font-size: 15px; color: #666; line-height: 1.7; }
 
 /* ===== BUY SECTION ===== */
 .mb-buy { padding: 120px 0; background: white; }
@@ -893,18 +950,11 @@
   font-family: 'Playfair Display', Georgia, serif;
   font-size: 40px; font-weight: 700; margin-bottom: 12px;
 }
-.mb-buy-price {
-  font-size: 32px; font-weight: 700; margin-bottom: 8px;
-}
-.mb-buy-shipping {
-  font-size: 14px; color: #888; margin-bottom: 32px;
-}
-.mb-buy-variants {
-  display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 32px;
-}
-.mb-variant-option {
-  cursor: pointer;
-}
+.mb-buy-price { font-size: 32px; font-weight: 700; margin-bottom: 8px; }
+.mb-buy-subtitle { font-size: 17px; color: #666; margin-bottom: 16px; line-height: 1.5; }
+.mb-buy-shipping { font-size: 14px; color: #888; margin-bottom: 32px; }
+.mb-buy-variants { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 32px; }
+.mb-variant-option { cursor: pointer; }
 .mb-variant-option input { display: none; }
 .mb-variant-option span {
   display: block; padding: 10px 24px;
@@ -970,7 +1020,7 @@
   .mb-hero-tagline { font-size: 17px; }
   .mb-hero-glow { width: 300px; height: 300px; }
 
-  .mb-statement { padding: 100px 24px; }
+  .mb-statement { min-height: 180vh; }
   .mb-statement-text { font-size: 32px; }
 
   .mb-section { padding: 80px 0; }
@@ -985,7 +1035,7 @@
   .mb-video-overlay { min-height: 50vh; }
   .mb-video-overlay h2 { font-size: 32px; }
 
-  .mb-band-gallery { grid-template-columns: 1fr; max-width: 320px; margin-left: auto; margin-right: auto; margin-bottom: 48px; }
+  .mb-band-gallery { grid-template-columns: repeat(2, 1fr); max-width: 400px; margin-left: auto; margin-right: auto; margin-bottom: 48px; }
 
   .mb-battery { padding: 100px 0; }
   .mb-battery-number { font-size: 100px; }
@@ -1019,7 +1069,6 @@
   .mb-pill { font-size: 12px; padding: 6px 14px; }
 }
 
-/* Large screens */
 @media (min-width: 1200px) {
   .mb-hero-title { font-size: 80px; }
   .mb-hero-product { width: 440px; height: 440px; }
@@ -1028,86 +1077,222 @@
   .mb-video-overlay h2 { font-size: 64px; }
   .mb-battery-number { font-size: 200px; }
 }
+
+/* Reduced motion: disable scroll effects */
+@media (prefers-reduced-motion: reduce) {
+  .mb-reveal { transition-duration: 0.01ms !important; }
+  .mb-word { opacity: 1 !important; filter: none !important; }
+  .mb-battery-hero { transform: none !important; opacity: 1 !important; }
+  .mb-full-media .mb-media-slot { transform: none !important; }
+  .mb-hero-product, .mb-hero-content { transform: none !important; opacity: 1 !important; }
+}
 </style>
 
 <!-- ============================================================
-     MOVEBAND JAVASCRIPT — Scroll animations, counters, sticky bar
+     MOVEBAND JAVASCRIPT — Premium scroll-driven animations
      ============================================================ -->
 <script>
 (function() {
-  // Scroll reveal with IntersectionObserver
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ========== UTILITIES ==========
+  function clamp(v, min, max) { return Math.min(Math.max(v, min), max); }
+  function lerp(a, b, t) { return a + (b - a) * t; }
+  function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+
+  // Get how far element is through viewport: 0 = entering bottom, 1 = leaving top
+  function scrollProgress(el, start, end) {
+    var rect = el.getBoundingClientRect();
+    var vh = window.innerHeight;
+    var s = vh * (start !== undefined ? start : 1);
+    var e = vh * (end !== undefined ? end : 0);
+    return clamp((s - rect.top) / (s - e), 0, 1);
+  }
+
+  // ========== 1. TRIGGER-BASED REVEALS (IntersectionObserver) ==========
   var reveals = document.querySelectorAll('.mb-reveal');
   if ('IntersectionObserver' in window) {
-    var observer = new IntersectionObserver(function(entries) {
+    var revealObs = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
         if (entry.isIntersecting) {
           var el = entry.target;
           var delay = parseInt(el.getAttribute('data-delay') || '0', 10);
           setTimeout(function() { el.classList.add('visible'); }, delay);
-          observer.unobserve(el);
+          revealObs.unobserve(el);
         }
       });
-    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-    reveals.forEach(function(el) { observer.observe(el); });
+    }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+    reveals.forEach(function(el) { revealObs.observe(el); });
   } else {
     reveals.forEach(function(el) { el.classList.add('visible'); });
   }
 
-  // Animated counters
+  // ========== 2. ANIMATED COUNTERS ==========
   var counters = document.querySelectorAll('[data-count]');
   if ('IntersectionObserver' in window) {
-    var counterObserver = new IntersectionObserver(function(entries) {
+    var counterObs = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
         if (entry.isIntersecting) {
           var el = entry.target;
           var target = parseInt(el.getAttribute('data-count'), 10);
-          var duration = 1500;
-          var start = 0;
+          var duration = 1800;
           var startTime = null;
-          function step(timestamp) {
-            if (!startTime) startTime = timestamp;
-            var progress = Math.min((timestamp - startTime) / duration, 1);
-            var eased = 1 - Math.pow(1 - progress, 3);
-            el.textContent = Math.floor(eased * target);
-            if (progress < 1) {
-              requestAnimationFrame(step);
-            } else {
-              el.textContent = target;
-            }
+          function step(ts) {
+            if (!startTime) startTime = ts;
+            var p = Math.min((ts - startTime) / duration, 1);
+            el.textContent = Math.floor(easeOutCubic(p) * target);
+            if (p < 1) requestAnimationFrame(step);
+            else el.textContent = target;
           }
           requestAnimationFrame(step);
-          counterObserver.unobserve(el);
+          counterObs.unobserve(el);
         }
       });
     }, { threshold: 0.5 });
-    counters.forEach(function(el) { counterObserver.observe(el); });
+    counters.forEach(function(el) { counterObs.observe(el); });
   }
 
-  // Sticky buy bar — show after scrolling past hero
-  var stickyBar = document.getElementById('mb-sticky-bar');
-  var buySection = document.getElementById('mb-buy');
-  if (stickyBar) {
-    var lastScroll = 0;
-    var ticking = false;
-    window.addEventListener('scroll', function() {
-      lastScroll = window.scrollY;
-      if (!ticking) {
-        requestAnimationFrame(function() {
-          var showAfter = window.innerHeight * 0.8;
-          var buyTop = buySection ? buySection.getBoundingClientRect().top + window.scrollY - window.innerHeight : Infinity;
-          if (lastScroll > showAfter && lastScroll < buyTop) {
-            stickyBar.classList.add('visible');
-          } else {
-            stickyBar.classList.remove('visible');
-          }
-          ticking = false;
-        });
-        ticking = true;
+  // ========== 3. SCROLL-DRIVEN ANIMATIONS ==========
+  if (prefersReduced) {
+    // Show everything immediately
+    document.querySelectorAll('.mb-word').forEach(function(w) { w.classList.add('revealed'); });
+    var bh = document.querySelector('.mb-battery-hero');
+    if (bh) { bh.style.transform = 'none'; bh.style.opacity = '1'; }
+    var fm = document.querySelector('.mb-full-media .mb-media-slot');
+    if (fm) { fm.style.transform = 'none'; }
+  } else {
+
+    // Cache DOM references
+    var heroSection = document.querySelector('.mb-hero');
+    var heroProduct = document.querySelector('.mb-hero-product');
+    var heroContent = document.querySelector('.mb-hero-content');
+    var heroGlow = document.querySelector('.mb-hero-glow');
+    var heroIndicator = document.querySelector('.mb-scroll-indicator');
+
+    var statementSection = document.querySelector('.mb-statement');
+    var statementWords = document.querySelectorAll('.mb-word');
+
+    var zoomMedia = document.querySelector('[data-scroll="zoom"]');
+    var zoomSlot = zoomMedia ? zoomMedia.querySelector('.mb-media-slot') : null;
+
+    var batterySection = document.querySelector('[data-scroll="battery"]');
+    var batteryHero = batterySection ? batterySection.querySelector('.mb-battery-hero') : null;
+
+    var parallaxMedias = document.querySelectorAll('[data-scroll="parallax"]');
+
+    var videoSection = document.querySelector('[data-scroll="video"]');
+    var videoWrap = videoSection ? videoSection.querySelector('.mb-video-wrap') : null;
+
+    var progressBar = document.querySelector('.mb-progress');
+
+    var stickyBar = document.getElementById('mb-sticky-bar');
+    var buySection = document.getElementById('mb-buy');
+
+    var scrollTicking = false;
+
+    function updateScroll() {
+      var scrollY = window.scrollY;
+      var vh = window.innerHeight;
+      var docH = document.documentElement.scrollHeight - vh;
+
+      // --- Progress bar ---
+      if (progressBar) {
+        progressBar.style.transform = 'scaleX(' + (scrollY / docH) + ')';
       }
-    });
+
+      // --- Hero parallax ---
+      if (heroSection && scrollY < vh * 1.5) {
+        var hp = clamp(scrollY / vh, 0, 1);
+        var productY = hp * -100;
+        var productScale = 1 + hp * 0.15;
+        var contentY = hp * 80;
+        var contentOp = clamp(1 - hp * 2, 0, 1);
+        var glowScale = 1 + hp * 0.5;
+
+        heroProduct.style.transform = 'translateY(' + productY + 'px) scale(' + productScale + ')';
+        heroContent.style.transform = 'translateY(' + contentY + 'px)';
+        heroContent.style.opacity = contentOp;
+        heroGlow.style.transform = 'translate(-50%, -60%) scale(' + glowScale + ')';
+        if (heroIndicator) heroIndicator.style.opacity = clamp(1 - hp * 4, 0, 1);
+      }
+
+      // --- Statement word-by-word reveal ---
+      if (statementSection && statementWords.length > 0) {
+        var stRect = statementSection.getBoundingClientRect();
+        var stHeight = statementSection.offsetHeight;
+        var stScrolled = -stRect.top;
+        var stProgress = clamp(stScrolled / (stHeight - vh), 0, 1);
+
+        var wordCount = statementWords.length;
+        for (var i = 0; i < wordCount; i++) {
+          var wordThreshold = (i + 0.5) / wordCount;
+          if (stProgress >= wordThreshold) {
+            statementWords[i].classList.add('revealed');
+          } else {
+            statementWords[i].classList.remove('revealed');
+          }
+        }
+      }
+
+      // --- Display image zoom ---
+      if (zoomSlot) {
+        var zp = scrollProgress(zoomMedia, 1.1, 0.2);
+        var zoomScale = lerp(1.15, 1.0, easeOutCubic(zp));
+        zoomSlot.style.transform = 'scale(' + zoomScale + ')';
+      }
+
+      // --- Battery number scale ---
+      if (batteryHero && batterySection) {
+        var bp = scrollProgress(batterySection, 1.0, 0.35);
+        var bScale = lerp(0.3, 1.0, easeOutCubic(bp));
+        var bOpacity = lerp(0, 1, easeOutCubic(clamp(bp * 1.5, 0, 1)));
+        batteryHero.style.transform = 'scale(' + bScale + ')';
+        batteryHero.style.opacity = bOpacity;
+      }
+
+      // --- Split media parallax ---
+      parallaxMedias.forEach(function(media) {
+        var mp = scrollProgress(media, 1.3, -0.3);
+        var mY = lerp(50, -50, mp);
+        var mOp = clamp(mp * 3, 0, 1) * clamp((1 - mp) * 3, 0, 1);
+        mOp = clamp(mOp + 0.15, 0, 1);
+        media.style.transform = 'translateY(' + mY + 'px)';
+        media.style.opacity = mOp;
+      });
+
+      // --- Video background parallax ---
+      if (videoWrap && videoSection) {
+        var vp = scrollProgress(videoSection, 1.2, -0.2);
+        var vY = lerp(40, -40, vp);
+        videoWrap.style.transform = 'translateY(' + vY + 'px)';
+      }
+
+      // --- Sticky buy bar ---
+      if (stickyBar) {
+        var showAfter = vh * 0.9;
+        var buyTop = buySection ? buySection.getBoundingClientRect().top + scrollY - vh : Infinity;
+        if (scrollY > showAfter && scrollY < buyTop) {
+          stickyBar.classList.add('visible');
+        } else {
+          stickyBar.classList.remove('visible');
+        }
+      }
+
+      scrollTicking = false;
+    }
+
+    window.addEventListener('scroll', function() {
+      if (!scrollTicking) {
+        requestAnimationFrame(updateScroll);
+        scrollTicking = true;
+      }
+    }, { passive: true });
+
+    // Run once on load
+    updateScroll();
   }
 
-  // Variant selector for buy section
+  // ========== 4. VARIANT SELECTOR ==========
   var variantInputs = document.querySelectorAll('.mb-variant-option input');
   var hiddenVariantId = document.getElementById('mb-variant-id');
   if (variantInputs.length > 0 && hiddenVariantId) {
@@ -1118,7 +1303,7 @@
     });
   }
 
-  // Smooth scroll for anchor links within page
+  // ========== 5. SMOOTH SCROLL ==========
   document.querySelectorAll('.mb-page a[href^="#"]').forEach(function(link) {
     link.addEventListener('click', function(e) {
       var target = document.querySelector(this.getAttribute('href'));
