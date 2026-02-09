@@ -378,6 +378,28 @@ document.addEventListener('DOMContentLoaded', function() {
       return '$' + (cents / 100).toFixed(2);
     }
 
+    // --- Free shipping bar (threshold: $75 = 7500 cents) ---
+    var FREE_SHIP_THRESHOLD = 7500;
+    var shippingBar = document.getElementById('cd-shipping-bar');
+    var shippingFill = document.getElementById('cd-shipping-fill');
+    var shippingMsg = document.getElementById('cd-shipping-msg');
+
+    function updateShippingBar(totalCents) {
+      if (!shippingBar) return;
+      var pct = Math.min((totalCents / FREE_SHIP_THRESHOLD) * 100, 100);
+      shippingFill.style.width = pct + '%';
+      if (totalCents >= FREE_SHIP_THRESHOLD) {
+        shippingFill.classList.add('cd-shipping-full');
+        shippingMsg.classList.add('cd-shipping-earned');
+        shippingMsg.textContent = '✓ You\'ve earned free shipping!';
+      } else {
+        shippingFill.classList.remove('cd-shipping-full');
+        shippingMsg.classList.remove('cd-shipping-earned');
+        var remaining = formatMoney(FREE_SHIP_THRESHOLD - totalCents);
+        shippingMsg.textContent = 'You\'re ' + remaining + ' away from free shipping';
+      }
+    }
+
     // --- Update cart count badge in header ---
     function updateCartCount(count) {
       if (!headerCartCount) {
@@ -444,6 +466,7 @@ document.addEventListener('DOMContentLoaded', function() {
       if (cartFooter) {
         cartFooter.style.display = 'block';
         if (cartTotalEl) cartTotalEl.textContent = formatMoney(cart.total_price);
+        updateShippingBar(cart.total_price);
       }
 
       // Bind quantity and remove buttons

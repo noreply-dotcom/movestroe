@@ -148,13 +148,21 @@
       <!-- Items rendered dynamically by JS -->
     </div>
     <div class="cart-drawer-footer" id="cart-drawer-footer" style="display:none;">
+      <div class="cd-shipping-bar" id="cd-shipping-bar">
+        <div class="cd-shipping-track"><div class="cd-shipping-fill" id="cd-shipping-fill"></div></div>
+        <p class="cd-shipping-msg" id="cd-shipping-msg"></p>
+      </div>
       <div class="cart-drawer-subtotal">
         <span>Subtotal</span>
         <span class="cart-drawer-total-price" id="cart-drawer-total"></span>
       </div>
-      <p class="cart-drawer-note">Shipping & taxes calculated at checkout</p>
       <a href="/checkout" class="cart-drawer-checkout-btn" id="cart-drawer-checkout">Checkout</a>
       <a href="/cart" class="cart-drawer-viewcart">View Cart</a>
+      <div class="cd-trust">
+        <span>🔒 Secure checkout</span>
+        <span>🚚 Free shipping over $75</span>
+        <span>↩ 30-day returns</span>
+      </div>
     </div>
   </div>
 </header>
@@ -770,6 +778,60 @@
     font-size: 14px;
     font-weight: 400;
     color: #999;
+  }
+
+  /* Shipping progress bar */
+  .cd-shipping-bar {
+    margin-bottom: 16px;
+  }
+
+  .cd-shipping-track {
+    height: 4px;
+    background: #e8e8e8;
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 8px;
+  }
+
+  .cd-shipping-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #369FFF, #36deff);
+    border-radius: 2px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+
+  .cd-shipping-fill.cd-shipping-full {
+    background: #22c55e;
+  }
+
+  .cd-shipping-msg {
+    font-size: 12px;
+    color: #666;
+    text-align: center;
+    margin: 0;
+  }
+
+  .cd-shipping-msg.cd-shipping-earned {
+    color: #22c55e;
+    font-weight: 600;
+  }
+
+  /* Trust signals */
+  .cd-trust {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid #f0f0f0;
+    flex-wrap: wrap;
+  }
+
+  .cd-trust span {
+    font-size: 11px;
+    color: #999;
+    white-space: nowrap;
   }
 
   /* Cart drawer overlay */
