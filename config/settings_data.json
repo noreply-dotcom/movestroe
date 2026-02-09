@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": {
     "color_primary": "#369FFF",
@@ -19,24 +28,19 @@
     "sections": {
       "header": {
         "type": "header",
-        "settings": {
-          "menu": "main-menu",
-          "logo_width": 100,
-          "show_search": true
-        }
+        "settings": {}
       },
       "hero": {
         "type": "hero",
-        "settings": {
-          "autoplay_speed": 6
-        },
         "blocks": {
           "slide_1": {
             "type": "slide",
             "settings": {
+              "image": "shopify://shop_images/LA_Style.webp",
               "layout": "centered",
               "subtitle": "IVORY, MOCHA, STONE & BLACK",
               "title": "EQUIP YOUR\nESSENTIALS",
+              "title_right": "",
               "cta_text": "Shop Now",
               "cta_link": "/collections/all"
             }
@@ -44,6 +48,7 @@
           "slide_2": {
             "type": "slide",
             "settings": {
+              "image": "shopify://shop_images/WearMT.webp",
               "layout": "split",
               "subtitle": "NEW SEASON COLLECTION",
               "title": "BORN\nTO PLAY",
@@ -55,23 +60,30 @@
           "slide_3": {
             "type": "slide",
             "settings": {
+              "image": "shopify://shop_images/NY_Style.webp",
               "layout": "centered",
               "subtitle": "PERFORMANCE MEETS STYLE",
               "title": "MOVE\nTOGETHER",
+              "title_right": "",
               "cta_text": "Shop Now",
               "cta_link": "/collections/equipment"
             }
           }
         },
-        "block_order": ["slide_1", "slide_2", "slide_3"]
+        "block_order": [
+          "slide_1",
+          "slide_2",
+          "slide_3"
+        ],
+        "settings": {
+          "autoplay_speed": 6
+        }
       },
       "footer": {
         "type": "footer",
-        "settings": {
-          "show_newsletter": true,
-          "show_social": true
-        }
+        "settings": {}
       }
-    }
+    },
+    "content_for_index": []
   }
 }
