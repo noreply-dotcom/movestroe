@@ -1,399 +1,1491 @@
-<div class="fitness-tracker-page">
+<div class="ft-page">
 
-  <!-- Product Hero Section -->
-  <section class="product-hero">
-    <div class="product-gallery">
-      <div class="main-image">
-        <img src="{{ product.featured_image | default: 'https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?w=600' | img_url: 'master' }}" alt="{{ product.title }}" id="mainImage">
+<!-- Page progress bar -->
+<div class="ft-progress"></div>
+
+<!-- ============================================================
+     SECTION 1: HERO — Full viewport, centered product
+     ============================================================ -->
+<section class="ft-hero" data-scroll="hero">
+  <div class="ft-hero-glow"></div>
+  <div class="ft-hero-product">
+    {% if product.featured_image %}
+      <img
+        src="{{ product.featured_image | image_url: width: 1000 }}"
+        srcset="{{ product.featured_image | image_url: width: 500 }} 500w, {{ product.featured_image | image_url: width: 800 }} 800w, {{ product.featured_image | image_url: width: 1000 }} 1000w"
+        sizes="(max-width: 768px) 280px, 440px"
+        alt="{{ product.title }}"
+        loading="eager"
+      >
+    {% else %}
+      <div class="ft-placeholder ft-placeholder--subtle">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><rect x="16" y="4" width="32" height="56" rx="16" stroke="#ccc" stroke-width="2"/><circle cx="32" cy="32" r="12" stroke="#ccc" stroke-width="1.5"/></svg>
+        <span>Product Hero Image</span>
       </div>
-      <div class="product-info">
-        <div class="breadcrumbs">
-          <a href="/">Home</a> / <span>{{ product.title }}</span>
-        </div>
-        <h1 class="product-title">{{ product.title }}</h1>
-        <div class="price-section">
-          <span class="price">{{ product.price | money }}</span>
-          <span class="shipping-info">Free delivery and free returns</span>
-        </div>
+    {% endif %}
+  </div>
+  <div class="ft-hero-content">
+    <p class="ft-hero-eyebrow">MoveTogether</p>
+    <h1 class="ft-hero-title">Fitness Tracker</h1>
+    <p class="ft-hero-tagline">The smarter way to move.</p>
+    <div class="ft-hero-price">
+      <span>From {{ product.price | money }}</span>
+    </div>
+    <a href="#ft-buy" class="ft-hero-cta">Buy</a>
+  </div>
+  <div class="ft-scroll-indicator">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 5V19M12 19L5 12M12 19L19 12" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+</section>
 
-        <!-- Variant Selector -->
+<!-- ============================================================
+     SECTION 2: HIGHLIGHTS STRIP — Apple Watch-style feature pills
+     ============================================================ -->
+<section class="ft-highlights">
+  <div class="ft-container">
+    <p class="ft-highlights-intro ft-reveal ft-reveal--up">Get the highlights.</p>
+    <div class="ft-highlights-row ft-reveal ft-reveal--up" data-delay="150">
+      <span class="ft-highlight-pill">AMOLED Display</span>
+      <span class="ft-highlight-pill">Heart Rate</span>
+      <span class="ft-highlight-pill">Blood Oxygen</span>
+      <span class="ft-highlight-pill">Sleep Tracking</span>
+      <span class="ft-highlight-pill">IP68 Waterproof</span>
+      <span class="ft-highlight-pill">7-Day Battery</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 3: STATEMENT — Sticky word-by-word reveal
+     ============================================================ -->
+<section class="ft-statement" data-scroll="statement">
+  <div class="ft-statement-sticky">
+    <h2 class="ft-statement-text">
+      <span class="ft-word">Your</span> <span class="ft-word">health</span> <span class="ft-word">deserves</span><br>
+      <span class="ft-word">more</span> <span class="ft-word">than</span> <span class="ft-word">a</span> <span class="ft-word">glance.</span><br>
+      <span class="ft-word">It</span> <span class="ft-word">deserves</span><br>
+      <span class="ft-word">a</span> <span class="ft-word">full</span> <span class="ft-word">picture.</span>
+    </h2>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 4: HEALTH — Deep storytelling, Apple Watch style
+     ============================================================ -->
+<section class="ft-section ft-section--dark">
+  <div class="ft-container">
+    <div class="ft-category-header ft-reveal ft-reveal--up">
+      <p class="ft-category-label">Health</p>
+      <h2 class="ft-category-title">Know what your<br>body is telling you.</h2>
+      <p class="ft-category-body">The more you understand about your body, the better choices you make. From real-time heart rate to blood oxygen and sleep stages, MoveTogether Fitness Tracker gives you the insights that turn awareness into action.</p>
+    </div>
+
+    <div class="ft-split">
+      <div class="ft-split-media" data-scroll="parallax">
+        <div class="ft-media-slot ft-media-slot--portrait" data-label="Heart Rate Screen">
+          <div class="ft-placeholder ft-placeholder--light">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><path d="M24 42S6 30 6 18C6 10 12 6 18 6C21 6 23 7.5 24 9C25 7.5 27 6 30 6C36 6 42 10 42 18C42 30 24 42 24 42Z" stroke="#999" stroke-width="2"/><path d="M6 24H16L20 16L26 32L30 24H42" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Heart Rate Screen</span>
+          </div>
+        </div>
+      </div>
+      <div class="ft-split-content ft-reveal ft-reveal--right">
+        <h3 class="ft-feature-title">24/7 heart rate monitoring.<br>Your pulse on progress.</h3>
+        <p class="ft-feature-body">Every heartbeat tells a story. Are you burning fat or carbs? Is your resting rate improving? The advanced optical sensor tracks your heart rate continuously — during workouts, at rest, and while you sleep — so you always know where you stand.</p>
+      </div>
+    </div>
+
+    <div class="ft-split ft-split--reverse">
+      <div class="ft-split-media" data-scroll="parallax">
+        <div class="ft-media-slot ft-media-slot--portrait" data-label="Blood Oxygen Screen">
+          <div class="ft-placeholder ft-placeholder--light">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="16" stroke="#999" stroke-width="2"/><path d="M24 14V24L32 28" stroke="#999" stroke-width="2" stroke-linecap="round"/><circle cx="24" cy="24" r="4" fill="#999"/></svg>
+            <span>Blood Oxygen Screen</span>
+          </div>
+        </div>
+      </div>
+      <div class="ft-split-content ft-reveal ft-reveal--left">
+        <h3 class="ft-feature-title">Blood oxygen. A breath of insight.</h3>
+        <p class="ft-feature-body">Oxygen fuels everything — your energy, your focus, your recovery. Track your SpO2 levels in real time and understand how your body responds to altitude, exercise, and sleep. Better oxygen awareness means better decisions about when to push and when to rest.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sleep feature - full width -->
+  <div class="ft-full-feature">
+    <div class="ft-container">
+      <div class="ft-centered-feature ft-reveal ft-reveal--up">
+        <div class="ft-media-slot ft-media-slot--wide" data-label="Sleep Tracking Dashboard">
+          <div class="ft-placeholder ft-placeholder--light">
+            <svg width="64" height="40" viewBox="0 0 64 40" fill="none"><path d="M12 28C12 28 16 12 32 12C48 12 52 28 52 28" stroke="#999" stroke-width="2" stroke-linecap="round"/><path d="M8 28H56" stroke="#999" stroke-width="1.5"/><path d="M20 8L24 12L28 4" stroke="#999" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Sleep Tracking Dashboard</span>
+          </div>
+        </div>
+        <h3 class="ft-feature-title">Sleep tracking.<br>Wake up to better rest.</h3>
+        <p class="ft-feature-body">Sleep quality shapes everything — your mood, your metabolism, your motivation. The Fitness Tracker monitors your deep, light, and REM sleep stages every night and helps you understand your patterns. Because the best fitness gains happen while you sleep.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="ft-container">
+    <div class="ft-health-grid">
+      <div class="ft-health-card ft-reveal ft-reveal--up" data-delay="0">
+        <div class="ft-health-icon">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M6 20C6 20 8 12 14 12C20 12 22 20 22 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M3 20H25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="14" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg>
+        </div>
+        <h4>Sedentary Reminder</h4>
+        <p>Sitting too long? A gentle buzz gets you moving. Small walks add up to big changes.</p>
+      </div>
+      <div class="ft-health-card ft-reveal ft-reveal--up" data-delay="100">
+        <div class="ft-health-icon">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M14 4V8M14 20V24M20 14H24M4 14H8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="14" cy="14" r="6" stroke="currentColor" stroke-width="1.5"/></svg>
+        </div>
+        <h4>Water Reminders</h4>
+        <p>Hydration drives metabolism. Get reminders to drink throughout the day.</p>
+      </div>
+      <div class="ft-health-card ft-reveal ft-reveal--up" data-delay="200">
+        <div class="ft-health-icon">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M14 9V14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="14" cy="19" r="1.5" fill="currentColor"/></svg>
+        </div>
+        <h4>Mood Monitoring</h4>
+        <p>Track how you feel alongside what you do. Understand what drives your habits.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 5: DISPLAY — AMOLED Showcase
+     ============================================================ -->
+<section class="ft-section ft-section--light">
+  <div class="ft-container">
+    <div class="ft-category-header ft-reveal ft-reveal--up">
+      <p class="ft-category-label">Display</p>
+      <h2 class="ft-category-title">Brilliant.<br>Always.</h2>
+      <p class="ft-category-body">The AMOLED display delivers vivid colors and true blacks that make every metric pop. Full-touch control means everything you need is a tap away.</p>
+    </div>
+  </div>
+  <div class="ft-full-media" data-scroll="zoom">
+    <div class="ft-media-slot ft-media-slot--wide" data-label="AMOLED Display Close-up">
+      <div class="ft-placeholder ft-placeholder--dark">
+        <svg width="64" height="40" viewBox="0 0 64 40" fill="none"><rect x="4" y="2" width="56" height="36" rx="4" stroke="#444" stroke-width="2"/><rect x="10" y="8" width="20" height="10" rx="2" fill="#333"/><rect x="10" y="22" width="44" height="3" rx="1.5" fill="#333"/><rect x="10" y="28" width="30" height="3" rx="1.5" fill="#333"/></svg>
+        <span>AMOLED Display Close-up</span>
+      </div>
+    </div>
+  </div>
+  <div class="ft-container">
+    <div class="ft-pill-row ft-reveal ft-reveal--up" data-delay="200">
+      <span class="ft-pill">AMOLED</span>
+      <span class="ft-pill">Full Touch</span>
+      <span class="ft-pill">Vivid Colors</span>
+      <span class="ft-pill">True Blacks</span>
+    </div>
+    <p class="ft-section-body ft-centered-body ft-reveal ft-reveal--up" data-delay="300">
+      Deep blacks, rich contrast, and colors that stay vivid even in bright sunlight. The full-touch AMOLED screen puts your heart rate, steps, calories, and notifications exactly where they should be — right in front of you, beautiful and easy to read.
+    </p>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 6: FITNESS — Activity tracking narrative
+     ============================================================ -->
+<section class="ft-section ft-section--dark">
+  <div class="ft-container">
+    <div class="ft-category-header ft-reveal ft-reveal--up">
+      <p class="ft-category-label">Fitness</p>
+      <h2 class="ft-category-title">Every move<br>matters.</h2>
+      <p class="ft-category-body">Whether you're walking the dog or crushing a HIIT session, the Fitness Tracker counts every step, every calorie, every rep. It doesn't just track your workout — it helps you understand it.</p>
+    </div>
+
+    <div class="ft-split">
+      <div class="ft-split-media" data-scroll="parallax">
+        <div class="ft-media-slot ft-media-slot--portrait" data-label="Person Working Out">
+          <div class="ft-placeholder ft-placeholder--light">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="12" r="6" stroke="#999" stroke-width="2"/><path d="M12 44V32C12 28 16 24 24 24C32 24 36 28 36 32V44" stroke="#999" stroke-width="2"/><path d="M18 32L24 38L30 32" stroke="#999" stroke-width="2" stroke-linecap="round"/></svg>
+            <span>Workout / Activity Shot</span>
+          </div>
+        </div>
+      </div>
+      <div class="ft-split-content ft-reveal ft-reveal--right">
+        <h3 class="ft-feature-title">Track it. Burn it.<br>See the results.</h3>
+        <p class="ft-feature-body">Steps, distance, calories — all tracked automatically throughout the day. During workouts, see real-time stats that push you to go further. Every movement counts toward your goal, and now you can prove it.</p>
+        <div class="ft-stats-row">
+          <div class="ft-stat">
+            <span class="ft-stat-number" data-count="100">0</span><span class="ft-stat-suffix">+</span>
+            <p>Activity Goals</p>
+          </div>
+          <div class="ft-stat">
+            <span class="ft-stat-label">All-Day</span>
+            <span class="ft-stat-big">CAL</span>
+            <p>Calorie Tracking</p>
+          </div>
+          <div class="ft-stat">
+            <span class="ft-stat-label">Step</span>
+            <span class="ft-stat-big">GPS</span>
+            <p>Pedometer</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 7: VIDEO / LIFESTYLE — Immersive full-width
+     ============================================================ -->
+<section class="ft-video-section" data-scroll="video">
+  <div class="ft-video-wrap">
+    <div class="ft-media-slot ft-media-slot--video" data-label="Lifestyle Video">
+      <div class="ft-placeholder ft-placeholder--dark ft-placeholder--video">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="24" stroke="#444" stroke-width="2"/><path d="M26 20V44L46 32L26 20Z" fill="#444"/></svg>
+        <span>Lifestyle Video (MP4)</span>
+      </div>
+    </div>
+  </div>
+  <div class="ft-video-overlay">
+    <h2 class="ft-reveal ft-reveal--up">Your body. Your data.<br>Your transformation.</h2>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 8: WATER RESISTANCE — Immersive feature
+     ============================================================ -->
+<section class="ft-section ft-section--light">
+  <div class="ft-container">
+    <div class="ft-split ft-split--reverse">
+      <div class="ft-split-media" data-scroll="parallax">
+        <div class="ft-media-slot ft-media-slot--portrait" data-label="Water Resistance Shot">
+          <div class="ft-placeholder ft-placeholder--subtle">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><path d="M24 8L32 24C32 24 36 32 24 40C12 32 16 24 16 24L24 8Z" stroke="#999" stroke-width="2"/></svg>
+            <span>Water Splash Shot</span>
+          </div>
+        </div>
+      </div>
+      <div class="ft-split-content ft-reveal ft-reveal--left">
+        <p class="ft-section-eyebrow">Durability</p>
+        <h3 class="ft-feature-title">Water resistant.<br>Sweat proof.<br>Ready for anything.</h3>
+        <p class="ft-feature-body">Rain, sweat, splashes — the IP68-rated Fitness Tracker handles it all without missing a beat. Wear it in the shower after your workout or in the rain during your run. Your tracker keeps going when conditions get tough.</p>
+        <div class="ft-waterproof-badge ft-reveal ft-reveal--up" data-delay="200">
+          <span class="ft-badge-rating">IP68</span>
+          <span class="ft-badge-label">Water Resistant</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 9: BATTERY — Big number hero
+     ============================================================ -->
+<section class="ft-battery" data-scroll="battery">
+  <div class="ft-container">
+    <p class="ft-section-eyebrow ft-reveal ft-reveal--up">Battery</p>
+    <p class="ft-battery-intro ft-reveal ft-reveal--up">Up to</p>
+    <div class="ft-battery-hero">
+      <span class="ft-battery-number" data-count="7">0</span>
+      <span class="ft-battery-unit">days</span>
+    </div>
+    <h2 class="ft-battery-sub ft-reveal ft-reveal--up">of battery life. Always a positive.</h2>
+    <p class="ft-section-body ft-centered-body ft-reveal ft-reveal--up" data-delay="100">
+      Charge it once, forget about it for a week. The Fitness Tracker delivers up to 7 days of normal use on a single charge — so you can track your sleep without worrying about plugging in every night. And when you do need to charge? Magnetic charging makes it effortless.
+    </p>
+    <div class="ft-battery-stats ft-reveal ft-reveal--up" data-delay="200">
+      <div class="ft-battery-stat">
+        <span class="ft-battery-stat-num">7</span>
+        <span class="ft-battery-stat-unit">days</span>
+        <p>Normal use</p>
+      </div>
+      <div class="ft-battery-stat-divider"></div>
+      <div class="ft-battery-stat">
+        <span class="ft-battery-stat-num">~2</span>
+        <span class="ft-battery-stat-unit">hrs</span>
+        <p>Full charge</p>
+      </div>
+      <div class="ft-battery-stat-divider"></div>
+      <div class="ft-battery-stat">
+        <span class="ft-battery-stat-num">Magnetic</span>
+        <span class="ft-battery-stat-unit"></span>
+        <p>Charging</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 10: DESIGN & COMFORT
+     ============================================================ -->
+<section class="ft-section ft-section--light">
+  <div class="ft-container">
+    <div class="ft-category-header ft-reveal ft-reveal--up">
+      <p class="ft-category-label">Design</p>
+      <h2 class="ft-category-title">Sleek on your wrist.<br>Smart under the hood.</h2>
+    </div>
+    <div class="ft-design-features">
+      <div class="ft-design-card ft-reveal ft-reveal--up" data-delay="0">
+        <div class="ft-media-slot ft-media-slot--square" data-label="Sleek Design Shot">
+          <div class="ft-placeholder ft-placeholder--subtle">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect x="12" y="2" width="16" height="36" rx="8" stroke="#ccc" stroke-width="1.5"/><circle cx="20" cy="20" r="6" stroke="#ccc" stroke-width="1"/></svg>
+            <span>Sleek Design</span>
+          </div>
+        </div>
+        <h4>Lightweight comfort</h4>
+        <p>Designed to be worn 24/7. Lightweight enough to forget it's there.</p>
+      </div>
+      <div class="ft-design-card ft-reveal ft-reveal--up" data-delay="100">
+        <div class="ft-media-slot ft-media-slot--square" data-label="AMOLED Screen Close-up">
+          <div class="ft-placeholder ft-placeholder--subtle">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect x="8" y="4" width="24" height="32" rx="4" stroke="#ccc" stroke-width="1.5"/><rect x="12" y="10" width="16" height="10" rx="2" fill="#eee"/></svg>
+            <span>AMOLED Screen</span>
+          </div>
+        </div>
+        <h4>AMOLED display</h4>
+        <p>Vivid colors and deep blacks. Every metric is clear at a glance.</p>
+      </div>
+      <div class="ft-design-card ft-reveal ft-reveal--up" data-delay="200">
+        <div class="ft-media-slot ft-media-slot--square" data-label="Magnetic Charger">
+          <div class="ft-placeholder ft-placeholder--subtle">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="10" stroke="#ccc" stroke-width="1.5"/><path d="M16 20H24M20 16V24" stroke="#ccc" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <span>Magnetic Charging</span>
+          </div>
+        </div>
+        <h4>Magnetic charging</h4>
+        <p>Snap it on, walk away. Full charge in about 2 hours.</p>
+      </div>
+      <div class="ft-design-card ft-reveal ft-reveal--up" data-delay="300">
+        <div class="ft-media-slot ft-media-slot--square" data-label="Water Resistance">
+          <div class="ft-placeholder ft-placeholder--subtle">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><path d="M20 8L26 20C26 20 30 28 20 34C10 28 14 20 14 20L20 8Z" stroke="#ccc" stroke-width="1.5"/></svg>
+            <span>IP68 Rated</span>
+          </div>
+        </div>
+        <h4>IP68 water resistance</h4>
+        <p>Handles sweat, rain, and splashes. Built for your active life.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 11: SMART FEATURES — Connectivity & Notifications
+     ============================================================ -->
+<section class="ft-section ft-section--dark">
+  <div class="ft-container">
+    <div class="ft-category-header ft-reveal ft-reveal--up">
+      <p class="ft-category-label">Smart Features</p>
+      <h2 class="ft-category-title">Stay connected.<br>Stay focused.</h2>
+    </div>
+    <div class="ft-smart-grid">
+      <div class="ft-smart-card ft-reveal ft-reveal--up" data-delay="0">
+        <div class="ft-smart-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="6" y="2" width="20" height="28" rx="4" stroke="currentColor" stroke-width="1.5"/><circle cx="16" cy="24" r="2" fill="currentColor"/><path d="M12 8H20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <h4>Smart Notifications</h4>
+        <p>Calls, texts, and app alerts right on your wrist. Stay in the loop without reaching for your phone.</p>
+      </div>
+      <div class="ft-smart-card ft-reveal ft-reveal--up" data-delay="100">
+        <div class="ft-smart-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M16 6C10 6 6 10 6 16C6 22 10 26 16 26C22 26 26 22 26 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M16 10V16L12 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <h4>Sedentary Alerts</h4>
+        <p>A gentle reminder to stand up and move when you've been sitting too long. Small nudges, big impact.</p>
+      </div>
+      <div class="ft-smart-card ft-reveal ft-reveal--up" data-delay="200">
+        <div class="ft-smart-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M12 16C12 16 14 12 16 12C18 12 20 16 20 16C20 16 18 20 16 20C14 20 12 16 12 16Z" stroke="currentColor" stroke-width="1.5"/><circle cx="16" cy="16" r="2" fill="currentColor"/></svg>
+        </div>
+        <h4>Find Your Phone</h4>
+        <p>Misplaced your phone? Tap your tracker to make it ring. Even when it's on silent.</p>
+      </div>
+      <div class="ft-smart-card ft-reveal ft-reveal--up" data-delay="300">
+        <div class="ft-smart-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M8 12C8 12 12 4 16 4C20 4 24 12 24 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M6 16H26" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M10 20H22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M12 24H20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M14 28H18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <h4>Remote Camera</h4>
+        <p>Use your tracker as a shutter button. Set up the shot, step back, and capture the moment.</p>
+      </div>
+      <div class="ft-smart-card ft-reveal ft-reveal--up" data-delay="400">
+        <div class="ft-smart-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M16 4V8M16 24V28M8 16H4M28 16H24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="16" cy="16" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M16 13V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <h4>Weather Updates</h4>
+        <p>Check the forecast from your wrist before heading out. Plan your runs around the weather.</p>
+      </div>
+      <div class="ft-smart-card ft-reveal ft-reveal--up" data-delay="500">
+        <div class="ft-smart-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M14 8H18V14L22 18L20 20L16 16V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="1.5"/></svg>
+        </div>
+        <h4>Alarm & Timer</h4>
+        <p>Silent vibration alarms wake you without disturbing anyone. Set timers for workouts, meals, or reminders.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 12: APP INTEGRATION
+     ============================================================ -->
+<section class="ft-section ft-section--light">
+  <div class="ft-container">
+    <div class="ft-split">
+      <div class="ft-split-media" data-scroll="parallax">
+        <div class="ft-media-slot ft-media-slot--portrait" data-label="App Screenshots">
+          <div class="ft-placeholder ft-placeholder--subtle">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><rect x="14" y="4" width="20" height="40" rx="4" stroke="#ccc" stroke-width="1.5"/><rect x="18" y="8" width="12" height="28" rx="1" fill="#eee"/><circle cx="24" cy="40" r="2" stroke="#ccc" stroke-width="1"/></svg>
+            <span>App + Watch Screenshot</span>
+          </div>
+        </div>
+      </div>
+      <div class="ft-split-content ft-reveal ft-reveal--right">
+        <p class="ft-section-eyebrow">Your Command Center</p>
+        <h3 class="ft-feature-title">All your data.<br>One app.</h3>
+        <p class="ft-feature-body">Sync your Fitness Tracker with the companion app to see your complete health picture — steps, calories, sleep patterns, heart rate trends, and more. Set goals, review your history, and share your progress with friends. Your entire journey, organized and beautiful.</p>
+        <div class="ft-app-badges ft-reveal ft-reveal--up" data-delay="200">
+          <span class="ft-pill">iOS 15.0+</span>
+          <span class="ft-pill">Android 9.0+</span>
+          <span class="ft-pill">Bluetooth 5.1</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 13: TECH SPECS
+     ============================================================ -->
+<section class="ft-specs">
+  <div class="ft-container">
+    <div class="ft-centered-header ft-reveal ft-reveal--up">
+      <p class="ft-section-eyebrow">Tech Specs</p>
+      <h2 class="ft-section-title">Under the hood.</h2>
+    </div>
+    <div class="ft-specs-grid ft-reveal ft-reveal--up" data-delay="200">
+      <div class="ft-spec-item">
+        <span class="ft-spec-label">Display</span>
+        <span class="ft-spec-value">AMOLED, Full Touch</span>
+      </div>
+      <div class="ft-spec-item">
+        <span class="ft-spec-label">Chipset</span>
+        <span class="ft-spec-value">Realtek8762D</span>
+      </div>
+      <div class="ft-spec-item">
+        <span class="ft-spec-label">Connectivity</span>
+        <span class="ft-spec-value">Bluetooth 5.1</span>
+      </div>
+      <div class="ft-spec-item">
+        <span class="ft-spec-label">Battery</span>
+        <span class="ft-spec-value">Polymer Lithium</span>
+      </div>
+      <div class="ft-spec-item">
+        <span class="ft-spec-label">Battery Life</span>
+        <span class="ft-spec-value">Up to 7 days</span>
+      </div>
+      <div class="ft-spec-item">
+        <span class="ft-spec-label">Charging</span>
+        <span class="ft-spec-value">Magnetic, ~2 hours</span>
+      </div>
+      <div class="ft-spec-item">
+        <span class="ft-spec-label">Water Resistance</span>
+        <span class="ft-spec-value">IP68</span>
+      </div>
+      <div class="ft-spec-item">
+        <span class="ft-spec-label">Compatibility</span>
+        <span class="ft-spec-value">iOS 15.0+ / Android 9.0+</span>
+      </div>
+      <div class="ft-spec-item">
+        <span class="ft-spec-label">Working Temp</span>
+        <span class="ft-spec-value">-5°C ~ 45°C</span>
+      </div>
+      <div class="ft-spec-item">
+        <span class="ft-spec-label">Sensors</span>
+        <span class="ft-spec-value">HR + SpO2 Optical</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 14: REVIEWS
+     ============================================================ -->
+<section class="ft-section ft-section--light">
+  <div class="ft-container">
+    <div class="ft-centered-header ft-reveal ft-reveal--up">
+      <p class="ft-section-eyebrow">Real Stories</p>
+      <h2 class="ft-section-title">They moved. They tracked.<br>They transformed.</h2>
+    </div>
+    <div class="ft-reviews-grid">
+      <div class="ft-review-card ft-reveal ft-reveal--up" data-delay="0">
+        <div class="ft-review-stars">★★★★★</div>
+        <h4>"Finally, a tracker that keeps up"</h4>
+        <p>The AMOLED screen is gorgeous and the battery lasts all week. I track my sleep, my runs, and my heart rate without ever worrying about charging. This is what a fitness tracker should be.</p>
+        <span class="ft-review-author">— Sarah M.</span>
+      </div>
+      <div class="ft-review-card ft-reveal ft-reveal--up" data-delay="150">
+        <div class="ft-review-stars">★★★★★</div>
+        <h4>"Lost 8kg in 3 months"</h4>
+        <p>The sedentary reminders got me walking more, and seeing my calorie burn in real time keeps me honest. The sleep tracking helped me fix my late-night snacking. Worth every penny.</p>
+        <span class="ft-review-author">— James T.</span>
+      </div>
+      <div class="ft-review-card ft-reveal ft-reveal--up" data-delay="300">
+        <div class="ft-review-stars">★★★★★</div>
+        <h4>"Beautiful and functional"</h4>
+        <p>I love that it looks sleek enough for work but tough enough for my morning runs. The notifications on my wrist mean I don't have to pull out my phone during meetings. Game changer.</p>
+        <span class="ft-review-author">— Priya K.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 15: FAQ
+     ============================================================ -->
+<section class="ft-faq">
+  <div class="ft-container">
+    <div class="ft-centered-header ft-reveal ft-reveal--up">
+      <h2 class="ft-section-title">Frequently Asked Questions</h2>
+    </div>
+    <div class="ft-faq-list ft-reveal ft-reveal--up" data-delay="100">
+      <details class="ft-faq-item">
+        <summary>How accurate is the heart rate monitor?</summary>
+        <p>The optical heart rate sensor provides continuous monitoring throughout the day and during workouts. For best accuracy, wear the tracker snug on your wrist about one finger width above your wrist bone. Note: this is a wellness device and not intended for medical diagnosis.</p>
+      </details>
+      <details class="ft-faq-item">
+        <summary>How long does the battery really last?</summary>
+        <p>With typical daily use — including notifications, heart rate monitoring, and sleep tracking — expect up to 7 days on a single charge. Heavy use with continuous tracking may reduce this slightly. A full charge takes about 2 hours with the magnetic charger.</p>
+      </details>
+      <details class="ft-faq-item">
+        <summary>Can I swim with the Fitness Tracker?</summary>
+        <p>The Fitness Tracker is IP68 water resistant, meaning it handles rain, sweat, and splashes without issue. We recommend avoiding prolonged submersion, hot water (showers, saunas), and salt or chlorinated water to maintain the seal over time.</p>
+      </details>
+      <details class="ft-faq-item">
+        <summary>What phones does it work with?</summary>
+        <p>The Fitness Tracker connects via Bluetooth 5.1 and is compatible with devices running Android 9.0 or above and iOS 15.0 or above. Download the companion app from the App Store or Google Play to get started.</p>
+      </details>
+      <details class="ft-faq-item">
+        <summary>Does it track sleep automatically?</summary>
+        <p>Yes. Wear it to bed and the tracker automatically detects when you fall asleep and wake up. It monitors deep, light, and REM sleep stages throughout the night, giving you a complete picture of your sleep quality each morning.</p>
+      </details>
+      <details class="ft-faq-item">
+        <summary>What's the delivery time?</summary>
+        <p>Standard delivery takes 5-7 business days. Express shipping options are available at checkout. We ship to most countries worldwide.</p>
+      </details>
+      <details class="ft-faq-item">
+        <summary>Is the Fitness Tracker a medical device?</summary>
+        <p>No. The MoveTogether Fitness Tracker is designed for wellness and fitness tracking only. It is not intended to diagnose, treat, cure, or prevent any disease. Always consult a healthcare professional for medical advice.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 16: BUY — Final CTA
+     ============================================================ -->
+<section class="ft-buy" id="ft-buy">
+  <div class="ft-container">
+    <div class="ft-buy-inner">
+      <div class="ft-buy-media ft-reveal ft-reveal--left">
+        {% if product.featured_image %}
+          <img
+            src="{{ product.featured_image | image_url: width: 800 }}"
+            srcset="{{ product.featured_image | image_url: width: 400 }} 400w, {{ product.featured_image | image_url: width: 600 }} 600w, {{ product.featured_image | image_url: width: 800 }} 800w"
+            sizes="(max-width: 768px) 100vw, 400px"
+            alt="{{ product.title }}"
+          >
+        {% else %}
+          <div class="ft-placeholder ft-placeholder--subtle">
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><rect x="16" y="4" width="32" height="56" rx="16" stroke="#ccc" stroke-width="2"/><circle cx="32" cy="32" r="12" stroke="#ccc" stroke-width="1.5"/></svg>
+            <span>Product Beauty Shot</span>
+          </div>
+        {% endif %}
+      </div>
+      <div class="ft-buy-content ft-reveal ft-reveal--right">
+        <p class="ft-section-eyebrow">Start Tracking</p>
+        <h2 class="ft-buy-title">Fitness Tracker</h2>
+        <p class="ft-buy-subtitle">Your health, always in view.</p>
+        <p class="ft-buy-price">{{ product.price | money }}</p>
+        <p class="ft-buy-shipping">Free shipping & 30-day returns</p>
+
         {% if product.variants.size > 1 %}
-          <div class="color-selector">
-            <div class="color-options">
-              {% for variant in product.variants %}
-                <label class="variant-label{% if forloop.first %} active{% endif %}">
-                  <input type="radio" name="variant-select" value="{{ variant.id }}" {% if forloop.first %}checked{% endif %}>
-                  <span>{{ variant.title }}</span>
-                </label>
-              {% endfor %}
-            </div>
+          <div class="ft-buy-variants">
+            {% for variant in product.variants %}
+              <label class="ft-variant-option">
+                <input type="radio" name="variant" value="{{ variant.id }}" {% if forloop.first %}checked{% endif %}>
+                <span>{{ variant.title }}</span>
+              </label>
+            {% endfor %}
           </div>
         {% endif %}
 
-        <!-- Add to Cart Form -->
-        <form action="/cart/add" method="post" class="product-add-form">
+        <form action="/cart/add" method="post">
           <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" id="ft-variant-id">
-          <button type="submit" class="add-to-cart-btn">
-            Add to Cart — {{ product.price | money }}
+          <button type="submit" class="ft-buy-btn">
+            <span>Add to Cart</span>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10H16M16 10L10 4M16 10L10 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
         </form>
-        <div class="product-trust-signals">
+        <div class="ft-trust-signals">
           <span>🔒 Secure checkout</span>
           <span>🚚 Free shipping over $75</span>
           <span>↩ 30-day returns</span>
         </div>
       </div>
     </div>
-  </section>
-
-  <!-- As Featured In -->
-  <section class="featured-in">
-    <h2>As featured in</h2>
-    <div class="media-logos">
-      <div class="media-card">
-        <h3>Forbes</h3>
-        <p>We evaluated weight loss programs to help you choose the best fit for your goals and lifestyle.</p>
-        <span class="year">2024</span>
-      </div>
-      <div class="media-card">
-        <h3>The Sun</h3>
-        <p>NEW YEAR, NEW YOU MoveTogether review: This health-tracking app is packed with useful features.</p>
-        <span class="year">2023</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- Trust Statistics -->
-  <section class="trust-stats">
-    <h2>Health and fitness</h2>
-    <h3>Trusted by millions. Chosen for reliability.</h3>
-    <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-number">150</div>
-        <div class="stat-unit">thousand</div>
-        <p>MoveTogether Fitness Trackers sold across the world</p>
-      </div>
-      <div class="stat-card">
-        <div class="stat-number">150</div>
-        <div class="stat-unit">million</div>
-        <p>People downloaded the MoveTogether: Health Coaching app</p>
-      </div>
-      <div class="stat-card">
-        <div class="stat-number">20</div>
-        <div class="stat-unit">million</div>
-        <p>Followers on social media across all platforms</p>
-      </div>
-      <div class="stat-card">
-        <div class="stat-number">1.2</div>
-        <div class="stat-unit">million</div>
-        <p>Ratings of MoveTogether: Health Coaching</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Product Features -->
-  <section class="product-features">
-
-    <!-- Water Resistant Feature -->
-    <div class="feature-block">
-      <div class="feature-content">
-        <span class="feature-icon">💧</span>
-        <h3>Water resistant.<br>Ready for action.<sup>[3]</sup></h3>
-        <div class="feature-image">
-          <img src="https://images.unsplash.com/photo-1576633587382-13ddf37b1fc1?w=600" alt="Water resistant">
-          <div class="waterproof-badge">
-            <span>IP68</span>
-            <small>WATERPROOF</small>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Display Feature -->
-    <div class="feature-block light-bg">
-      <div class="feature-content">
-        <span class="feature-icon">☀️</span>
-        <h3>High quality screen.<br>Vivid graphics.</h3>
-        <div class="feature-image">
-          <img src="https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=600" alt="AMOLED Display">
-        </div>
-        <div class="feature-specs">
-          <span class="spec-label">Display</span>
-          <h4>FULL TOUCH & AMOLED</h4>
-        </div>
-      </div>
-    </div>
-
-    <!-- Battery Feature -->
-    <div class="feature-block">
-      <div class="feature-content">
-        <h3>Smart design<br>for every lifestyle.</h3>
-        <div class="battery-feature">
-          <h4>Charges in minutes.<sup>[1]</sup><br>Lasts for days.</h4>
-          <div class="battery-stat">
-            <span>Up to</span>
-            <h2>7 days <sup>[1]</sup></h2>
-            <p>Stay on the move without being tied to the charger.</p>
-          </div>
-          <div class="charging-image">
-            <img src="https://images.unsplash.com/photo-1609205807107-e8ec6672f0b2?w=600" alt="Charging">
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </section>
-
-  <!-- Wellness System -->
-  <section class="wellness-system">
-    <h3>MoveTogether Fitness Tracker</h3>
-    <h2>Wellness support system on your wrist.</h2>
-
-    <div class="wellness-features">
-      <div class="wellness-image">
-        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800" alt="Sleep tracking">
-      </div>
-
-      <div class="metrics-display">
-        <div class="metric-card">
-          <h4>AVERAGE TIME ASLEEP</h4>
-          <p class="metric-value">7h 3min</p>
-          <div class="chart-placeholder"></div>
-        </div>
-        <div class="metric-card">
-          <h4>TOTAL STEPS</h4>
-          <p class="metric-value">12,246</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="tracking-info">
-      <div class="tracking-section">
-        <h4>Sleep</h4>
-        <p>Keep achieving the right balance for a restful sleep! Continue tracking your goals each night.</p>
-      </div>
-      <div class="tracking-section">
-        <h4>Steps</h4>
-        <p>Don't forget to track your progress to meet your goal!</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- App Integration -->
-  <section class="app-integration">
-    <h3>MoveTogether: Health Coaching</h3>
-    <h2>All in one app.<sup>[7]</sup></h2>
-
-    <div class="app-screens">
-      <img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=400" alt="App screen 1">
-      <img src="https://images.unsplash.com/photo-1611532736579-6b16e2786cfd?w=400" alt="App screen 2">
-      <img src="https://images.unsplash.com/photo-1611532736561-4b66b82b5b3e?w=400" alt="App screen 3">
-    </div>
-  </section>
-
-  <!-- Technical Specifications -->
-  <section class="tech-specs">
-    <h2>Technical Specification</h2>
-    <div class="specs-grid">
-      <div class="spec-item">
-        <span class="spec-label">CPU:</span>
-        <span class="spec-value">Realtek8762D</span>
-      </div>
-      <div class="spec-item">
-        <span class="spec-label">Charging method:</span>
-        <span class="spec-value">Magnetic charging</span>
-      </div>
-      <div class="spec-item">
-        <span class="spec-label">Battery type:</span>
-        <span class="spec-value">Polymer lithium battery</span>
-      </div>
-      <div class="spec-item">
-        <span class="spec-label">Data transfer:</span>
-        <span class="spec-value">Bluetooth 5.1</span>
-      </div>
-      <div class="spec-item">
-        <span class="spec-label">Device requirement:</span>
-        <span class="spec-value">Android 9.0/above; iOS 15.0/above</span>
-      </div>
-      <div class="spec-item">
-        <span class="spec-label">Screen type:</span>
-        <span class="spec-value">Amoled</span>
-      </div>
-      <div class="spec-item">
-        <span class="spec-label">Waterproof:</span>
-        <span class="spec-value">IP68</span>
-      </div>
-      <div class="spec-item">
-        <span class="spec-label">Working temperature:</span>
-        <span class="spec-value">-5C ~ 45C</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- Important Disclaimers -->
-  <section class="disclaimers">
-    <h2>Important disclaimers</h2>
-    <ol>
-      <li>The battery life of MoveTogether Fitness Tracker may vary depending on the manner of use, settings, operating conditions, and other factors.</li>
-      <li>MoveTogether Fitness Tracker is not a medical device. It is not intended to predict, diagnose, prevent, or cure any disease.</li>
-      <li>MoveTogether Fitness Tracker is rated with IP68 Water Resistance.</li>
-      <li>There's a detector monitoring your sleep at night.</li>
-      <li>All MoveTogether Fitness Tracker's images available above are used for illustrative purposes only.</li>
-      <li>In case you have a pacemaker, implantable cardioverter defibrillator, or other implanted device, we strongly recommend you consult your healthcare provider.</li>
-      <li>The screens presented are available only with a paid subscription in MoveTogether app.</li>
-    </ol>
-  </section>
-
-  <!-- FAQ Section -->
-  <section class="faq-section">
-    <h2>Frequently asked questions</h2>
-    <div class="faq-list">
-      <details class="faq-item">
-        <summary>What is the delivery time for MoveTogether Fitness Tracker?</summary>
-        <p>Standard delivery takes 5-7 business days. Express shipping options are available at checkout.</p>
-      </details>
-      <details class="faq-item">
-        <summary>Do you ship internationally?</summary>
-        <p>Yes, we ship to most countries worldwide. Shipping costs and delivery times vary by location.</p>
-      </details>
-      <details class="faq-item">
-        <summary>Does MoveTogether Fitness Tracker work without a phone?</summary>
-        <p>The tracker can record basic metrics independently, but requires phone connection for full functionality.</p>
-      </details>
-      <details class="faq-item">
-        <summary>Does MoveTogether Fitness Tracker work both with iOS and Android?</summary>
-        <p>Yes, it's compatible with Android 9.0/above and iOS 15.0/above.</p>
-      </details>
-      <details class="faq-item">
-        <summary>Is MoveTogether Fitness Tracker waterproof for swimming?</summary>
-        <p>The tracker has IP68 water resistance but we don't recommend using it in salt or chlorinated water.</p>
-      </details>
-      <details class="faq-item">
-        <summary>Can I wear my MoveTogether Fitness Tracker in the shower?</summary>
-        <p>We don't recommend using the band in hot showers/baths, saunas, or high-temperature environments.</p>
-      </details>
-      <details class="faq-item">
-        <summary>What should I pay attention to when wearing?</summary>
-        <p>Ensure proper fit - not too tight or loose. Clean the band regularly and let your skin breathe periodically.</p>
-      </details>
-    </div>
-  </section>
-
-  <!-- Reviews Section -->
-  <section class="reviews-section">
-    <h2>Feedback</h2>
-    <h3>Here's what our users say</h3>
-
-    <div class="reviews-grid">
-      <div class="review-card">
-        <div class="review-header">
-          <span class="reviewer-name">Georja V.</span>
-          <div class="stars">⭐⭐⭐⭐⭐</div>
-        </div>
-        <h4>Absolutely perfect!</h4>
-        <p>Absolutely perfect! It's on charge plugged into my laptop right now.</p>
-      </div>
-
-      <div class="review-card">
-        <div class="review-header">
-          <span class="reviewer-name">Lisa S.</span>
-          <div class="stars">⭐⭐⭐⭐⭐</div>
-        </div>
-        <h4>MoveTogether is the Best!</h4>
-        <p>MoveTogether is the Best! The MoveTogether app is intuitive and requires no time to get started!</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA Section -->
-  <section class="cta-section">
-    <h2>Grab yours today!</h2>
-    <div class="cta-product">
-      <img src="{{ product.featured_image | default: 'https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?w=400' | img_url: 'master' }}" alt="{{ product.title }}">
-      <p class="price-cta">{{ product.price | money }}</p>
-      <form action="/cart/add" method="post" class="cta-add-form">
-        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-        <button type="submit" class="add-to-cart-btn">Add to Cart</button>
-      </form>
-    </div>
-  </section>
-
-  <!-- Footer is rendered by theme.liquid via sections/footer.liquid -->
-
-  <!-- Sticky Buy Button -->
-  <div class="sticky-buy-button">
-    <form action="/cart/add" method="post">
-      <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-      <button type="submit" class="buy-now-btn">Buy Now - {{ product.price | money }}</button>
-    </form>
   </div>
+</section>
 
+<!-- Sticky Buy Bar -->
+<div class="ft-sticky-bar" id="ft-sticky-bar">
+  <div class="ft-sticky-inner">
+    <div class="ft-sticky-info">
+      <strong>{{ product.title }}</strong>
+      <span>{{ product.price | money }}</span>
+    </div>
+    <a href="#ft-buy" class="ft-sticky-btn">Buy</a>
+  </div>
 </div>
 
+</div><!-- /.ft-page -->
+
+<!-- ============================================================
+     FITNESS TRACKER CSS
+     ============================================================ -->
 <style>
-.product-add-form {
-  margin-top: 24px;
+/* ===== PAGE RESET ===== */
+.ft-page { overflow-x: hidden; }
+.ft-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+/* ===== PROGRESS BAR ===== */
+.ft-progress {
+  position: fixed; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, #FF6B35, #FF3366);
+  transform-origin: left; transform: scaleX(0);
+  z-index: 9999; pointer-events: none;
+  will-change: transform;
 }
-.add-to-cart-btn {
-  display: block;
-  width: 100%;
-  padding: 16px 32px;
-  background: #369FFF;
-  color: white;
-  border: none;
-  border-radius: 980px;
-  font-size: 17px;
-  font-weight: 600;
-  cursor: pointer;
+
+/* ===== SCROLL REVEAL ===== */
+.ft-reveal {
+  opacity: 0;
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.ft-reveal--up { transform: translateY(50px); }
+.ft-reveal--scale { transform: scale(0.92); }
+.ft-reveal--left { transform: translateX(-50px); }
+.ft-reveal--right { transform: translateX(50px); }
+.ft-reveal.visible { opacity: 1; transform: none; }
+
+/* ===== PLACEHOLDERS ===== */
+.ft-media-slot { width: 100%; overflow: hidden; border-radius: 16px; }
+.ft-placeholder {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 12px; padding: 60px 20px; text-align: center;
+}
+.ft-placeholder span { font-size: 13px; font-weight: 500; letter-spacing: 0.5px; }
+.ft-placeholder--dark { background: #1a1a1a; color: #555; }
+.ft-placeholder--light { background: #f0f0f0; color: #999; }
+.ft-placeholder--subtle { background: #f5f5f5; color: #bbb; }
+.ft-placeholder--video { padding: 120px 20px; }
+.ft-media-slot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* ===== HERO ===== */
+.ft-hero {
+  position: relative; min-height: 100vh; min-height: 100dvh;
+  background: #ffffff; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center;
+  padding: 100px 24px 80px; overflow: hidden;
+}
+.ft-hero-glow {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -60%);
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(255, 107, 53, 0.08) 0%, transparent 70%);
+  pointer-events: none; will-change: transform;
+}
+.ft-hero-product {
+  position: relative; z-index: 2;
+  width: 280px; height: 280px; margin-bottom: 40px;
+  will-change: transform;
+}
+.ft-hero-product img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.ft-hero-content { position: relative; z-index: 2; will-change: transform, opacity; }
+.ft-hero-eyebrow {
+  font-size: 14px; font-weight: 500; letter-spacing: 3px;
+  text-transform: uppercase; color: rgba(0,0,0,0.4);
+  margin-bottom: 12px;
+}
+.ft-hero-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 64px; font-weight: 700; color: #1a1a1a;
+  line-height: 1; margin-bottom: 16px; letter-spacing: -1px;
+}
+.ft-hero-tagline {
+  font-size: 20px; color: rgba(0,0,0,0.5);
+  font-weight: 300; margin-bottom: 24px;
+}
+.ft-hero-price {
+  font-size: 18px; color: #1a1a1a;
+  margin-bottom: 32px; font-weight: 500;
+}
+.ft-hero-cta {
+  display: inline-block; padding: 14px 48px;
+  background: #FF6B35; color: white; text-decoration: none;
+  border-radius: 980px; font-size: 17px; font-weight: 600;
   transition: background 0.3s, transform 0.3s;
+}
+.ft-hero-cta:hover { background: #e55a28; transform: scale(1.05); }
+.ft-scroll-indicator {
+  position: absolute; bottom: 30px; left: 50%;
+  transform: translateX(-50%);
+  animation: ft-bounce 2s ease infinite;
+  color: rgba(0,0,0,0.25); will-change: opacity;
+}
+@keyframes ft-bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(10px); }
+}
+
+/* ===== HIGHLIGHTS ===== */
+.ft-highlights {
+  padding: 80px 0; background: #fafafa; text-align: center;
+}
+.ft-highlights-intro {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 28px; font-weight: 600; color: #1a1a1a;
+  margin-bottom: 32px;
+}
+.ft-highlights-row {
+  display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;
+}
+.ft-highlight-pill {
+  padding: 10px 24px; border-radius: 980px;
+  font-size: 14px; font-weight: 500;
+  background: white; color: #1a1a1a;
+  border: 1.5px solid #e0e0e0;
+  transition: all 0.3s;
+}
+.ft-highlight-pill:hover {
+  border-color: #FF6B35; color: #FF6B35;
+}
+
+/* ===== STATEMENT (word reveal) ===== */
+.ft-statement {
+  min-height: 250vh; position: relative;
+  background: #fafafa;
+}
+.ft-statement-sticky {
+  position: sticky; top: 0; min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  padding: 40px 24px;
+}
+.ft-statement-text {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 48px; line-height: 1.25; font-weight: 600;
+  color: #1a1a1a; max-width: 800px; text-align: center;
+}
+.ft-word {
+  opacity: 0.12;
+  filter: blur(5px);
+  transition: opacity 0.15s ease, filter 0.15s ease;
+  display: inline-block;
+}
+.ft-word.revealed {
+  opacity: 1;
+  filter: blur(0);
+}
+
+/* ===== SECTIONS ===== */
+.ft-section { padding: 120px 0; }
+.ft-section--dark { background: #0a0a0a; color: white; }
+.ft-section--dark .ft-section-eyebrow,
+.ft-section--dark .ft-category-label { color: #FF6B35; }
+.ft-section--dark .ft-section-body,
+.ft-section--dark .ft-feature-body { color: rgba(255,255,255,0.6); }
+.ft-section--light { background: #fafafa; color: #1a1a1a; }
+.ft-section--light .ft-section-eyebrow,
+.ft-section--light .ft-category-label { color: #FF6B35; }
+
+.ft-section-eyebrow {
+  font-size: 14px; font-weight: 600; letter-spacing: 3px;
+  text-transform: uppercase; color: #FF6B35; margin-bottom: 16px;
+}
+.ft-section-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 48px; font-weight: 600; line-height: 1.15; margin-bottom: 20px;
+}
+.ft-section-body {
+  font-size: 18px; line-height: 1.7; color: #666; max-width: 520px;
+}
+.ft-centered-header { text-align: center; margin-bottom: 60px; }
+.ft-centered-header .ft-section-title { margin-left: auto; margin-right: auto; }
+.ft-centered-body { text-align: center; max-width: 600px; margin-left: auto; margin-right: auto; }
+
+/* ===== CATEGORY HEADERS (Apple Watch style) ===== */
+.ft-category-header {
+  text-align: center; margin-bottom: 80px; max-width: 700px; margin-left: auto; margin-right: auto;
+}
+.ft-category-label {
+  font-size: 32px; font-weight: 700; color: #FF6B35; margin-bottom: 8px;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+.ft-category-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 48px; font-weight: 600; line-height: 1.15; margin-bottom: 24px;
+}
+.ft-category-body {
+  font-size: 18px; line-height: 1.7; color: #666; max-width: 600px;
+  margin: 0 auto;
+}
+.ft-section--dark .ft-category-body { color: rgba(255,255,255,0.6); }
+
+/* ===== SPLIT LAYOUT ===== */
+.ft-split {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: center;
+  margin-bottom: 100px;
+}
+.ft-split:last-child { margin-bottom: 0; }
+.ft-split--reverse .ft-split-content { order: -1; }
+.ft-split-media { will-change: transform, opacity; }
+.ft-split-media .ft-media-slot--portrait { aspect-ratio: 4/5; }
+
+.ft-feature-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 36px; font-weight: 600; line-height: 1.2; margin-bottom: 20px;
+}
+.ft-feature-body {
+  font-size: 17px; line-height: 1.7; color: #666;
+}
+.ft-section--dark .ft-feature-title { color: white; }
+
+/* ===== FULL-WIDTH MEDIA ===== */
+.ft-full-media {
+  width: 100%; max-width: 1400px; margin: 0 auto 60px;
+  padding: 0 24px; overflow: hidden;
+}
+.ft-full-media .ft-media-slot {
+  will-change: transform;
+  transform: scale(1.15);
+  transition: none;
+}
+.ft-media-slot--wide { aspect-ratio: 21/9; }
+.ft-media-slot--portrait { aspect-ratio: 4/5; }
+.ft-media-slot--square { aspect-ratio: 1; }
+
+/* ===== FULL FEATURE (centered) ===== */
+.ft-full-feature {
+  padding: 80px 0;
+}
+.ft-centered-feature {
+  text-align: center; max-width: 800px; margin: 0 auto;
+}
+.ft-centered-feature .ft-media-slot {
+  margin-bottom: 40px; aspect-ratio: 16/9;
+}
+.ft-centered-feature .ft-feature-title { margin-bottom: 16px; }
+.ft-centered-feature .ft-feature-body {
+  max-width: 600px; margin: 0 auto;
+}
+
+/* ===== HEALTH GRID ===== */
+.ft-health-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
+  margin-top: 40px;
+}
+.ft-health-card {
+  background: rgba(255,255,255,0.05); border-radius: 20px; padding: 32px 24px;
+  text-align: center; border: 1px solid rgba(255,255,255,0.08);
+  transition: transform 0.3s, border-color 0.3s;
+}
+.ft-health-card:hover { transform: translateY(-4px); border-color: rgba(255,255,255,0.15); }
+.ft-health-icon {
+  width: 48px; height: 48px; margin: 0 auto 16px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 12px; background: rgba(255, 107, 53, 0.15); color: #FF6B35;
+}
+.ft-health-card h4 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+.ft-health-card p { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.5; }
+
+/* ===== PILLS ===== */
+.ft-pill-row {
+  display: flex; flex-wrap: wrap; gap: 12px;
+  justify-content: center; margin-bottom: 32px;
+}
+.ft-pill {
+  padding: 8px 20px; border-radius: 980px;
+  font-size: 13px; font-weight: 600; letter-spacing: 0.5px;
+  background: #1a1a1a; color: white;
+}
+.ft-section--dark .ft-pill { background: rgba(255,255,255,0.1); color: white; }
+
+/* ===== STATS ROW ===== */
+.ft-stats-row { display: flex; gap: 40px; margin-top: 48px; }
+.ft-stat { text-align: center; }
+.ft-stat-number {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 48px; font-weight: 700; line-height: 1;
+}
+.ft-stat-suffix { font-size: 24px; font-weight: 600; }
+.ft-stat-label { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.5); display: block; }
+.ft-stat-big {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 48px; font-weight: 700; line-height: 1; display: block;
+}
+.ft-stat p { font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 6px; }
+
+/* ===== VIDEO SECTION ===== */
+.ft-video-section { position: relative; min-height: 70vh; background: #0a0a0a; overflow: hidden; }
+.ft-video-wrap {
+  position: absolute; inset: -60px 0;
+  will-change: transform;
+}
+.ft-video-wrap .ft-media-slot { width: 100%; height: 100%; border-radius: 0; }
+.ft-video-wrap .ft-placeholder { height: 100%; }
+.ft-video-overlay {
+  position: relative; z-index: 2; display: flex;
+  align-items: center; justify-content: center;
+  min-height: 70vh; background: rgba(0,0,0,0.4);
+  padding: 40px 24px;
+}
+.ft-video-overlay h2 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 56px; font-weight: 600; color: white;
+  text-align: center; max-width: 700px; line-height: 1.15;
+}
+
+/* ===== WATERPROOF BADGE ===== */
+.ft-waterproof-badge {
+  display: inline-flex; flex-direction: column; align-items: center;
+  margin-top: 32px; padding: 24px 40px;
+  border: 2px solid #e0e0e0; border-radius: 20px;
+}
+.ft-badge-rating {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 40px; font-weight: 700; color: #1a1a1a; line-height: 1;
+}
+.ft-badge-label {
+  font-size: 13px; font-weight: 600; letter-spacing: 2px;
+  text-transform: uppercase; color: #888; margin-top: 4px;
+}
+
+/* ===== BATTERY ===== */
+.ft-battery {
+  padding: 140px 0; background: #0a0a0a; color: white; text-align: center;
+  overflow: hidden;
+}
+.ft-battery .ft-section-eyebrow { color: #FF6B35; }
+.ft-battery-intro {
+  font-size: 20px; color: rgba(255,255,255,0.5); margin-bottom: 0; font-weight: 400;
+}
+.ft-battery-hero {
+  display: flex; align-items: baseline;
+  justify-content: center; gap: 12px;
+  margin: 10px 0 24px;
+  will-change: transform, opacity;
+  transform: scale(0.3); opacity: 0;
+}
+.ft-battery-number {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 160px; font-weight: 700; line-height: 1;
+  background: linear-gradient(135deg, #FF6B35, #FF3366);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.ft-battery-unit {
+  font-size: 48px; font-weight: 300; color: rgba(255,255,255,0.5);
+}
+.ft-battery-sub {
+  font-size: 24px; font-weight: 400; color: rgba(255,255,255,0.7);
+  margin-bottom: 24px;
+}
+.ft-battery .ft-section-body { color: rgba(255,255,255,0.5); }
+
+.ft-battery-stats {
+  display: flex; justify-content: center; align-items: center;
+  gap: 40px; margin-top: 60px;
+}
+.ft-battery-stat { text-align: center; }
+.ft-battery-stat-num {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 36px; font-weight: 700; display: block; line-height: 1;
+}
+.ft-battery-stat-unit {
+  font-size: 16px; font-weight: 400; color: rgba(255,255,255,0.5);
+}
+.ft-battery-stat p {
+  font-size: 13px; color: rgba(255,255,255,0.4); margin-top: 8px;
+}
+.ft-battery-stat-divider {
+  width: 1px; height: 60px; background: rgba(255,255,255,0.1);
+}
+
+/* ===== DESIGN GRID ===== */
+.ft-design-features {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px;
+}
+.ft-design-card { text-align: center; }
+.ft-design-card .ft-media-slot--square { aspect-ratio: 1; border-radius: 20px; overflow: hidden; }
+.ft-design-card h4 { font-size: 16px; font-weight: 600; margin-top: 16px; margin-bottom: 6px; }
+.ft-design-card p { font-size: 14px; color: #888; line-height: 1.5; }
+
+/* ===== SMART GRID ===== */
+.ft-smart-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
+}
+.ft-smart-card {
+  background: rgba(255,255,255,0.05); border-radius: 20px; padding: 36px 28px;
+  text-align: center; border: 1px solid rgba(255,255,255,0.08);
+  transition: transform 0.3s, border-color 0.3s;
+}
+.ft-smart-card:hover { transform: translateY(-4px); border-color: rgba(255,255,255,0.15); }
+.ft-smart-icon {
+  width: 56px; height: 56px; margin: 0 auto 20px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 16px; background: rgba(255, 107, 53, 0.15); color: #FF6B35;
+}
+.ft-smart-card h4 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+.ft-smart-card p { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.5; }
+
+/* ===== APP BADGES ===== */
+.ft-app-badges { display: flex; gap: 10px; margin-top: 32px; flex-wrap: wrap; }
+
+/* ===== SPECS ===== */
+.ft-specs { padding: 120px 0; background: #0a0a0a; color: white; }
+.ft-specs .ft-section-eyebrow { color: #FF6B35; }
+.ft-specs-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+.ft-spec-item {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding-right: 40px;
+}
+.ft-spec-item:nth-child(even) { padding-left: 40px; padding-right: 0; }
+.ft-spec-label { font-size: 14px; color: rgba(255,255,255,0.4); font-weight: 500; }
+.ft-spec-value { font-size: 14px; font-weight: 500; text-align: right; }
+
+/* ===== REVIEWS ===== */
+.ft-reviews-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;
+}
+.ft-review-card {
+  background: white; border-radius: 20px; padding: 36px;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+}
+.ft-review-stars { color: #f5a623; font-size: 16px; margin-bottom: 16px; letter-spacing: 2px; }
+.ft-review-card h4 { font-size: 17px; font-weight: 600; margin-bottom: 12px; }
+.ft-review-card p { font-size: 14px; color: #666; line-height: 1.7; margin-bottom: 16px; }
+.ft-review-author { font-size: 13px; font-weight: 600; color: #999; }
+
+/* ===== FAQ ===== */
+.ft-faq { padding: 120px 0; background: #fafafa; }
+.ft-faq-list { max-width: 800px; margin: 0 auto; }
+.ft-faq-item { border-bottom: 1px solid #e0e0e0; overflow: hidden; }
+.ft-faq-item summary {
+  padding: 24px 0; font-size: 17px; font-weight: 500;
+  cursor: pointer; list-style: none; display: flex;
+  justify-content: space-between; align-items: center;
+  transition: color 0.2s;
+}
+.ft-faq-item summary::-webkit-details-marker { display: none; }
+.ft-faq-item summary::after {
+  content: '+'; font-size: 24px; font-weight: 300; color: #999;
+  transition: transform 0.3s;
+}
+.ft-faq-item[open] summary::after { transform: rotate(45deg); }
+.ft-faq-item[open] summary { color: #FF6B35; }
+.ft-faq-item p { padding: 0 0 24px; font-size: 15px; color: #666; line-height: 1.7; }
+
+/* ===== BUY SECTION ===== */
+.ft-buy { padding: 120px 0; background: white; }
+.ft-buy-inner {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: center;
+}
+.ft-buy-media { border-radius: 24px; overflow: hidden; }
+.ft-buy-media img { width: 100%; display: block; }
+.ft-buy-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 40px; font-weight: 700; margin-bottom: 12px;
+}
+.ft-buy-price { font-size: 32px; font-weight: 700; margin-bottom: 8px; }
+.ft-buy-subtitle { font-size: 17px; color: #666; margin-bottom: 16px; line-height: 1.5; }
+.ft-buy-shipping { font-size: 14px; color: #888; margin-bottom: 32px; }
+.ft-buy-variants { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 32px; }
+.ft-variant-option { cursor: pointer; }
+.ft-variant-option input { display: none; }
+.ft-variant-option span {
+  display: block; padding: 10px 24px;
+  border: 1.5px solid #ddd; border-radius: 980px;
+  font-size: 14px; font-weight: 500; transition: all 0.2s;
+}
+.ft-variant-option input:checked + span {
+  border-color: #1a1a1a; background: #1a1a1a; color: white;
+}
+.ft-variant-option:hover span { border-color: #999; }
+.ft-buy-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 18px 48px; background: #FF6B35; color: white;
+  border: none; border-radius: 980px; font-size: 17px;
+  font-weight: 600; cursor: pointer; transition: all 0.3s;
   font-family: inherit;
 }
-.add-to-cart-btn:hover {
-  background: #1a7fe8;
-  transform: scale(1.03);
+.ft-buy-btn:hover { background: #e55a28; transform: scale(1.03); }
+.ft-trust-signals {
+  display: flex; gap: 16px; margin-top: 20px; flex-wrap: wrap;
 }
-.variant-label {
-  display: inline-block;
-  cursor: pointer;
-  margin: 0 4px 8px 0;
-}
-.variant-label input { display: none; }
-.variant-label span {
-  display: inline-block;
-  padding: 8px 20px;
-  border: 1.5px solid #ddd;
-  border-radius: 980px;
-  font-size: 14px;
-  font-weight: 500;
-  transition: all 0.2s;
-}
-.variant-label input:checked + span {
-  border-color: #1a1a1a;
-  background: #1a1a1a;
-  color: white;
-}
-.product-trust-signals {
-  display: flex; gap: 14px; margin-top: 16px; flex-wrap: wrap;
-}
-.product-trust-signals span {
+.ft-trust-signals span {
   font-size: 12px; color: #999; white-space: nowrap;
 }
-.cta-add-form { margin-top: 16px; }
-.cta-add-form .add-to-cart-btn { max-width: 300px; margin: 0 auto; }
+
+/* ===== STICKY BAR ===== */
+.ft-sticky-bar {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: rgba(255,255,255,0.92); backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(0,0,0,0.08);
+  z-index: 40; transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.ft-sticky-bar.visible { transform: translateY(0); }
+.ft-sticky-inner {
+  max-width: 1200px; margin: 0 auto; padding: 14px 24px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.ft-sticky-info { display: flex; align-items: center; gap: 16px; }
+.ft-sticky-info strong { font-size: 16px; }
+.ft-sticky-info span { font-size: 16px; color: #666; }
+.ft-sticky-btn {
+  padding: 12px 36px; background: #FF6B35; color: white;
+  text-decoration: none; border-radius: 980px; font-size: 15px;
+  font-weight: 600; transition: background 0.3s;
+}
+.ft-sticky-btn:hover { background: #e55a28; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1024px) {
+  .ft-hero-title { font-size: 52px; }
+  .ft-statement-text { font-size: 40px; }
+  .ft-section-title, .ft-category-title { font-size: 40px; }
+  .ft-feature-title { font-size: 30px; }
+  .ft-video-overlay h2 { font-size: 44px; }
+  .ft-battery-number { font-size: 120px; }
+  .ft-smart-grid { grid-template-columns: repeat(2, 1fr); }
+  .ft-design-features { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .ft-hero { padding: 80px 24px 60px; min-height: 90vh; }
+  .ft-hero-product { width: 220px; height: 220px; margin-bottom: 32px; }
+  .ft-hero-title { font-size: 44px; }
+  .ft-hero-tagline { font-size: 17px; }
+  .ft-hero-glow { width: 300px; height: 300px; }
+
+  .ft-highlights { padding: 60px 0; }
+  .ft-highlights-intro { font-size: 22px; }
+
+  .ft-statement { min-height: 180vh; }
+  .ft-statement-text { font-size: 32px; }
+
+  .ft-section { padding: 80px 0; }
+  .ft-section-title, .ft-category-title { font-size: 34px; }
+  .ft-category-label { font-size: 24px; }
+  .ft-feature-title { font-size: 28px; }
+  .ft-category-header { margin-bottom: 48px; }
+
+  .ft-split { grid-template-columns: 1fr; gap: 48px; margin-bottom: 60px; }
+  .ft-split--reverse .ft-split-content { order: 0; }
+
+  .ft-full-media { padding: 0 16px; }
+  .ft-full-feature { padding: 48px 0; }
+
+  .ft-health-grid { grid-template-columns: 1fr; max-width: 400px; margin: 40px auto 0; }
+
+  .ft-video-section { min-height: 50vh; }
+  .ft-video-overlay { min-height: 50vh; }
+  .ft-video-overlay h2 { font-size: 32px; }
+
+  .ft-battery { padding: 100px 0; }
+  .ft-battery-number { font-size: 100px; }
+  .ft-battery-unit { font-size: 32px; }
+  .ft-battery-sub { font-size: 20px; }
+  .ft-battery-stats { gap: 24px; }
+  .ft-battery-stat-num { font-size: 28px; }
+
+  .ft-design-features { grid-template-columns: repeat(2, 1fr); max-width: 400px; margin: 0 auto; }
+
+  .ft-smart-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+
+  .ft-specs-grid { grid-template-columns: 1fr; }
+  .ft-spec-item { padding-right: 0 !important; padding-left: 0 !important; }
+
+  .ft-reviews-grid { grid-template-columns: 1fr; }
+
+  .ft-buy-inner { grid-template-columns: 1fr; gap: 48px; }
+
+  .ft-stats-row { gap: 24px; }
+  .ft-stat-number { font-size: 36px; }
+  .ft-stat-big { font-size: 36px; }
+
+  .ft-sticky-info strong { font-size: 14px; }
+  .ft-sticky-info span { font-size: 14px; }
+}
+
+@media (max-width: 480px) {
+  .ft-hero-title { font-size: 36px; }
+  .ft-statement-text { font-size: 28px; }
+  .ft-section-title, .ft-category-title { font-size: 28px; }
+  .ft-battery-number { font-size: 80px; }
+  .ft-stats-row { flex-wrap: wrap; }
+  .ft-pill-row { gap: 8px; }
+  .ft-pill { font-size: 12px; padding: 6px 14px; }
+  .ft-battery-stats { flex-direction: column; gap: 24px; }
+  .ft-battery-stat-divider { width: 60px; height: 1px; }
+}
+
+@media (min-width: 1200px) {
+  .ft-hero-title { font-size: 80px; }
+  .ft-hero-product { width: 440px; height: 440px; }
+  .ft-statement-text { font-size: 60px; }
+  .ft-section-title, .ft-category-title { font-size: 56px; }
+  .ft-video-overlay h2 { font-size: 64px; }
+  .ft-battery-number { font-size: 200px; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .ft-reveal { transition-duration: 0.01ms !important; }
+  .ft-word { opacity: 1 !important; filter: none !important; }
+  .ft-battery-hero { transform: none !important; opacity: 1 !important; }
+  .ft-full-media .ft-media-slot { transform: none !important; }
+  .ft-hero-product, .ft-hero-content { transform: none !important; opacity: 1 !important; }
+}
 </style>
 
+<!-- ============================================================
+     FITNESS TRACKER JAVASCRIPT — Scroll-driven animations
+     ============================================================ -->
 <script>
 (function() {
-  var variantRadios = document.querySelectorAll('input[name="variant-select"]');
-  var variantInputs = document.querySelectorAll('input[name="id"]');
-  if (variantRadios.length > 0) {
-    variantRadios.forEach(function(radio) {
-      radio.addEventListener('change', function() {
-        variantInputs.forEach(function(input) { input.value = radio.value; });
-        document.querySelectorAll('.variant-label').forEach(function(l) { l.classList.remove('active'); });
-        radio.parentNode.classList.add('active');
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ========== UTILITIES ==========
+  function clamp(v, min, max) { return Math.min(Math.max(v, min), max); }
+  function lerp(a, b, t) { return a + (b - a) * t; }
+  function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+
+  function scrollProgress(el, start, end) {
+    var rect = el.getBoundingClientRect();
+    var vh = window.innerHeight;
+    var s = vh * (start !== undefined ? start : 1);
+    var e = vh * (end !== undefined ? end : 0);
+    return clamp((s - rect.top) / (s - e), 0, 1);
+  }
+
+  // ========== 1. TRIGGER-BASED REVEALS ==========
+  var reveals = document.querySelectorAll('.ft-reveal');
+  if ('IntersectionObserver' in window) {
+    var revealObs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var el = entry.target;
+          var delay = parseInt(el.getAttribute('data-delay') || '0', 10);
+          setTimeout(function() { el.classList.add('visible'); }, delay);
+          revealObs.unobserve(el);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+    reveals.forEach(function(el) { revealObs.observe(el); });
+  } else {
+    reveals.forEach(function(el) { el.classList.add('visible'); });
+  }
+
+  // ========== 2. ANIMATED COUNTERS ==========
+  var counters = document.querySelectorAll('[data-count]');
+  if ('IntersectionObserver' in window) {
+    var counterObs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var el = entry.target;
+          var target = parseInt(el.getAttribute('data-count'), 10);
+          var duration = 1800;
+          var startTime = null;
+          function step(ts) {
+            if (!startTime) startTime = ts;
+            var p = Math.min((ts - startTime) / duration, 1);
+            el.textContent = Math.floor(easeOutCubic(p) * target);
+            if (p < 1) requestAnimationFrame(step);
+            else el.textContent = target;
+          }
+          requestAnimationFrame(step);
+          counterObs.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(function(el) { counterObs.observe(el); });
+  }
+
+  // ========== 3. SCROLL-DRIVEN ANIMATIONS ==========
+  if (prefersReduced) {
+    document.querySelectorAll('.ft-word').forEach(function(w) { w.classList.add('revealed'); });
+    var bh = document.querySelector('.ft-battery-hero');
+    if (bh) { bh.style.transform = 'none'; bh.style.opacity = '1'; }
+    var fm = document.querySelector('.ft-full-media .ft-media-slot');
+    if (fm) { fm.style.transform = 'none'; }
+  } else {
+
+    // Cache DOM references
+    var heroSection = document.querySelector('.ft-hero');
+    var heroProduct = document.querySelector('.ft-hero-product');
+    var heroContent = document.querySelector('.ft-hero-content');
+    var heroGlow = document.querySelector('.ft-hero-glow');
+    var heroIndicator = document.querySelector('.ft-scroll-indicator');
+
+    var statementSection = document.querySelector('.ft-statement');
+    var statementWords = document.querySelectorAll('.ft-word');
+
+    var zoomMedia = document.querySelector('[data-scroll="zoom"]');
+    var zoomSlot = zoomMedia ? zoomMedia.querySelector('.ft-media-slot') : null;
+
+    var batterySection = document.querySelector('[data-scroll="battery"]');
+    var batteryHero = batterySection ? batterySection.querySelector('.ft-battery-hero') : null;
+
+    var parallaxMedias = document.querySelectorAll('[data-scroll="parallax"]');
+
+    var videoSection = document.querySelector('[data-scroll="video"]');
+    var videoWrap = videoSection ? videoSection.querySelector('.ft-video-wrap') : null;
+
+    var progressBar = document.querySelector('.ft-progress');
+
+    var stickyBar = document.getElementById('ft-sticky-bar');
+    var buySection = document.getElementById('ft-buy');
+
+    var scrollTicking = false;
+
+    function updateScroll() {
+      var scrollY = window.scrollY;
+      var vh = window.innerHeight;
+      var docH = document.documentElement.scrollHeight - vh;
+
+      // --- Progress bar ---
+      if (progressBar) {
+        progressBar.style.transform = 'scaleX(' + (scrollY / docH) + ')';
+      }
+
+      // --- Hero parallax ---
+      if (heroSection && scrollY < vh * 1.5) {
+        var hp = clamp(scrollY / vh, 0, 1);
+        var productY = hp * -100;
+        var productScale = 1 + hp * 0.15;
+        var contentY = hp * 80;
+        var contentOp = clamp(1 - hp * 2, 0, 1);
+        var glowScale = 1 + hp * 0.5;
+
+        heroProduct.style.transform = 'translateY(' + productY + 'px) scale(' + productScale + ')';
+        heroContent.style.transform = 'translateY(' + contentY + 'px)';
+        heroContent.style.opacity = contentOp;
+        heroGlow.style.transform = 'translate(-50%, -60%) scale(' + glowScale + ')';
+        if (heroIndicator) heroIndicator.style.opacity = clamp(1 - hp * 4, 0, 1);
+      }
+
+      // --- Statement word-by-word reveal ---
+      if (statementSection && statementWords.length > 0) {
+        var stRect = statementSection.getBoundingClientRect();
+        var stHeight = statementSection.offsetHeight;
+        var stScrolled = -stRect.top;
+        var stProgress = clamp(stScrolled / (stHeight - vh), 0, 1);
+
+        var wordCount = statementWords.length;
+        for (var i = 0; i < wordCount; i++) {
+          var wordThreshold = (i + 0.5) / wordCount;
+          if (stProgress >= wordThreshold) {
+            statementWords[i].classList.add('revealed');
+          } else {
+            statementWords[i].classList.remove('revealed');
+          }
+        }
+      }
+
+      // --- Display image zoom ---
+      if (zoomSlot) {
+        var zp = scrollProgress(zoomMedia, 1.1, 0.2);
+        var zoomScale = lerp(1.15, 1.0, easeOutCubic(zp));
+        zoomSlot.style.transform = 'scale(' + zoomScale + ')';
+      }
+
+      // --- Battery number scale ---
+      if (batteryHero && batterySection) {
+        var bp = scrollProgress(batterySection, 1.0, 0.35);
+        var bScale = lerp(0.3, 1.0, easeOutCubic(bp));
+        var bOpacity = lerp(0, 1, easeOutCubic(clamp(bp * 1.5, 0, 1)));
+        batteryHero.style.transform = 'scale(' + bScale + ')';
+        batteryHero.style.opacity = bOpacity;
+      }
+
+      // --- Split media parallax ---
+      parallaxMedias.forEach(function(media) {
+        var mp = scrollProgress(media, 1.3, -0.3);
+        var mY = lerp(50, -50, mp);
+        var mOp = clamp(mp * 3, 0, 1) * clamp((1 - mp) * 3, 0, 1);
+        mOp = clamp(mOp + 0.15, 0, 1);
+        media.style.transform = 'translateY(' + mY + 'px)';
+        media.style.opacity = mOp;
+      });
+
+      // --- Video background parallax ---
+      if (videoWrap && videoSection) {
+        var vp = scrollProgress(videoSection, 1.2, -0.2);
+        var vY = lerp(40, -40, vp);
+        videoWrap.style.transform = 'translateY(' + vY + 'px)';
+      }
+
+      // --- Sticky buy bar ---
+      if (stickyBar) {
+        var showAfter = vh * 0.9;
+        var buyTop = buySection ? buySection.getBoundingClientRect().top + scrollY - vh : Infinity;
+        if (scrollY > showAfter && scrollY < buyTop) {
+          stickyBar.classList.add('visible');
+        } else {
+          stickyBar.classList.remove('visible');
+        }
+      }
+
+      scrollTicking = false;
+    }
+
+    window.addEventListener('scroll', function() {
+      if (!scrollTicking) {
+        requestAnimationFrame(updateScroll);
+        scrollTicking = true;
+      }
+    }, { passive: true });
+
+    // Run once on load
+    updateScroll();
+  }
+
+  // ========== 4. VARIANT SELECTOR ==========
+  var variantInputs = document.querySelectorAll('.ft-variant-option input');
+  var hiddenVariantId = document.getElementById('ft-variant-id');
+  if (variantInputs.length > 0 && hiddenVariantId) {
+    variantInputs.forEach(function(input) {
+      input.addEventListener('change', function() {
+        hiddenVariantId.value = this.value;
       });
     });
   }
+
+  // ========== 5. SMOOTH SCROLL ==========
+  document.querySelectorAll('.ft-page a[href^="#"]').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      var target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
 })();
 </script>
