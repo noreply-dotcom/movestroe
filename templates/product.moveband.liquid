@@ -1,12 +1,14 @@
 <div class="mb-page">
 
+<!-- Page progress bar -->
+<div class="mb-progress"></div>
+
 <!-- ============================================================
-     SECTION 1: HERO — Full viewport, dark, floating product
+     SECTION 1: HERO — Full viewport, parallax on scroll
      ============================================================ -->
-<section class="mb-hero">
+<section class="mb-hero" data-scroll="hero">
   <div class="mb-hero-glow"></div>
-  <div class="mb-hero-product mb-reveal mb-reveal--scale" data-delay="200">
-    <!-- UPLOAD: Product hero shot — transparent PNG of MoveBand, ~1000x1000px -->
+  <div class="mb-hero-product">
     <div class="mb-media-slot mb-media-slot--hero" data-label="Product Hero Image">
       {% if product.featured_image %}
         <img
@@ -25,13 +27,13 @@
     </div>
   </div>
   <div class="mb-hero-content">
-    <p class="mb-hero-eyebrow mb-reveal mb-reveal--up">Introducing</p>
-    <h1 class="mb-hero-title mb-reveal mb-reveal--up" data-delay="100">MoveBand</h1>
-    <p class="mb-hero-tagline mb-reveal mb-reveal--up" data-delay="200">Move Smarter. Live Better.</p>
-    <div class="mb-hero-price mb-reveal mb-reveal--up" data-delay="300">
+    <p class="mb-hero-eyebrow">Introducing</p>
+    <h1 class="mb-hero-title">MoveBand</h1>
+    <p class="mb-hero-tagline">Move Smarter. Live Better.</p>
+    <div class="mb-hero-price">
       <span>From {{ product.price | money }}</span>
     </div>
-    <a href="#mb-buy" class="mb-hero-cta mb-reveal mb-reveal--up" data-delay="400">Buy</a>
+    <a href="#mb-buy" class="mb-hero-cta">Buy</a>
   </div>
   <div class="mb-scroll-indicator">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 5V19M12 19L5 12M12 19L19 12" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -39,12 +41,14 @@
 </section>
 
 <!-- ============================================================
-     SECTION 2: STATEMENT — Big text reveal
+     SECTION 2: STATEMENT — Sticky word-by-word reveal
      ============================================================ -->
-<section class="mb-statement">
-  <div class="mb-container">
-    <h2 class="mb-statement-text mb-reveal mb-reveal--up">
-      The most advanced<br>fitness tracker<br>we've ever created.
+<section class="mb-statement" data-scroll="statement">
+  <div class="mb-statement-sticky">
+    <h2 class="mb-statement-text">
+      <span class="mb-word">The</span> <span class="mb-word">most</span> <span class="mb-word">advanced</span><br>
+      <span class="mb-word">fitness</span> <span class="mb-word">tracker</span><br>
+      <span class="mb-word">we've</span> <span class="mb-word">ever</span> <span class="mb-word">created.</span>
     </h2>
   </div>
 </section>
@@ -55,7 +59,7 @@
 <section class="mb-section mb-section--dark">
   <div class="mb-container">
     <div class="mb-split">
-      <div class="mb-split-media mb-reveal mb-reveal--left">
+      <div class="mb-split-media" data-scroll="parallax">
         <!-- UPLOAD: Close-up of MoveBand showing heart rate screen — 800x1000px -->
         <div class="mb-media-slot mb-media-slot--portrait" data-label="Health Monitoring Image">
           <div class="mb-placeholder mb-placeholder--light">
@@ -69,7 +73,7 @@
         <h2 class="mb-section-title">Your health.<br>Always in focus.</h2>
         <p class="mb-section-body">Advanced sensors work around the clock so you can understand your body better than ever before.</p>
         <div class="mb-feature-list">
-          <div class="mb-feature-item">
+          <div class="mb-feature-item mb-reveal mb-reveal--up" data-delay="0">
             <div class="mb-feature-icon">
               <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M14 24S4 18 4 11C4 7 7.5 4 11 4C12.8 4 14 5 14 5S15.2 4 17 4C20.5 4 24 7 24 11C24 18 14 24 14 24Z" stroke="currentColor" stroke-width="1.5"/><path d="M4 14H10L12 10L15 18L17 14H24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </div>
@@ -78,7 +82,7 @@
               <p>24/7 continuous tracking with real-time alerts</p>
             </div>
           </div>
-          <div class="mb-feature-item">
+          <div class="mb-feature-item mb-reveal mb-reveal--up" data-delay="120">
             <div class="mb-feature-icon">
               <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M14 8V14L18 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="14" cy="14" r="2" fill="currentColor"/></svg>
             </div>
@@ -87,7 +91,7 @@
               <p>Measure your blood oxygen levels anytime</p>
             </div>
           </div>
-          <div class="mb-feature-item">
+          <div class="mb-feature-item mb-reveal mb-reveal--up" data-delay="240">
             <div class="mb-feature-icon">
               <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M6 20C6 20 8 12 14 12C20 12 22 20 22 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M3 20H25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="14" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg>
             </div>
@@ -96,7 +100,7 @@
               <p>Deep, light & REM sleep analysis every night</p>
             </div>
           </div>
-          <div class="mb-feature-item">
+          <div class="mb-feature-item mb-reveal mb-reveal--up" data-delay="360">
             <div class="mb-feature-icon">
               <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M14 9V14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="14" cy="19" r="1.5" fill="currentColor"/></svg>
             </div>
@@ -121,7 +125,7 @@
       <h2 class="mb-section-title">Brilliant<br>in every light.</h2>
     </div>
   </div>
-  <div class="mb-full-media mb-reveal mb-reveal--scale">
+  <div class="mb-full-media" data-scroll="zoom">
     <!-- UPLOAD: Full-width close-up of AMOLED screen — 2000x900px -->
     <div class="mb-media-slot mb-media-slot--wide" data-label="Display Close-up">
       <div class="mb-placeholder mb-placeholder--dark">
@@ -149,7 +153,7 @@
 <section class="mb-section mb-section--dark">
   <div class="mb-container">
     <div class="mb-split mb-split--reverse">
-      <div class="mb-split-media mb-reveal mb-reveal--right">
+      <div class="mb-split-media" data-scroll="parallax">
         <!-- UPLOAD: Person working out wearing MoveBand — 800x1000px -->
         <div class="mb-media-slot mb-media-slot--portrait" data-label="Fitness & Activity Image">
           <div class="mb-placeholder mb-placeholder--light">
@@ -185,7 +189,7 @@
 <!-- ============================================================
      SECTION 6: VIDEO / LIFESTYLE — Immersive full-width
      ============================================================ -->
-<section class="mb-video-section">
+<section class="mb-video-section" data-scroll="video">
   <div class="mb-video-wrap">
     <!-- UPLOAD: Lifestyle/promotional video — MP4, 1920x1080, <20MB -->
     <div class="mb-media-slot mb-media-slot--video" data-label="Promotional Video">
@@ -251,10 +255,10 @@
 <!-- ============================================================
      SECTION 8: BATTERY — Big number hero
      ============================================================ -->
-<section class="mb-battery">
+<section class="mb-battery" data-scroll="battery">
   <div class="mb-container">
     <p class="mb-section-eyebrow mb-reveal mb-reveal--up">Battery</p>
-    <div class="mb-battery-hero mb-reveal mb-reveal--scale">
+    <div class="mb-battery-hero">
       <span class="mb-battery-number" data-count="14">0</span>
       <span class="mb-battery-unit">days</span>
     </div>
@@ -336,7 +340,7 @@
 <section class="mb-section mb-section--dark">
   <div class="mb-container">
     <div class="mb-split">
-      <div class="mb-split-media mb-reveal mb-reveal--left">
+      <div class="mb-split-media" data-scroll="parallax">
         <!-- UPLOAD: App screens on phone + watch side by side — 800x1000px -->
         <div class="mb-media-slot mb-media-slot--portrait" data-label="App Integration Screenshot">
           <div class="mb-placeholder mb-placeholder--light">
@@ -564,20 +568,26 @@
 .mb-page { overflow-x: hidden; }
 .mb-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
-/* ===== SCROLL REVEAL ===== */
+/* ===== PROGRESS BAR ===== */
+.mb-progress {
+  position: fixed; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, #369FFF, #36deff);
+  transform-origin: left; transform: scaleX(0);
+  z-index: 9999; pointer-events: none;
+  will-change: transform;
+}
+
+/* ===== SCROLL REVEAL (trigger-based) ===== */
 .mb-reveal {
   opacity: 0;
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
-.mb-reveal--up { transform: translateY(60px); }
+.mb-reveal--up { transform: translateY(50px); }
 .mb-reveal--scale { transform: scale(0.92); }
-.mb-reveal--left { transform: translateX(-60px); }
-.mb-reveal--right { transform: translateX(60px); }
-.mb-reveal.visible {
-  opacity: 1;
-  transform: none;
-}
+.mb-reveal--left { transform: translateX(-50px); }
+.mb-reveal--right { transform: translateX(50px); }
+.mb-reveal.visible { opacity: 1; transform: none; }
 
 /* ===== PLACEHOLDERS ===== */
 .mb-media-slot { width: 100%; overflow: hidden; border-radius: 16px; }
@@ -592,7 +602,7 @@
 .mb-placeholder--video { padding: 120px 20px; }
 .mb-media-slot img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-/* ===== HERO ===== */
+/* ===== HERO (scroll-driven parallax) ===== */
 .mb-hero {
   position: relative; min-height: 100vh; min-height: 100dvh;
   background: #ffffff; display: flex; flex-direction: column;
@@ -604,17 +614,18 @@
   transform: translate(-50%, -60%);
   width: 500px; height: 500px;
   background: radial-gradient(circle, rgba(54, 159, 255, 0.08) 0%, transparent 70%);
-  pointer-events: none;
+  pointer-events: none; will-change: transform;
 }
 .mb-hero-product {
   position: relative; z-index: 2;
   width: 280px; height: 280px; margin-bottom: 40px;
+  will-change: transform;
 }
 .mb-hero-product .mb-media-slot { border-radius: 0; background: transparent; }
 .mb-hero-product .mb-placeholder { background: transparent; }
 .mb-hero-product .mb-media-slot--hero { width: 100%; height: 100%; }
 .mb-hero-product img { object-fit: contain; }
-.mb-hero-content { position: relative; z-index: 2; }
+.mb-hero-content { position: relative; z-index: 2; will-change: transform, opacity; }
 .mb-hero-eyebrow {
   font-size: 14px; font-weight: 500; letter-spacing: 3px;
   text-transform: uppercase; color: rgba(0,0,0,0.4);
@@ -623,8 +634,7 @@
 .mb-hero-title {
   font-family: 'Playfair Display', Georgia, serif;
   font-size: 64px; font-weight: 700; color: #1a1a1a;
-  line-height: 1; margin-bottom: 16px;
-  letter-spacing: -1px;
+  line-height: 1; margin-bottom: 16px; letter-spacing: -1px;
 }
 .mb-hero-tagline {
   font-size: 20px; color: rgba(0,0,0,0.5);
@@ -645,21 +655,37 @@
   position: absolute; bottom: 30px; left: 50%;
   transform: translateX(-50%);
   animation: mb-bounce 2s ease infinite;
-  color: rgba(0,0,0,0.25);
+  color: rgba(0,0,0,0.25); will-change: opacity;
 }
 @keyframes mb-bounce {
   0%, 100% { transform: translateX(-50%) translateY(0); }
   50% { transform: translateX(-50%) translateY(10px); }
 }
 
-/* ===== STATEMENT ===== */
+/* ===== STATEMENT (sticky word reveal) ===== */
 .mb-statement {
-  padding: 140px 24px; background: #fafafa; text-align: center;
+  min-height: 250vh; position: relative;
+  background: #fafafa;
+}
+.mb-statement-sticky {
+  position: sticky; top: 0; min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  padding: 40px 24px;
 }
 .mb-statement-text {
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: 48px; line-height: 1.2; font-weight: 600;
-  color: #1a1a1a; max-width: 800px; margin: 0 auto;
+  font-size: 48px; line-height: 1.25; font-weight: 600;
+  color: #1a1a1a; max-width: 800px; text-align: center;
+}
+.mb-word {
+  opacity: 0.12;
+  filter: blur(5px);
+  transition: opacity 0.15s ease, filter 0.15s ease;
+  display: inline-block;
+}
+.mb-word.revealed {
+  opacity: 1;
+  filter: blur(0);
 }
 
 /* ===== SECTIONS ===== */
@@ -673,17 +699,14 @@
 
 .mb-section-eyebrow {
   font-size: 14px; font-weight: 600; letter-spacing: 3px;
-  text-transform: uppercase; color: #369FFF;
-  margin-bottom: 16px;
+  text-transform: uppercase; color: #369FFF; margin-bottom: 16px;
 }
 .mb-section-title {
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: 48px; font-weight: 600; line-height: 1.15;
-  margin-bottom: 20px;
+  font-size: 48px; font-weight: 600; line-height: 1.15; margin-bottom: 20px;
 }
 .mb-section-body {
-  font-size: 18px; line-height: 1.7; color: #666;
-  max-width: 520px;
+  font-size: 18px; line-height: 1.7; color: #666; max-width: 520px;
 }
 .mb-centered-header { text-align: center; margin-bottom: 60px; }
 .mb-centered-header .mb-section-title { margin-left: auto; margin-right: auto; }
@@ -695,6 +718,7 @@
   gap: 80px; align-items: center;
 }
 .mb-split--reverse .mb-split-content { order: -1; }
+.mb-split-media { will-change: transform, opacity; }
 .mb-split-media .mb-media-slot--portrait { aspect-ratio: 4/5; }
 
 /* ===== FEATURE LIST ===== */
@@ -703,16 +727,20 @@
 .mb-feature-icon {
   width: 48px; height: 48px; flex-shrink: 0;
   display: flex; align-items: center; justify-content: center;
-  border-radius: 12px; background: rgba(54, 159, 255, 0.1);
-  color: #369FFF;
+  border-radius: 12px; background: rgba(54, 159, 255, 0.1); color: #369FFF;
 }
 .mb-feature-item h4 { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
 .mb-feature-item p { font-size: 14px; line-height: 1.5; margin: 0; }
 
-/* ===== FULL-WIDTH MEDIA ===== */
+/* ===== FULL-WIDTH MEDIA (scroll zoom) ===== */
 .mb-full-media {
   width: 100%; max-width: 1400px; margin: 0 auto 60px;
-  padding: 0 24px;
+  padding: 0 24px; overflow: hidden;
+}
+.mb-full-media .mb-media-slot {
+  will-change: transform;
+  transform: scale(1.15);
+  transition: none;
 }
 .mb-media-slot--wide { aspect-ratio: 21/9; }
 
@@ -746,9 +774,12 @@
 }
 .mb-stat p { font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 6px; }
 
-/* ===== VIDEO SECTION ===== */
+/* ===== VIDEO SECTION (parallax bg) ===== */
 .mb-video-section { position: relative; min-height: 70vh; background: #0a0a0a; overflow: hidden; }
-.mb-video-wrap { position: absolute; inset: 0; }
+.mb-video-wrap {
+  position: absolute; inset: -60px 0;
+  will-change: transform;
+}
 .mb-video-wrap video,
 .mb-video-wrap .mb-media-slot { width: 100%; height: 100%; }
 .mb-video-wrap .mb-media-slot { border-radius: 0; }
@@ -779,15 +810,18 @@
   display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;
 }
 
-/* ===== BATTERY ===== */
+/* ===== BATTERY (scroll-driven scale) ===== */
 .mb-battery {
   padding: 140px 0; background: #0a0a0a; color: white; text-align: center;
+  overflow: hidden;
 }
 .mb-battery .mb-section-eyebrow { color: #369FFF; }
 .mb-battery-hero {
   display: flex; align-items: baseline;
   justify-content: center; gap: 12px;
   margin: 20px 0 24px;
+  will-change: transform, opacity;
+  transform: scale(0.3); opacity: 0;
 }
 .mb-battery-number {
   font-family: 'Playfair Display', Georgia, serif;
@@ -804,15 +838,12 @@
   margin-bottom: 24px;
 }
 .mb-battery .mb-section-body { color: rgba(255,255,255,0.5); }
-.mb-battery-visual {
-  max-width: 700px; margin: 48px auto 0;
-}
+.mb-battery-visual { max-width: 700px; margin: 48px auto 0; }
 .mb-media-slot--wide-sm { aspect-ratio: 16/10; }
 
 /* ===== SMART GRID ===== */
 .mb-smart-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
 }
 .mb-smart-card {
   background: white; border-radius: 20px; padding: 36px 28px;
@@ -829,9 +860,7 @@
 .mb-smart-card p { font-size: 14px; color: #888; line-height: 1.5; }
 
 /* ===== SPECS ===== */
-.mb-specs {
-  padding: 120px 0; background: #0a0a0a; color: white;
-}
+.mb-specs { padding: 120px 0; background: #0a0a0a; color: white; }
 .mb-specs .mb-section-eyebrow { color: #369FFF; }
 .mb-specs-grid {
   display: grid; grid-template-columns: 1fr 1fr;
@@ -862,9 +891,7 @@
 /* ===== FAQ ===== */
 .mb-faq { padding: 120px 0; background: #fafafa; }
 .mb-faq-list { max-width: 800px; margin: 0 auto; }
-.mb-faq-item {
-  border-bottom: 1px solid #e0e0e0; overflow: hidden;
-}
+.mb-faq-item { border-bottom: 1px solid #e0e0e0; overflow: hidden; }
 .mb-faq-item summary {
   padding: 24px 0; font-size: 17px; font-weight: 500;
   cursor: pointer; list-style: none; display: flex;
@@ -878,9 +905,7 @@
 }
 .mb-faq-item[open] summary::after { transform: rotate(45deg); }
 .mb-faq-item[open] summary { color: #369FFF; }
-.mb-faq-item p {
-  padding: 0 0 24px; font-size: 15px; color: #666; line-height: 1.7;
-}
+.mb-faq-item p { padding: 0 0 24px; font-size: 15px; color: #666; line-height: 1.7; }
 
 /* ===== BUY SECTION ===== */
 .mb-buy { padding: 120px 0; background: white; }
@@ -893,18 +918,10 @@
   font-family: 'Playfair Display', Georgia, serif;
   font-size: 40px; font-weight: 700; margin-bottom: 12px;
 }
-.mb-buy-price {
-  font-size: 32px; font-weight: 700; margin-bottom: 8px;
-}
-.mb-buy-shipping {
-  font-size: 14px; color: #888; margin-bottom: 32px;
-}
-.mb-buy-variants {
-  display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 32px;
-}
-.mb-variant-option {
-  cursor: pointer;
-}
+.mb-buy-price { font-size: 32px; font-weight: 700; margin-bottom: 8px; }
+.mb-buy-shipping { font-size: 14px; color: #888; margin-bottom: 32px; }
+.mb-buy-variants { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 32px; }
+.mb-variant-option { cursor: pointer; }
 .mb-variant-option input { display: none; }
 .mb-variant-option span {
   display: block; padding: 10px 24px;
@@ -970,7 +987,7 @@
   .mb-hero-tagline { font-size: 17px; }
   .mb-hero-glow { width: 300px; height: 300px; }
 
-  .mb-statement { padding: 100px 24px; }
+  .mb-statement { min-height: 180vh; }
   .mb-statement-text { font-size: 32px; }
 
   .mb-section { padding: 80px 0; }
@@ -1019,7 +1036,6 @@
   .mb-pill { font-size: 12px; padding: 6px 14px; }
 }
 
-/* Large screens */
 @media (min-width: 1200px) {
   .mb-hero-title { font-size: 80px; }
   .mb-hero-product { width: 440px; height: 440px; }
@@ -1028,86 +1044,222 @@
   .mb-video-overlay h2 { font-size: 64px; }
   .mb-battery-number { font-size: 200px; }
 }
+
+/* Reduced motion: disable scroll effects */
+@media (prefers-reduced-motion: reduce) {
+  .mb-reveal { transition-duration: 0.01ms !important; }
+  .mb-word { opacity: 1 !important; filter: none !important; }
+  .mb-battery-hero { transform: none !important; opacity: 1 !important; }
+  .mb-full-media .mb-media-slot { transform: none !important; }
+  .mb-hero-product, .mb-hero-content { transform: none !important; opacity: 1 !important; }
+}
 </style>
 
 <!-- ============================================================
-     MOVEBAND JAVASCRIPT — Scroll animations, counters, sticky bar
+     MOVEBAND JAVASCRIPT — Premium scroll-driven animations
      ============================================================ -->
 <script>
 (function() {
-  // Scroll reveal with IntersectionObserver
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ========== UTILITIES ==========
+  function clamp(v, min, max) { return Math.min(Math.max(v, min), max); }
+  function lerp(a, b, t) { return a + (b - a) * t; }
+  function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+
+  // Get how far element is through viewport: 0 = entering bottom, 1 = leaving top
+  function scrollProgress(el, start, end) {
+    var rect = el.getBoundingClientRect();
+    var vh = window.innerHeight;
+    var s = vh * (start !== undefined ? start : 1);
+    var e = vh * (end !== undefined ? end : 0);
+    return clamp((s - rect.top) / (s - e), 0, 1);
+  }
+
+  // ========== 1. TRIGGER-BASED REVEALS (IntersectionObserver) ==========
   var reveals = document.querySelectorAll('.mb-reveal');
   if ('IntersectionObserver' in window) {
-    var observer = new IntersectionObserver(function(entries) {
+    var revealObs = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
         if (entry.isIntersecting) {
           var el = entry.target;
           var delay = parseInt(el.getAttribute('data-delay') || '0', 10);
           setTimeout(function() { el.classList.add('visible'); }, delay);
-          observer.unobserve(el);
+          revealObs.unobserve(el);
         }
       });
-    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-    reveals.forEach(function(el) { observer.observe(el); });
+    }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+    reveals.forEach(function(el) { revealObs.observe(el); });
   } else {
     reveals.forEach(function(el) { el.classList.add('visible'); });
   }
 
-  // Animated counters
+  // ========== 2. ANIMATED COUNTERS ==========
   var counters = document.querySelectorAll('[data-count]');
   if ('IntersectionObserver' in window) {
-    var counterObserver = new IntersectionObserver(function(entries) {
+    var counterObs = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
         if (entry.isIntersecting) {
           var el = entry.target;
           var target = parseInt(el.getAttribute('data-count'), 10);
-          var duration = 1500;
-          var start = 0;
+          var duration = 1800;
           var startTime = null;
-          function step(timestamp) {
-            if (!startTime) startTime = timestamp;
-            var progress = Math.min((timestamp - startTime) / duration, 1);
-            var eased = 1 - Math.pow(1 - progress, 3);
-            el.textContent = Math.floor(eased * target);
-            if (progress < 1) {
-              requestAnimationFrame(step);
-            } else {
-              el.textContent = target;
-            }
+          function step(ts) {
+            if (!startTime) startTime = ts;
+            var p = Math.min((ts - startTime) / duration, 1);
+            el.textContent = Math.floor(easeOutCubic(p) * target);
+            if (p < 1) requestAnimationFrame(step);
+            else el.textContent = target;
           }
           requestAnimationFrame(step);
-          counterObserver.unobserve(el);
+          counterObs.unobserve(el);
         }
       });
     }, { threshold: 0.5 });
-    counters.forEach(function(el) { counterObserver.observe(el); });
+    counters.forEach(function(el) { counterObs.observe(el); });
   }
 
-  // Sticky buy bar — show after scrolling past hero
-  var stickyBar = document.getElementById('mb-sticky-bar');
-  var buySection = document.getElementById('mb-buy');
-  if (stickyBar) {
-    var lastScroll = 0;
-    var ticking = false;
-    window.addEventListener('scroll', function() {
-      lastScroll = window.scrollY;
-      if (!ticking) {
-        requestAnimationFrame(function() {
-          var showAfter = window.innerHeight * 0.8;
-          var buyTop = buySection ? buySection.getBoundingClientRect().top + window.scrollY - window.innerHeight : Infinity;
-          if (lastScroll > showAfter && lastScroll < buyTop) {
-            stickyBar.classList.add('visible');
-          } else {
-            stickyBar.classList.remove('visible');
-          }
-          ticking = false;
-        });
-        ticking = true;
+  // ========== 3. SCROLL-DRIVEN ANIMATIONS ==========
+  if (prefersReduced) {
+    // Show everything immediately
+    document.querySelectorAll('.mb-word').forEach(function(w) { w.classList.add('revealed'); });
+    var bh = document.querySelector('.mb-battery-hero');
+    if (bh) { bh.style.transform = 'none'; bh.style.opacity = '1'; }
+    var fm = document.querySelector('.mb-full-media .mb-media-slot');
+    if (fm) { fm.style.transform = 'none'; }
+  } else {
+
+    // Cache DOM references
+    var heroSection = document.querySelector('.mb-hero');
+    var heroProduct = document.querySelector('.mb-hero-product');
+    var heroContent = document.querySelector('.mb-hero-content');
+    var heroGlow = document.querySelector('.mb-hero-glow');
+    var heroIndicator = document.querySelector('.mb-scroll-indicator');
+
+    var statementSection = document.querySelector('.mb-statement');
+    var statementWords = document.querySelectorAll('.mb-word');
+
+    var zoomMedia = document.querySelector('[data-scroll="zoom"]');
+    var zoomSlot = zoomMedia ? zoomMedia.querySelector('.mb-media-slot') : null;
+
+    var batterySection = document.querySelector('[data-scroll="battery"]');
+    var batteryHero = batterySection ? batterySection.querySelector('.mb-battery-hero') : null;
+
+    var parallaxMedias = document.querySelectorAll('[data-scroll="parallax"]');
+
+    var videoSection = document.querySelector('[data-scroll="video"]');
+    var videoWrap = videoSection ? videoSection.querySelector('.mb-video-wrap') : null;
+
+    var progressBar = document.querySelector('.mb-progress');
+
+    var stickyBar = document.getElementById('mb-sticky-bar');
+    var buySection = document.getElementById('mb-buy');
+
+    var scrollTicking = false;
+
+    function updateScroll() {
+      var scrollY = window.scrollY;
+      var vh = window.innerHeight;
+      var docH = document.documentElement.scrollHeight - vh;
+
+      // --- Progress bar ---
+      if (progressBar) {
+        progressBar.style.transform = 'scaleX(' + (scrollY / docH) + ')';
       }
-    });
+
+      // --- Hero parallax ---
+      if (heroSection && scrollY < vh * 1.5) {
+        var hp = clamp(scrollY / vh, 0, 1);
+        var productY = hp * -100;
+        var productScale = 1 + hp * 0.15;
+        var contentY = hp * 80;
+        var contentOp = clamp(1 - hp * 2, 0, 1);
+        var glowScale = 1 + hp * 0.5;
+
+        heroProduct.style.transform = 'translateY(' + productY + 'px) scale(' + productScale + ')';
+        heroContent.style.transform = 'translateY(' + contentY + 'px)';
+        heroContent.style.opacity = contentOp;
+        heroGlow.style.transform = 'translate(-50%, -60%) scale(' + glowScale + ')';
+        if (heroIndicator) heroIndicator.style.opacity = clamp(1 - hp * 4, 0, 1);
+      }
+
+      // --- Statement word-by-word reveal ---
+      if (statementSection && statementWords.length > 0) {
+        var stRect = statementSection.getBoundingClientRect();
+        var stHeight = statementSection.offsetHeight;
+        var stScrolled = -stRect.top;
+        var stProgress = clamp(stScrolled / (stHeight - vh), 0, 1);
+
+        var wordCount = statementWords.length;
+        for (var i = 0; i < wordCount; i++) {
+          var wordThreshold = (i + 0.5) / wordCount;
+          if (stProgress >= wordThreshold) {
+            statementWords[i].classList.add('revealed');
+          } else {
+            statementWords[i].classList.remove('revealed');
+          }
+        }
+      }
+
+      // --- Display image zoom ---
+      if (zoomSlot) {
+        var zp = scrollProgress(zoomMedia, 1.1, 0.2);
+        var zoomScale = lerp(1.15, 1.0, easeOutCubic(zp));
+        zoomSlot.style.transform = 'scale(' + zoomScale + ')';
+      }
+
+      // --- Battery number scale ---
+      if (batteryHero && batterySection) {
+        var bp = scrollProgress(batterySection, 1.0, 0.35);
+        var bScale = lerp(0.3, 1.0, easeOutCubic(bp));
+        var bOpacity = lerp(0, 1, easeOutCubic(clamp(bp * 1.5, 0, 1)));
+        batteryHero.style.transform = 'scale(' + bScale + ')';
+        batteryHero.style.opacity = bOpacity;
+      }
+
+      // --- Split media parallax ---
+      parallaxMedias.forEach(function(media) {
+        var mp = scrollProgress(media, 1.3, -0.3);
+        var mY = lerp(50, -50, mp);
+        var mOp = clamp(mp * 3, 0, 1) * clamp((1 - mp) * 3, 0, 1);
+        mOp = clamp(mOp + 0.15, 0, 1);
+        media.style.transform = 'translateY(' + mY + 'px)';
+        media.style.opacity = mOp;
+      });
+
+      // --- Video background parallax ---
+      if (videoWrap && videoSection) {
+        var vp = scrollProgress(videoSection, 1.2, -0.2);
+        var vY = lerp(40, -40, vp);
+        videoWrap.style.transform = 'translateY(' + vY + 'px)';
+      }
+
+      // --- Sticky buy bar ---
+      if (stickyBar) {
+        var showAfter = vh * 0.9;
+        var buyTop = buySection ? buySection.getBoundingClientRect().top + scrollY - vh : Infinity;
+        if (scrollY > showAfter && scrollY < buyTop) {
+          stickyBar.classList.add('visible');
+        } else {
+          stickyBar.classList.remove('visible');
+        }
+      }
+
+      scrollTicking = false;
+    }
+
+    window.addEventListener('scroll', function() {
+      if (!scrollTicking) {
+        requestAnimationFrame(updateScroll);
+        scrollTicking = true;
+      }
+    }, { passive: true });
+
+    // Run once on load
+    updateScroll();
   }
 
-  // Variant selector for buy section
+  // ========== 4. VARIANT SELECTOR ==========
   var variantInputs = document.querySelectorAll('.mb-variant-option input');
   var hiddenVariantId = document.getElementById('mb-variant-id');
   if (variantInputs.length > 0 && hiddenVariantId) {
@@ -1118,7 +1270,7 @@
     });
   }
 
-  // Smooth scroll for anchor links within page
+  // ========== 5. SMOOTH SCROLL ==========
   document.querySelectorAll('.mb-page a[href^="#"]').forEach(function(link) {
     link.addEventListener('click', function(e) {
       var target = document.querySelector(this.getAttribute('href'));
