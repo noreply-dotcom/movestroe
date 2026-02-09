@@ -14,16 +14,32 @@
       {% if linklists[settings.menu_main] != blank %}
         <ul class="nav-list">
           {% for link in linklists[settings.menu_main].links %}
-            <li>
+            <li class="nav-item{% if link.links != blank %} has-mega{% endif %}">
+              <a href="{{ link.url }}" class="nav-link{% if link.links != blank %} has-submenu{% endif %}">
+                {{ link.title }}
+                {% if link.links != blank %}
+                  <svg class="nav-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                {% endif %}
+              </a>
               {% if link.links != blank %}
-                <a href="{{ link.url }}" class="nav-link has-submenu">{{ link.title }}</a>
-                <ul class="submenu">
-                  {% for childlink in link.links %}
-                    <li><a href="{{ childlink.url }}" class="nav-link">{{ childlink.title }}</a></li>
-                  {% endfor %}
-                </ul>
-              {% else %}
-                <a href="{{ link.url }}" class="nav-link">{{ link.title }}</a>
+                <div class="mega-menu">
+                  <div class="mega-menu-inner">
+                    <div class="mega-menu-columns">
+                      {% for childlink in link.links %}
+                        <div class="mega-menu-col">
+                          <a href="{{ childlink.url }}" class="mega-menu-heading">{{ childlink.title }}</a>
+                          {% if childlink.links != blank %}
+                            <ul class="mega-menu-links">
+                              {% for grandchild in childlink.links %}
+                                <li><a href="{{ grandchild.url }}">{{ grandchild.title }}</a></li>
+                              {% endfor %}
+                            </ul>
+                          {% endif %}
+                        </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
               {% endif %}
             </li>
           {% endfor %}
@@ -34,78 +50,135 @@
     <div class="header-actions">
       {% if settings.show_search %}
         <button class="search-toggle" aria-label="Search">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="2"/>
-            <line x1="14" y1="14" x2="18" y2="18" stroke="currentColor" stroke-width="2"/>
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+            <circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="1.5"/>
+            <line x1="14.5" y1="14.5" x2="20" y2="20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
           </svg>
         </button>
       {% endif %}
 
       <a href="/account" class="header-account" aria-label="Account">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="10" cy="6" r="3" stroke="currentColor" stroke-width="1.5"/>
-          <path d="M3 17C3 13.134 6.134 10 10 10C13.866 10 17 13.134 17 17" stroke="currentColor" stroke-width="1.5"/>
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+          <circle cx="11" cy="7" r="3.5" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M3.5 19C3.5 14.858 6.858 11.5 11 11.5C15.142 11.5 18.5 14.858 18.5 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
         </svg>
       </a>
 
-      <a href="/cart" class="header-cart" aria-label="Cart">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M1 1H4L6.68 14.39C6.77 14.8839 7.02621 15.3228 7.38179 15.6494C7.73738 15.976 8.18558 16.1784 8.65 16.22H17.55C18.0143 16.1781 18.4622 15.9757 18.8178 15.6494C19.1734 15.323 19.4297 14.884 19.52 14.39L20 6H5" stroke="currentColor" stroke-width="1.5"/>
-          <circle cx="7.5" cy="18" r="1.5" fill="currentColor"/>
-          <circle cx="16.5" cy="18" r="1.5" fill="currentColor"/>
+      <button class="cart-toggle" aria-label="Cart">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+          <path d="M6 6H19L17.5 14H7.5L6 6Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M6 6L5 2H2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="8.5" cy="18.5" r="1.5" fill="currentColor"/>
+          <circle cx="16.5" cy="18.5" r="1.5" fill="currentColor"/>
         </svg>
         {% if cart.item_count > 0 %}
           <span class="cart-count">{{ cart.item_count }}</span>
         {% endif %}
-      </a>
+      </button>
 
       <button class="mobile-menu-toggle" aria-label="Toggle menu">
-        <span></span>
-        <span></span>
-        <span></span>
+        <svg class="icon-hamburger" width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <line x1="3" y1="6" x2="21" y2="6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="3" y1="12" x2="21" y2="12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="3" y1="18" x2="21" y2="18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <svg class="icon-close" width="24" height="24" viewBox="0 0 24 24" fill="none" style="display:none">
+          <line x1="5" y1="5" x2="19" y2="19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="19" y1="5" x2="5" y2="19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
       </button>
     </div>
   </div>
 
-  <!-- Mobile Menu Drawer -->
-  <nav class="mobile-menu" aria-label="Mobile navigation">
-    {% if linklists[settings.menu_main] != blank %}
+  <!-- Mobile Menu Drawer with drill-down panels -->
+  <div class="mobile-menu" aria-label="Mobile navigation">
+    <!-- Main Panel -->
+    <div class="mobile-panel mobile-panel--main active" data-panel="main">
       <ul class="mobile-nav-list">
-        {% for link in linklists[settings.menu_main].links %}
-          <li>
-            <a href="{{ link.url }}" class="mobile-nav-link">{{ link.title }}</a>
-            {% if link.links != blank %}
-              <ul class="mobile-submenu">
+        {% if linklists[settings.menu_main] != blank %}
+          {% for link in linklists[settings.menu_main].links %}
+            <li>
+              {% if link.links != blank %}
+                <button class="mobile-nav-item has-children" data-target="panel-{{ forloop.index }}">
+                  <span>{{ link.title }}</span>
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7 4L13 10L7 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+              {% else %}
+                <a href="{{ link.url }}" class="mobile-nav-item">
+                  <span>{{ link.title }}</span>
+                </a>
+              {% endif %}
+            </li>
+          {% endfor %}
+        {% endif %}
+      </ul>
+    </div>
+
+    <!-- Sub-panels for each category with children -->
+    {% if linklists[settings.menu_main] != blank %}
+      {% for link in linklists[settings.menu_main].links %}
+        {% if link.links != blank %}
+          <div class="mobile-panel mobile-panel--sub" data-panel="panel-{{ forloop.index }}">
+            <button class="mobile-back-btn" data-target="main">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M13 16L7 10L13 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span>All</span>
+            </button>
+            <div class="mobile-panel-content">
+              <h2 class="mobile-panel-title">{{ link.title }}</h2>
+              <ul class="mobile-sub-list">
                 {% for childlink in link.links %}
-                  <li><a href="{{ childlink.url }}" class="mobile-nav-link">{{ childlink.title }}</a></li>
+                  <li><a href="{{ childlink.url }}" class="mobile-sub-link">{{ childlink.title }}</a></li>
                 {% endfor %}
               </ul>
-            {% endif %}
-          </li>
-        {% endfor %}
-      </ul>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
     {% endif %}
-    <div class="mobile-menu-actions">
-      <a href="/account" class="mobile-menu-link">Account</a>
-      <a href="/search" class="mobile-menu-link">Search</a>
+  </div>
+
+  <!-- Cart Drawer -->
+  <div class="cart-drawer" aria-label="Shopping cart">
+    <div class="cart-drawer-header">
+      <h2 class="cart-drawer-title">Shopping cart</h2>
+      <button class="cart-drawer-close" aria-label="Close cart">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <line x1="5" y1="5" x2="19" y2="19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="19" y1="5" x2="5" y2="19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
     </div>
-  </nav>
+    <div class="cart-drawer-body">
+      <div class="cart-empty-state">
+        <h3>Your Cart is Empty</h3>
+        <p>There doesn't seem to be anything here.</p>
+        <svg class="cart-empty-icon" width="80" height="90" viewBox="0 0 80 90" fill="none">
+          <rect x="15" y="10" width="50" height="55" rx="6" fill="#e8e8e8"/>
+          <circle cx="28" cy="20" r="3" fill="#ccc"/>
+          <circle cx="52" cy="20" r="3" fill="#ccc"/>
+          <path d="M28 15C28 12 32 8 40 8C48 8 52 12 52 15" stroke="#ccc" stroke-width="2" fill="none"/>
+          <circle cx="50" cy="60" r="18" fill="#e0e0e0"/>
+          <circle cx="50" cy="60" r="10" stroke="#ccc" stroke-width="2" fill="none"/>
+          <line x1="57" y1="67" x2="65" y2="75" stroke="#ccc" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+        <a href="/collections/all" class="cart-start-shopping">Start Shopping</a>
+      </div>
+    </div>
+  </div>
 </header>
 
 <style>
   .site-header {
     background: white;
-    border-bottom: 1px solid #e0e0e0;
     position: sticky;
     top: 0;
     z-index: 50;
-    transition: box-shadow 0.3s;
   }
 
   .header-container {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -124,68 +197,126 @@
   }
 
   .header-logo-text {
-    font-size: 20px;
-    font-weight: 600;
+    font-size: 22px;
+    font-weight: 700;
   }
 
+  /* Desktop Navigation */
   .header-nav {
     flex: 1;
-    margin: 0 40px;
+    display: flex;
+    justify-content: center;
   }
 
   .nav-list {
     display: flex;
     list-style: none;
-    gap: 30px;
+    gap: 32px;
+    align-items: center;
+  }
+
+  .nav-item {
+    position: static;
   }
 
   .nav-link {
     text-decoration: none;
     color: #1a1a1a;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 500;
-    transition: color 0.3s;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 0;
   }
 
   .nav-link:hover {
-    color: #369FFF;
+    color: #666;
   }
 
-  .nav-list > li {
-    position: relative;
+  .nav-chevron {
+    transition: transform 0.2s;
   }
 
-  .submenu {
+  .nav-item:hover .nav-chevron {
+    transform: rotate(180deg);
+  }
+
+  /* Mega Menu Dropdown */
+  .mega-menu {
     display: none;
     position: absolute;
     top: 100%;
     left: 0;
+    right: 0;
     background: white;
-    border: 1px solid #e0e0e0;
-    border-radius: 4px;
-    min-width: 200px;
+    border-top: 1px solid #e8e8e8;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    z-index: 100;
+  }
+
+  .nav-item.has-mega:hover .mega-menu {
+    display: block;
+  }
+
+  .mega-menu-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 30px;
+  }
+
+  .mega-menu-columns {
+    display: flex;
+    gap: 50px;
+  }
+
+  .mega-menu-col {
+    min-width: 160px;
+  }
+
+  .mega-menu-heading {
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+    color: #1a1a1a;
+    text-decoration: none;
+    margin-bottom: 18px;
+  }
+
+  .mega-menu-heading:hover {
+    color: #369FFF;
+  }
+
+  .mega-menu-links {
     list-style: none;
-    padding: 10px 0;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   }
 
-  .submenu a {
-    display: block;
-    padding: 8px 20px;
+  .mega-menu-links li {
+    margin-bottom: 12px;
   }
 
-  .nav-list > li:hover > .submenu {
-    display: block;
+  .mega-menu-links a {
+    color: #666;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s;
   }
 
+  .mega-menu-links a:hover {
+    color: #1a1a1a;
+  }
+
+  /* Header Actions */
   .header-actions {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 18px;
   }
 
   .search-toggle,
   .header-account,
+  .cart-toggle,
   .mobile-menu-toggle {
     background: none;
     border: none;
@@ -193,109 +324,177 @@
     color: #1a1a1a;
     display: flex;
     align-items: center;
+    padding: 4px;
+    transition: color 0.2s;
   }
 
-  .header-cart {
+  .search-toggle:hover,
+  .header-account:hover,
+  .cart-toggle:hover {
+    color: #666;
+  }
+
+  .cart-toggle {
     position: relative;
-    color: #1a1a1a;
   }
 
   .cart-count {
     position: absolute;
-    top: -8px;
-    right: -8px;
-    background: #369FFF;
+    top: -4px;
+    right: -6px;
+    background: #1a1a1a;
     color: white;
     border-radius: 50%;
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 600;
   }
 
   .mobile-menu-toggle {
     display: none;
-    flex-direction: column;
-    gap: 4px;
   }
 
-  .mobile-menu-toggle span {
-    width: 25px;
-    height: 2px;
-    background: #1a1a1a;
-    transition: all 0.3s;
+  .icon-close {
+    display: none;
   }
 
-  /* Mobile Menu Drawer */
+  .mobile-menu-toggle.active .icon-hamburger {
+    display: none;
+  }
+
+  .mobile-menu-toggle.active .icon-close {
+    display: block !important;
+  }
+
+  /* ===== MOBILE MENU - Drill-down panels ===== */
   .mobile-menu {
     display: none;
     position: fixed;
     top: 0;
     right: -100%;
-    width: 80%;
-    max-width: 320px;
+    width: 85%;
+    max-width: 400px;
     height: 100vh;
+    height: 100dvh;
     background: white;
     z-index: 200;
-    padding: 80px 20px 40px;
-    overflow-y: auto;
-    transition: right 0.3s ease;
-    box-shadow: -2px 0 10px rgba(0,0,0,0.1);
-    flex-direction: column;
+    transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
   }
 
   .mobile-menu.active {
     right: 0;
   }
 
-  .mobile-nav-list {
-    list-style: none;
-    margin-bottom: 30px;
+  /* Panels */
+  .mobile-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 80px 0 40px;
   }
 
-  .mobile-nav-link {
+  .mobile-panel--main {
+    transform: translateX(-100%);
+  }
+
+  .mobile-panel--main.active {
+    transform: translateX(0);
+  }
+
+  .mobile-panel--sub {
+    transform: translateX(100%);
+  }
+
+  .mobile-panel--sub.active {
+    transform: translateX(0);
+  }
+
+  /* Main panel list items */
+  .mobile-nav-list {
+    list-style: none;
+    padding: 0 24px;
+  }
+
+  .mobile-nav-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 16px 0;
+    background: none;
+    border: none;
+    border-bottom: none;
+    font-size: 20px;
+    font-weight: 500;
+    color: #1a1a1a;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: left;
+    font-family: inherit;
+  }
+
+  .mobile-nav-item svg {
+    color: #999;
+    flex-shrink: 0;
+  }
+
+  /* Sub-panel */
+  .mobile-back-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 24px;
+    background: none;
+    border: none;
+    border-bottom: 1px solid #e8e8e8;
+    font-size: 15px;
+    font-weight: 400;
+    color: #1a1a1a;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    font-family: inherit;
+  }
+
+  .mobile-panel-content {
+    padding: 30px 24px;
+  }
+
+  .mobile-panel-title {
+    font-size: 28px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 24px;
+  }
+
+  .mobile-sub-list {
+    list-style: none;
+  }
+
+  .mobile-sub-link {
     display: block;
     padding: 12px 0;
     color: #1a1a1a;
     text-decoration: none;
-    font-size: 16px;
-    font-weight: 500;
-    border-bottom: 1px solid #f0f0f0;
-  }
-
-  .mobile-nav-link:hover {
-    color: #369FFF;
-  }
-
-  .mobile-submenu {
-    list-style: none;
-    padding-left: 20px;
-  }
-
-  .mobile-submenu .mobile-nav-link {
-    font-size: 14px;
+    font-size: 17px;
     font-weight: 400;
+  }
+
+  .mobile-sub-link:active {
     color: #666;
   }
 
-  .mobile-menu-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding-top: 20px;
-    border-top: 1px solid #e0e0e0;
-  }
-
-  .mobile-menu-link {
-    color: #666;
-    text-decoration: none;
-    font-size: 14px;
-    padding: 8px 0;
-  }
-
+  /* Mobile menu overlay */
   .mobile-menu-overlay {
     display: none;
     position: fixed;
@@ -303,26 +502,128 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.4);
     z-index: 199;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
   }
 
   .mobile-menu-overlay.active {
     display: block;
   }
 
-  .mobile-menu-toggle.active span:nth-child(1) {
-    transform: rotate(45deg) translate(4px, 4px);
+  /* ===== CART DRAWER ===== */
+  .cart-drawer {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 85%;
+    max-width: 420px;
+    height: 100vh;
+    height: 100dvh;
+    background: white;
+    z-index: 300;
+    transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
   }
 
-  .mobile-menu-toggle.active span:nth-child(2) {
-    opacity: 0;
+  .cart-drawer.active {
+    right: 0;
   }
 
-  .mobile-menu-toggle.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(4px, -4px);
+  .cart-drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid #e8e8e8;
   }
 
+  .cart-drawer-title {
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .cart-drawer-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #1a1a1a;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+  }
+
+  .cart-drawer-body {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cart-empty-state {
+    text-align: center;
+    padding: 40px 24px;
+  }
+
+  .cart-empty-state h3 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .cart-empty-state p {
+    font-size: 14px;
+    color: #999;
+    margin-bottom: 30px;
+  }
+
+  .cart-empty-icon {
+    display: block;
+    margin: 0 auto 30px;
+  }
+
+  .cart-start-shopping {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 16px 40px;
+    background: #1a1a1a;
+    color: white;
+    text-decoration: none;
+    border-radius: 40px;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    transition: background 0.2s;
+  }
+
+  .cart-start-shopping:hover {
+    background: #333;
+  }
+
+  /* Cart drawer overlay */
+  .cart-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+    z-index: 299;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+  }
+
+  .cart-overlay.active {
+    display: block;
+  }
+
+  /* ===== Responsive ===== */
   @media (max-width: 768px) {
     .header-nav {
       display: none;
@@ -333,7 +634,7 @@
     }
 
     .mobile-menu {
-      display: flex;
+      display: block;
     }
 
     .header-container {
@@ -342,7 +643,7 @@
     }
 
     .header-actions {
-      gap: 15px;
+      gap: 14px;
     }
   }
 </style>
