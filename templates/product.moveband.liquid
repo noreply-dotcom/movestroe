@@ -17,8 +17,8 @@
           loading="eager"
         >
       {% else %}
-        <div class="mb-placeholder mb-placeholder--dark">
-          <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><rect x="20" y="4" width="24" height="56" rx="12" stroke="#444" stroke-width="2"/><rect x="24" y="16" width="16" height="20" rx="3" stroke="#555" stroke-width="1.5"/><circle cx="32" cy="48" r="3" stroke="#555" stroke-width="1.5"/></svg>
+        <div class="mb-placeholder mb-placeholder--subtle">
+          <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><rect x="20" y="4" width="24" height="56" rx="12" stroke="#ccc" stroke-width="2"/><rect x="24" y="16" width="16" height="20" rx="3" stroke="#ccc" stroke-width="1.5"/><circle cx="32" cy="48" r="3" stroke="#ccc" stroke-width="1.5"/></svg>
           <span>Product Hero Image</span>
         </div>
       {% endif %}
@@ -34,7 +34,7 @@
     <a href="#mb-buy" class="mb-hero-cta mb-reveal mb-reveal--up" data-delay="400">Buy</a>
   </div>
   <div class="mb-scroll-indicator">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 5V19M12 19L5 12M12 19L19 12" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 5V19M12 19L5 12M12 19L19 12" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
   </div>
 </section>
 
@@ -595,7 +595,7 @@
 /* ===== HERO ===== */
 .mb-hero {
   position: relative; min-height: 100vh; min-height: 100dvh;
-  background: #0a0a0a; display: flex; flex-direction: column;
+  background: #ffffff; display: flex; flex-direction: column;
   align-items: center; justify-content: center; text-align: center;
   padding: 100px 24px 80px; overflow: hidden;
 }
@@ -603,7 +603,7 @@
   position: absolute; top: 50%; left: 50%;
   transform: translate(-50%, -60%);
   width: 500px; height: 500px;
-  background: radial-gradient(circle, rgba(54, 159, 255, 0.15) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(54, 159, 255, 0.08) 0%, transparent 70%);
   pointer-events: none;
 }
 .mb-hero-product {
@@ -617,21 +617,21 @@
 .mb-hero-content { position: relative; z-index: 2; }
 .mb-hero-eyebrow {
   font-size: 14px; font-weight: 500; letter-spacing: 3px;
-  text-transform: uppercase; color: rgba(255,255,255,0.5);
+  text-transform: uppercase; color: rgba(0,0,0,0.4);
   margin-bottom: 12px;
 }
 .mb-hero-title {
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: 64px; font-weight: 700; color: white;
+  font-size: 64px; font-weight: 700; color: #1a1a1a;
   line-height: 1; margin-bottom: 16px;
   letter-spacing: -1px;
 }
 .mb-hero-tagline {
-  font-size: 20px; color: rgba(255,255,255,0.6);
+  font-size: 20px; color: rgba(0,0,0,0.5);
   font-weight: 300; margin-bottom: 24px;
 }
 .mb-hero-price {
-  font-size: 18px; color: rgba(255,255,255,0.8);
+  font-size: 18px; color: #1a1a1a;
   margin-bottom: 32px; font-weight: 500;
 }
 .mb-hero-cta {
@@ -645,7 +645,7 @@
   position: absolute; bottom: 30px; left: 50%;
   transform: translateX(-50%);
   animation: mb-bounce 2s ease infinite;
-  color: rgba(255,255,255,0.3);
+  color: rgba(0,0,0,0.25);
 }
 @keyframes mb-bounce {
   0%, 100% { transform: translateX(-50%) translateY(0); }
