@@ -1,13 +1,9 @@
 <header class="site-header">
   <div class="header-container">
     <div class="header-logo">
-      {% if shop.brand.logo %}
-        <a href="/">
-          <img src="{{ shop.brand.logo | img_url: '100x' }}" alt="{{ shop.name }}" width="100">
-        </a>
-      {% else %}
-        <a href="/" class="header-logo-text">{{ shop.name }}</a>
-      {% endif %}
+      <a href="/">
+        <img src="https://cdn.shopify.com/s/files/1/0719/9395/0343/files/MoveTogether-logo.png?v=1770620723" alt="{{ shop.name }}" class="header-logo-img">
+      </a>
     </div>
 
     <nav class="header-nav">
@@ -192,13 +188,10 @@
     align-items: center;
   }
 
-  .header-logo img {
-    height: auto;
-  }
-
-  .header-logo-text {
-    font-size: 22px;
-    font-weight: 700;
+  .header-logo-img {
+    height: 36px;
+    width: auto;
+    display: block;
   }
 
   /* Desktop Navigation */
