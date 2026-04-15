@@ -149,21 +149,86 @@
   <div class="cart-drawer-body" id="cart-drawer-body">
     <!-- Items rendered dynamically by JS -->
   </div>
+  <div class="cart-drawer-upsell" id="cart-drawer-upsell" hidden>
+    <div class="cd-upsell-header">
+      <span class="cd-upsell-title">Complete your order</span>
+    </div>
+    <div class="cd-upsell-track" id="cd-upsell-track"></div>
+  </div>
   <div class="cart-drawer-footer" id="cart-drawer-footer" style="display:none;">
     <div class="cd-shipping-bar" id="cd-shipping-bar">
       <div class="cd-shipping-track"><div class="cd-shipping-fill" id="cd-shipping-fill"></div></div>
       <p class="cd-shipping-msg" id="cd-shipping-msg"></p>
     </div>
+
+    <details class="cd-accordion" id="cd-discount">
+      <summary class="cd-accordion-summary">
+        <span>Add a discount code</span>
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </summary>
+      <div class="cd-accordion-body">
+        <form class="cd-discount-form" id="cd-discount-form" novalidate>
+          <input type="text" name="discount" id="cd-discount-input" placeholder="Discount code" autocomplete="off">
+          <button type="submit">Apply</button>
+        </form>
+        <p class="cd-discount-msg" id="cd-discount-msg" role="status"></p>
+      </div>
+    </details>
+
+    <details class="cd-accordion" id="cd-note">
+      <summary class="cd-accordion-summary">
+        <span>Add a note or gift message</span>
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </summary>
+      <div class="cd-accordion-body">
+        <textarea id="cd-note-input" name="note" rows="3" maxlength="255" placeholder="Gift message or delivery instructions"></textarea>
+        <p class="cd-note-status" id="cd-note-status" aria-live="polite"></p>
+      </div>
+    </details>
+
     <div class="cart-drawer-subtotal">
       <span>Subtotal</span>
       <span class="cart-drawer-total-price" id="cart-drawer-total"></span>
     </div>
+    <p class="cd-tax-note">Shipping &amp; taxes calculated at checkout.</p>
     <a href="/checkout" class="cart-drawer-checkout-btn" id="cart-drawer-checkout">Checkout</a>
+    <div class="cd-express" id="cd-express">
+      {{ content_for_additional_checkout_buttons }}
+    </div>
     <a href="/cart" class="cart-drawer-viewcart">View Cart</a>
     <div class="cd-trust">
-      <span>🔒 Secure checkout</span>
-      <span>🚚 Free shipping over $75</span>
-      <span>↩ 30-day returns</span>
+      <span class="cd-trust-item">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1L2 3v4c0 3.5 2.5 6.5 6 8 3.5-1.5 6-4.5 6-8V3L8 1z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M5.5 8l2 2 3-3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Secure checkout
+      </span>
+      <a href="/policies/shipping-policy" class="cd-trust-item">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="1" y="4" width="9" height="7" stroke="currentColor" stroke-width="1.3"/><path d="M10 6h3l2 2v3h-5V6z" stroke="currentColor" stroke-width="1.3"/><circle cx="4" cy="12" r="1.3" stroke="currentColor" stroke-width="1.3"/><circle cx="12" cy="12" r="1.3" stroke="currentColor" stroke-width="1.3"/></svg>
+        Free shipping $75+
+      </a>
+      <a href="/policies/refund-policy" class="cd-trust-item">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8a5 5 0 109-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M3 3v4h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        30-day returns
+      </a>
+    </div>
+    <div class="cd-payments" aria-label="Accepted payment methods">
+      {% render 'payment-icons' %}
+    </div>
+  </div>
+</div>
+
+<!-- Post-ATC upsell modal (optional; hidden by default) -->
+<div class="post-atc-modal" id="post-atc-modal" hidden role="dialog" aria-modal="true" aria-labelledby="post-atc-title">
+  <div class="post-atc-backdrop" data-post-atc-close></div>
+  <div class="post-atc-panel">
+    <button class="post-atc-close" data-post-atc-close aria-label="Close">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </button>
+    <h3 class="post-atc-title" id="post-atc-title">Added to cart ✓</h3>
+    <p class="post-atc-subtitle">Customers often add these with their order:</p>
+    <div class="post-atc-list" id="post-atc-list"></div>
+    <div class="post-atc-actions">
+      <button type="button" class="post-atc-continue" data-post-atc-close>Keep shopping</button>
+      <button type="button" class="post-atc-viewcart" id="post-atc-viewcart">View cart</button>
     </div>
   </div>
 </div>

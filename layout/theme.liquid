@@ -22,7 +22,7 @@
   {{ 'movetogether-store.css' | asset_url | stylesheet_tag }}
 </head>
 
-<body>
+<body data-post-atc="{{ settings.enable_post_atc_modal | default: false }}" data-cart-upsell="{{ settings.enable_cart_drawer_upsell | default: true }}" data-free-ship-threshold="{{ settings.free_shipping_threshold | default: 75 | times: 100 }}">
   <!-- Announcement Bar -->
   <div class="announcement-bar">
     <div class="announcement-bar-inner">

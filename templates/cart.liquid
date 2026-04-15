@@ -23,7 +23,7 @@
             <div class="cart-item">
               <div class="cart-item-image">
                 {% if item.image %}
-                  <img src="{{ item.image | image_url: width: 200 }}" alt="{{ item.title | escape }}" loading="lazy">
+                  <img src="{{ item.image | image_url: width: 200 }}" alt="{{ item.title | escape }}" width="200" height="200" loading="lazy">
                 {% else %}
                   <div class="cart-item-placeholder">
                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect x="8" y="2" width="24" height="36" rx="4" stroke="#ccc" stroke-width="1.5"/></svg>
@@ -56,33 +56,60 @@
         </div>
 
         <div class="cart-footer">
+          <details class="cart-accordion">
+            <summary>Add a discount code</summary>
+            <div class="cart-accordion-body">
+              <input type="text" name="discount" id="cart-discount-input" placeholder="Discount code" autocomplete="off">
+              <button type="button" id="cart-discount-apply">Apply</button>
+              <p class="cart-discount-msg" id="cart-discount-msg" role="status"></p>
+            </div>
+          </details>
+
+          <details class="cart-accordion">
+            <summary>Add a note or gift message</summary>
+            <div class="cart-accordion-body">
+              <textarea name="note" id="cart-note-input" rows="3" maxlength="255" placeholder="Gift message or delivery instructions">{{ cart.note | escape }}</textarea>
+              <p class="cart-note-status" id="cart-note-status" aria-live="polite"></p>
+            </div>
+          </details>
+
           <div class="cart-subtotal">
             <span>Subtotal</span>
-            <span class="cart-subtotal-price">{{ cart.total_price | money }}</span>
+            <span class="cart-subtotal-price" id="cart-subtotal-price">{{ cart.total_price | money }}</span>
           </div>
-          <p class="cart-note-text">Shipping & taxes calculated at checkout.</p>
+          <p class="cart-note-text">Shipping &amp; taxes calculated at checkout.</p>
           <button type="submit" name="checkout" class="cart-checkout-btn">Checkout</button>
+          <div class="cart-express">
+            {{ content_for_additional_checkout_buttons }}
+          </div>
           <a href="/collections/all" class="cart-continue">Continue Shopping</a>
         </div>
       </form>
 
       <div class="cart-trust">
-        <span>🔒 Secure checkout</span>
-        <span>🚚 Free shipping over $75</span>
-        <span>↩ 30-day returns</span>
+        <span class="cart-trust-item">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M9 1L2.5 3.2v4.5c0 3.8 2.8 7 6.5 8.8 3.7-1.8 6.5-5 6.5-8.8V3.2L9 1z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M6 9l2 2 4-4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Secure checkout
+        </span>
+        <a href="/policies/shipping-policy" class="cart-trust-item">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><rect x="1" y="5" width="10" height="8" stroke="currentColor" stroke-width="1.4"/><path d="M11 7h3.5L17 9.5V13h-6V7z" stroke="currentColor" stroke-width="1.4"/><circle cx="5" cy="14" r="1.5" stroke="currentColor" stroke-width="1.4"/><circle cx="13.5" cy="14" r="1.5" stroke="currentColor" stroke-width="1.4"/></svg>
+          Free shipping $75+
+        </a>
+        <a href="/policies/refund-policy" class="cart-trust-item">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9a6 6 0 1011-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M3 3v5h5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          30-day returns
+        </a>
       </div>
       <div class="cart-payments">
         <span class="cart-payments-label">We accept</span>
-        <div class="cart-payment-icons">
-          <span class="pay-icon">Visa</span>
-          <span class="pay-icon">Mastercard</span>
-          <span class="pay-icon">Amex</span>
-          <span class="pay-icon">PayPal</span>
-          <span class="pay-icon">Apple Pay</span>
-          <span class="pay-icon">Google Pay</span>
-          <span class="pay-icon">Shop Pay</span>
-        </div>
+        {% render 'payment-icons' %}
       </div>
+
+      <!-- You may also like -->
+      <section class="cart-recommendations" id="cart-recommendations" hidden aria-labelledby="cart-rec-title">
+        <h2 class="cart-rec-title" id="cart-rec-title">You may also like</h2>
+        <div class="cart-rec-grid" id="cart-rec-grid"></div>
+      </section>
     {% else %}
       <div class="cart-empty">
         <h1 class="cart-title">Your Cart is Empty</h1>
@@ -191,13 +218,67 @@
 .cart-trust {
   display: flex; gap: 20px; justify-content: center; margin-top: 32px; flex-wrap: wrap;
 }
-.cart-trust span { font-size: 13px; color: #888; }
+.cart-trust-item {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; color: #555; text-decoration: none;
+}
+.cart-trust-item:hover { color: #1a1a1a; }
 .cart-payments { text-align: center; margin-top: 20px; }
 .cart-payments-label { font-size: 11px; color: #bbb; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 10px; }
-.cart-payment-icons { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
-.pay-icon {
-  padding: 4px 10px; border: 1px solid #e0e0e0; border-radius: 4px;
-  font-size: 11px; font-weight: 600; color: #888; background: #fff;
+
+/* Accordions (discount/note) */
+.cart-accordion { border-top: 1px solid #eee; padding: 12px 0; }
+.cart-accordion summary {
+  cursor: pointer; font-size: 14px; font-weight: 500;
+  color: #1a1a1a; list-style: none; display: flex; justify-content: space-between;
+  align-items: center; padding: 8px 0;
+}
+.cart-accordion summary::-webkit-details-marker { display: none; }
+.cart-accordion summary::after {
+  content: '+'; color: #999; font-size: 18px; transition: transform 0.2s;
+}
+.cart-accordion[open] summary::after { content: '−'; }
+.cart-accordion-body { padding: 10px 0 4px; display: flex; gap: 8px; flex-wrap: wrap; }
+.cart-accordion-body input[type="text"],
+.cart-accordion-body textarea {
+  flex: 1; min-width: 180px; padding: 10px 14px;
+  border: 1px solid #ddd; border-radius: 8px; font-family: inherit;
+  font-size: 14px;
+}
+.cart-accordion-body textarea { width: 100%; resize: vertical; }
+.cart-accordion-body button {
+  padding: 10px 20px; background: #1a1a1a; color: white; border: none;
+  border-radius: 8px; font-weight: 500; cursor: pointer;
+}
+.cart-discount-msg, .cart-note-status {
+  width: 100%; font-size: 12px; color: #666; margin: 6px 0 0;
+}
+.cart-discount-msg.is-success { color: #1f7a3a; }
+.cart-discount-msg.is-error { color: #c0392b; }
+.cart-express { margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+.cart-express:empty { display: none; }
+
+/* Cart recommendations */
+.cart-recommendations { margin-top: 60px; }
+.cart-rec-title { font-size: 22px; font-weight: 700; margin-bottom: 20px; text-align: center; }
+.cart-rec-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+}
+.cart-rec-card {
+  background: white; border-radius: 12px; padding: 12px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.cart-rec-img { display: block; aspect-ratio: 1; border-radius: 8px; overflow: hidden; background: #f5f5f5; }
+.cart-rec-img img { width: 100%; height: 100%; object-fit: cover; }
+.cart-rec-name { font-size: 14px; font-weight: 500; color: #1a1a1a; text-decoration: none; line-height: 1.3; }
+.cart-rec-price { font-size: 14px; font-weight: 600; }
+.cart-rec-add {
+  margin-top: auto; padding: 10px; background: #1a1a1a; color: white;
+  border: none; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer;
+}
+.cart-rec-add[disabled] { background: #bbb; cursor: not-allowed; }
+@media (max-width: 768px) {
+  .cart-rec-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 768px) {
   .cart-item { grid-template-columns: 80px 1fr; gap: 16px; }
@@ -210,21 +291,69 @@
 
 <script>
 (function() {
-  // AJAX quantity updates for cart page
-  function updateCartItem(key, qty) {
-    fetch('/cart/change.js', {
-      method: 'POST',
-      credentials: 'same-origin',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id: key, quantity: qty })
-    })
-    .then(function(r) { return r.json(); })
-    .then(function() {
-      window.location.reload();
-    })
-    .catch(function() {
-      window.location.reload();
+  function money(cents) { return '$' + (cents / 100).toFixed(2); }
+
+  var subtotalEl = document.getElementById('cart-subtotal-price');
+  var shippingBar = document.querySelector('.cart-shipping-bar');
+  var THRESHOLD = 7500;
+
+  function reshipBar(total) {
+    if (!shippingBar) return;
+    if (total >= THRESHOLD) {
+      shippingBar.innerHTML = '<div class="cart-shipping-track"><div class="cart-shipping-fill cart-shipping-full" style="width:100%"></div></div><p class="cart-shipping-msg cart-shipping-earned">✓ You\'ve earned free shipping!</p>';
+    } else {
+      var pct = Math.round(total * 100 / THRESHOLD);
+      shippingBar.innerHTML = '<div class="cart-shipping-track"><div class="cart-shipping-fill" style="width:' + pct + '%"></div></div><p class="cart-shipping-msg">You\'re ' + money(THRESHOLD - total) + ' away from free shipping</p>';
+    }
+  }
+
+  function refreshCart(cart) {
+    if (!cart) return;
+    if (cart.item_count === 0) { window.location.reload(); return; }
+    if (subtotalEl) subtotalEl.textContent = money(cart.total_price);
+    reshipBar(cart.total_price);
+    // Update line totals and qty
+    cart.items.forEach(function(item) {
+      var row = document.querySelector('.cart-item [data-key="' + cssEscape(item.key) + '"]');
+      if (!row) return;
+      var rowEl = row.closest('.cart-item');
+      if (!rowEl) return;
+      var input = rowEl.querySelector('.qty-input');
+      if (input) input.value = item.quantity;
+      var total = rowEl.querySelector('.cart-item-total span');
+      if (total) total.textContent = money(item.final_line_price);
     });
+    // Remove rows not in cart anymore
+    var keysNow = {};
+    cart.items.forEach(function(i) { keysNow[i.key] = true; });
+    document.querySelectorAll('.cart-item').forEach(function(el) {
+      var input = el.querySelector('.qty-input');
+      if (input && !keysNow[input.getAttribute('data-key')]) el.remove();
+    });
+    // Update title count
+    var title = document.querySelector('.cart-title');
+    if (title && !/Empty/i.test(title.textContent)) title.textContent = 'Your Cart (' + cart.item_count + ')';
+  }
+
+  function cssEscape(v) {
+    if (window.CSS && CSS.escape) return CSS.escape(v);
+    return String(v).replace(/([^\w-])/g, '\\$1');
+  }
+
+  var pending = {};
+  function updateCartItem(key, qty) {
+    if (pending[key]) clearTimeout(pending[key]);
+    pending[key] = setTimeout(function() {
+      fetch('/cart/change.js', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: key, quantity: qty })
+      })
+      .then(function(r) { if (!r.ok) throw new Error(); return r.json(); })
+      .then(refreshCart)
+      .catch(function() { window.location.reload(); });
+    }, 220);
   }
 
   document.querySelectorAll('.qty-minus').forEach(function(btn) {
@@ -232,13 +361,9 @@
       var key = this.getAttribute('data-key');
       var input = this.parentNode.querySelector('.qty-input');
       var val = parseInt(input.value, 10);
-      if (val > 0) {
-        input.value = val - 1;
-        updateCartItem(key, val - 1);
-      }
+      if (val > 0) { input.value = val - 1; updateCartItem(key, val - 1); }
     });
   });
-
   document.querySelectorAll('.qty-plus').forEach(function(btn) {
     btn.addEventListener('click', function() {
       var key = this.getAttribute('data-key');
@@ -248,12 +373,137 @@
       updateCartItem(key, val + 1);
     });
   });
-
   document.querySelectorAll('.cart-item-remove').forEach(function(btn) {
     btn.addEventListener('click', function() {
-      var key = this.getAttribute('data-key');
-      updateCartItem(key, 0);
+      updateCartItem(this.getAttribute('data-key'), 0);
     });
   });
+
+  // Discount code
+  var discountBtn = document.getElementById('cart-discount-apply');
+  var discountInput = document.getElementById('cart-discount-input');
+  var discountMsg = document.getElementById('cart-discount-msg');
+  if (discountBtn) {
+    discountBtn.addEventListener('click', function() {
+      var code = (discountInput.value || '').trim();
+      if (!code) return;
+      discountMsg.textContent = 'Applying…';
+      discountMsg.className = 'cart-discount-msg';
+      fetch('/discount/' + encodeURIComponent(code), { credentials: 'same-origin' })
+        .then(function() {
+          return fetch('/cart/update.js', {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ discount: code })
+          });
+        })
+        .then(function() { return fetch('/cart.js', { credentials: 'same-origin' }); })
+        .then(function(r) { return r.json(); })
+        .then(function(cart) {
+          refreshCart(cart);
+          discountMsg.textContent = 'Code saved. Applied at checkout.';
+          discountMsg.className = 'cart-discount-msg is-success';
+        })
+        .catch(function() {
+          discountMsg.textContent = 'Could not apply code. Try again at checkout.';
+          discountMsg.className = 'cart-discount-msg is-error';
+        });
+    });
+  }
+
+  // Order note
+  var noteInput = document.getElementById('cart-note-input');
+  var noteStatus = document.getElementById('cart-note-status');
+  if (noteInput) {
+    var noteTimer;
+    noteInput.addEventListener('input', function() {
+      if (noteTimer) clearTimeout(noteTimer);
+      noteStatus.textContent = '';
+      noteTimer = setTimeout(function() {
+        fetch('/cart/update.js', {
+          method: 'POST',
+          credentials: 'same-origin',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ note: noteInput.value })
+        })
+          .then(function(r) {
+            if (!r.ok) throw new Error();
+            noteStatus.textContent = 'Saved';
+            setTimeout(function() { noteStatus.textContent = ''; }, 1500);
+          })
+          .catch(function() { noteStatus.textContent = 'Could not save note.'; });
+      }, 600);
+    });
+  }
+
+  // "You may also like" recommendations
+  (function loadCartRecs() {
+    var grid = document.getElementById('cart-rec-grid');
+    var wrap = document.getElementById('cart-recommendations');
+    if (!grid || !wrap) return;
+    fetch('/cart.js', { credentials: 'same-origin' })
+      .then(function(r) { return r.json(); })
+      .then(function(cart) {
+        if (!cart.items.length) return;
+        var seed = cart.items[0].product_id;
+        var inCart = {};
+        cart.items.forEach(function(i) { inCart[i.product_id] = true; });
+        return fetch('/recommendations/products.json?product_id=' + seed + '&limit=8&intent=related', { credentials: 'same-origin' })
+          .then(function(r) { return r.ok ? r.json() : { products: [] }; })
+          .then(function(data) {
+            var products = (data.products || []).filter(function(p) { return !inCart[p.id]; }).slice(0, 4);
+            if (!products.length) return;
+            wrap.hidden = false;
+            grid.innerHTML = products.map(function(p) {
+              var img = (p.featured_image || (p.images && p.images[0])) || '';
+              var thumb = img ? img.replace(/(\.[^.?]+)(\?|$)/, '_400x$1$2') : '';
+              var vid = (p.variants && p.variants[0] && p.variants[0].id) || p.id;
+              var avail = p.available !== false;
+              return '<div class="cart-rec-card">' +
+                '<a href="' + p.url + '" class="cart-rec-img">' +
+                  (thumb ? '<img src="' + thumb + '" alt="' + (p.title || '').replace(/"/g,'&quot;') + '" loading="lazy">' : '') +
+                '</a>' +
+                '<a href="' + p.url + '" class="cart-rec-name">' + (p.title || '') + '</a>' +
+                '<div class="cart-rec-price">' + money(p.price) + '</div>' +
+                (avail
+                  ? '<button type="button" class="cart-rec-add" data-variant="' + vid + '">Add to cart</button>'
+                  : '<button type="button" class="cart-rec-add" disabled>Sold out</button>') +
+                '</div>';
+            }).join('');
+            grid.querySelectorAll('.cart-rec-add').forEach(function(b) {
+              b.addEventListener('click', function() {
+                var vid = this.getAttribute('data-variant');
+                if (!vid) return;
+                var self = this;
+                self.disabled = true;
+                self.textContent = 'Adding…';
+                fetch('/cart/add.js', {
+                  method: 'POST',
+                  credentials: 'same-origin',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ id: vid, quantity: 1 })
+                })
+                  .then(function(r) { if (!r.ok) throw new Error(); return r.json(); })
+                  .then(function() { window.location.reload(); })
+                  .catch(function() {
+                    self.textContent = 'Add to cart';
+                    self.disabled = false;
+                  });
+              });
+            });
+          });
+      })
+      .catch(function() {});
+  })();
+
+  // Smart continue-shopping: use last viewed collection if any
+  try {
+    var last = sessionStorage.getItem('lastCollection');
+    if (last) {
+      var ct = document.querySelector('.cart-continue');
+      if (ct) ct.setAttribute('href', last);
+    }
+  } catch (e) {}
 })();
 </script>

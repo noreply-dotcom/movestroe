@@ -35,13 +35,13 @@
       },
       {
         "type": "range",
-        "id": "free_shipping_threshold_cents",
-        "label": "Free shipping threshold (cents)",
-        "info": "Amount in cents that unlocks free shipping. Example: 7500 = $75.",
+        "id": "free_shipping_threshold",
+        "label": "Free shipping threshold ($)",
+        "info": "Amount in dollars that unlocks free shipping. Example: 75 = $75.",
         "min": 0,
-        "max": 9999,
+        "max": 100,
         "step": 1,
-        "default": 7500
+        "default": 75
       }
     ]
   }

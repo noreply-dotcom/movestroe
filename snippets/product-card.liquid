@@ -15,7 +15,12 @@
     {% if product.featured_image %}
       <img
         src="{{ product.featured_image | img_url: '400x400' }}"
-        alt="{{ product.featured_image.alt | escape }}"
+        srcset="{{ product.featured_image | img_url: '200x200' }} 200w,
+                {{ product.featured_image | img_url: '400x400' }} 400w,
+                {{ product.featured_image | img_url: '600x600' }} 600w,
+                {{ product.featured_image | img_url: '800x800' }} 800w"
+        sizes="(max-width: 480px) 45vw, (max-width: 768px) 33vw, 25vw"
+        alt="{{ product.featured_image.alt | default: product.title | escape }}"
         width="400"
         height="400"
         loading="lazy">

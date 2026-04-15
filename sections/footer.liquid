@@ -77,10 +77,24 @@
       <div class="footer-section">
         <h4 class="footer-subheading">{{ "footer.newsletter_title" | t }}</h4>
         <p class="footer-newsletter-subtitle">{{ "footer.newsletter_subtitle" | t }}</p>
-        <form class="footer-newsletter-form">
-          <input type="email" name="email" placeholder="{{ "general.newsletter.label" | t }}" required>
-          <button type="submit">{{ "general.newsletter.button" | t }}</button>
-        </form>
+        {% form 'customer', class: 'footer-newsletter-form' %}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <input
+            type="email"
+            name="contact[email]"
+            id="FooterNewsletterEmail"
+            placeholder="{{ "general.newsletter.label" | t }}"
+            aria-label="{{ "general.newsletter.label" | t }}"
+            autocomplete="email"
+            required>
+          <button type="submit" name="commit">{{ "general.newsletter.button" | t }}</button>
+          {%- if form.posted_successfully? -%}
+            <p class="footer-newsletter-success" role="status">{{ "general.newsletter.success" | t | default: "Thanks for subscribing!" }}</p>
+          {%- endif -%}
+          {%- if form.errors -%}
+            <p class="footer-newsletter-error" role="alert">{{ form.errors.messages.email | default: "Please enter a valid email." }}</p>
+          {%- endif -%}
+        {% endform %}
         <p class="footer-privacy-note">{{ "footer.privacy_notice" | t }}</p>
       </div>
     </div>

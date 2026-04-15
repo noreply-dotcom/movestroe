@@ -9,6 +9,8 @@
               srcset="{{ product.featured_image | image_url: width: 400 }} 400w, {{ product.featured_image | image_url: width: 600 }} 600w, {{ product.featured_image | image_url: width: 800 }} 800w"
               sizes="(max-width: 768px) 100vw, 50vw"
               alt="{{ product.featured_image.alt | default: product.title | escape }}"
+              width="800"
+              height="800"
               loading="eager"
               id="product-main-image"
             >
@@ -17,7 +19,7 @@
             <div class="product-page-thumbs">
               {% for image in product.images %}
                 <button class="product-thumb{% if forloop.first %} active{% endif %}" data-src="{{ image | image_url: width: 800 }}" aria-label="View image {{ forloop.index }}">
-                  <img src="{{ image | image_url: width: 120 }}" alt="{{ image.alt | default: product.title | escape }}" loading="lazy">
+                  <img src="{{ image | image_url: width: 120 }}" alt="{{ image.alt | default: product.title | escape }}" width="120" height="120" loading="lazy">
                 </button>
               {% endfor %}
             </div>
@@ -34,10 +36,28 @@
           <a href="/">Home</a> / <a href="/collections/all">Products</a> / <span>{{ product.title }}</span>
         </div>
         <h1 class="product-page-title">{{ product.title }}</h1>
-        <p class="product-page-price">{{ product.price | money }}</p>
-        {% if product.compare_at_price > product.price %}
-          <p class="product-page-compare">{{ product.compare_at_price | money }}</p>
-        {% endif %}
+        <div class="product-page-price-row">
+          <p class="product-page-price" id="product-price">{{ product.price | money }}</p>
+          {% if product.compare_at_price > product.price %}
+            <p class="product-page-compare" id="product-compare">{{ product.compare_at_price | money }}</p>
+            {% assign save_pct = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price %}
+            <span class="product-page-save">Save {{ save_pct }}%</span>
+          {% endif %}
+        </div>
+
+        {%- assign cv = product.selected_or_first_available_variant -%}
+        <div class="product-page-stock" id="product-stock" data-available="{{ cv.available }}" data-inventory="{{ cv.inventory_quantity }}" data-inventory-mgmt="{{ cv.inventory_management }}">
+          {% if cv.available == false %}
+            <span class="stock-pill stock-out">Sold out</span>
+          {% elsif cv.inventory_management != blank and cv.inventory_quantity > 0 and cv.inventory_quantity <= 10 %}
+            <span class="stock-pill stock-low">Only {{ cv.inventory_quantity }} left in stock — order soon</span>
+          {% else %}
+            <span class="stock-pill stock-in">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><circle cx="5" cy="5" r="4" fill="#22c55e"/></svg>
+              In stock &amp; ready to ship
+            </span>
+          {% endif %}
+        </div>
 
         {% if product.description != blank %}
           <div class="product-page-description">
@@ -48,27 +68,67 @@
         {% if product.variants.size > 1 %}
           <div class="product-page-variants">
             {% for variant in product.variants %}
-              <label class="product-page-variant">
-                <input type="radio" name="variant-select" value="{{ variant.id }}" {% if forloop.first %}checked{% endif %}>
-                <span>{{ variant.title }}</span>
+              <label class="product-page-variant{% unless variant.available %} is-unavailable{% endunless %}">
+                <input type="radio" name="variant-select" value="{{ variant.id }}" data-price="{{ variant.price }}" data-available="{{ variant.available }}" data-inventory="{{ variant.inventory_quantity }}" data-inventory-mgmt="{{ variant.inventory_management }}" {% if variant.id == cv.id %}checked{% endif %}>
+                <span>{{ variant.title }}{% unless variant.available %} · Sold out{% endunless %}</span>
               </label>
             {% endfor %}
           </div>
         {% endif %}
 
-        <form action="/cart/add" method="post" class="product-page-form">
-          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" id="product-variant-id">
-          <button type="submit" class="product-page-add-btn">Add to Cart</button>
+        <form action="{{ routes.cart_add_url }}" method="post" class="product-page-form" enctype="multipart/form-data" novalidate>
+          <input type="hidden" name="id" value="{{ cv.id }}" id="product-variant-id">
+
+          <div class="product-page-qty">
+            <label for="product-quantity" class="product-page-qty-label">Quantity</label>
+            <div class="qty-selector qty-selector--pdp">
+              <button type="button" class="qty-btn qty-minus" aria-label="Decrease quantity">−</button>
+              <input type="number" id="product-quantity" name="quantity" value="1" min="1" max="99" class="qty-input" inputmode="numeric">
+              <button type="button" class="qty-btn qty-plus" aria-label="Increase quantity">+</button>
+            </div>
+          </div>
+
+          <button type="submit" class="product-page-add-btn" id="product-add-btn"{% unless cv.available %} disabled{% endunless %}>
+            {% if cv.available %}Add to Cart — {{ product.price | money }}{% else %}Sold out{% endif %}
+          </button>
+
+          <div class="product-page-express">
+            {{ content_for_additional_checkout_buttons }}
+          </div>
         </form>
 
         <div class="product-page-trust">
-          <span>🔒 Secure checkout</span>
-          <span>🚚 Free shipping over $75</span>
-          <span>↩ 30-day returns</span>
+          <span class="trust-item">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M9 1L2.5 3.2v4.5c0 3.8 2.8 7 6.5 8.8 3.7-1.8 6.5-5 6.5-8.8V3.2L9 1z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M6 9l2 2 4-4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Secure checkout
+          </span>
+          <a href="/policies/shipping-policy" class="trust-item">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><rect x="1" y="5" width="10" height="8" stroke="currentColor" stroke-width="1.4"/><path d="M11 7h3.5L17 9.5V13h-6V7z" stroke="currentColor" stroke-width="1.4"/><circle cx="5" cy="14" r="1.5" stroke="currentColor" stroke-width="1.4"/><circle cx="13.5" cy="14" r="1.5" stroke="currentColor" stroke-width="1.4"/></svg>
+            Free shipping $75+
+          </a>
+          <a href="/policies/refund-policy" class="trust-item">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9a6 6 0 1011-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M3 3v5h5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            30-day returns
+          </a>
+        </div>
+
+        <div class="product-page-payments">
+          {% render 'payment-icons' %}
         </div>
       </div>
     </div>
   </div>
+</div>
+
+<!-- Sticky mobile ATC -->
+<div class="pdp-sticky-atc" id="pdp-sticky-atc" aria-hidden="true">
+  <div class="pdp-sticky-info">
+    <span class="pdp-sticky-name">{{ product.title }}</span>
+    <span class="pdp-sticky-price" id="pdp-sticky-price">{{ product.price | money }}</span>
+  </div>
+  <button type="button" class="pdp-sticky-btn" id="pdp-sticky-btn"{% unless product.selected_or_first_available_variant.available %} disabled{% endunless %}>
+    {% if product.selected_or_first_available_variant.available %}Add to Cart{% else %}Sold out{% endif %}
+  </button>
 </div>
 
 <style>
@@ -132,13 +192,89 @@
   font-family: inherit;
 }
 .product-page-add-btn:hover { background: #1a7fe8; transform: scale(1.02); }
-.product-page-trust {
-  display: flex; gap: 20px; font-size: 13px; color: #999;
+.product-page-price-row { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
+.product-page-save {
+  background: #ffe9ea; color: #c0392b; font-size: 12px; font-weight: 700;
+  padding: 3px 8px; border-radius: 4px; letter-spacing: 0.3px;
 }
+.product-page-stock { margin: 8px 0 20px; }
+.stock-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 500; padding: 6px 12px;
+  border-radius: 980px; letter-spacing: 0.2px;
+}
+.stock-in { background: #eefbf2; color: #1f7a3a; }
+.stock-low { background: #fff4e5; color: #b45309; }
+.stock-out { background: #fdecec; color: #a12020; }
+
+.product-page-qty { margin-bottom: 16px; }
+.product-page-qty-label {
+  display: block; font-size: 13px; font-weight: 600; color: #1a1a1a;
+  text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;
+}
+.qty-selector--pdp {
+  display: inline-flex; align-items: center; border: 1.5px solid #ddd;
+  border-radius: 980px; overflow: hidden;
+}
+.qty-selector--pdp .qty-btn {
+  width: 44px; height: 44px; border: none; background: none;
+  font-size: 20px; cursor: pointer; color: #1a1a1a;
+  display: flex; align-items: center; justify-content: center; transition: background 0.2s;
+}
+.qty-selector--pdp .qty-btn:hover { background: #f0f0f0; }
+.qty-selector--pdp .qty-input {
+  width: 52px; height: 44px; border: none; text-align: center;
+  font-size: 15px; font-weight: 600; font-family: inherit;
+  -moz-appearance: textfield;
+}
+.qty-selector--pdp .qty-input::-webkit-outer-spin-button,
+.qty-selector--pdp .qty-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+.product-page-add-btn[disabled] { background: #bbb; cursor: not-allowed; transform: none; }
+.product-page-express { margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+.product-page-express:empty { display: none; }
+.product-page-express .shopify-payment-button__button { border-radius: 980px !important; }
+
+.product-page-variant.is-unavailable span {
+  color: #bbb; text-decoration: line-through; background: #f5f5f5;
+}
+
+.product-page-trust {
+  display: flex; gap: 18px; font-size: 13px; color: #555;
+  margin-top: 18px; flex-wrap: wrap;
+}
+.trust-item {
+  display: inline-flex; align-items: center; gap: 6px;
+  color: #555; text-decoration: none;
+}
+.trust-item:hover { color: #1a1a1a; }
+.product-page-payments { margin-top: 16px; }
+
+/* Sticky mobile ATC */
+.pdp-sticky-atc {
+  position: fixed; left: 0; right: 0; bottom: 0;
+  display: none; align-items: center; gap: 12px;
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0));
+  background: rgba(255,255,255,0.98); backdrop-filter: blur(8px);
+  border-top: 1px solid #e5e5e5; z-index: 90;
+  transform: translateY(110%); transition: transform 0.3s ease;
+}
+.pdp-sticky-atc.visible { transform: translateY(0); }
+.pdp-sticky-info { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.pdp-sticky-name { font-size: 13px; color: #555; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pdp-sticky-price { font-size: 15px; font-weight: 700; color: #1a1a1a; }
+.pdp-sticky-btn {
+  background: #369FFF; color: white; border: none; border-radius: 980px;
+  padding: 12px 24px; font-size: 15px; font-weight: 600; cursor: pointer;
+  font-family: inherit; white-space: nowrap;
+}
+.pdp-sticky-btn[disabled] { background: #bbb; cursor: not-allowed; }
+
 @media (max-width: 768px) {
   .product-page-grid { grid-template-columns: 1fr; gap: 32px; }
   .product-page-title { font-size: 28px; }
-  .product-page { padding: 20px 0 80px; }
+  .product-page { padding: 20px 0 100px; }
+  .pdp-sticky-atc { display: flex; }
 }
 </style>
 
@@ -156,13 +292,106 @@
       });
     });
   }
+
+  function formatMoney(cents) { return '$' + (cents / 100).toFixed(2); }
+
+  var priceEl = document.getElementById('product-price');
+  var addBtn = document.getElementById('product-add-btn');
+  var stickyPrice = document.getElementById('pdp-sticky-price');
+  var stickyBtn = document.getElementById('pdp-sticky-btn');
+  var stockWrap = document.getElementById('product-stock');
+  var qtyInput = document.getElementById('product-quantity');
+  var variantInput = document.getElementById('product-variant-id');
+  var productForm = document.querySelector('.product-page-form');
+
+  function setButtonState(available, priceCents) {
+    if (!addBtn) return;
+    if (available) {
+      addBtn.disabled = false;
+      addBtn.textContent = 'Add to Cart — ' + formatMoney(priceCents);
+      if (stickyBtn) { stickyBtn.disabled = false; stickyBtn.textContent = 'Add to Cart'; }
+    } else {
+      addBtn.disabled = true;
+      addBtn.textContent = 'Sold out';
+      if (stickyBtn) { stickyBtn.disabled = true; stickyBtn.textContent = 'Sold out'; }
+    }
+  }
+
+  function setStock(available, inv, mgmt) {
+    if (!stockWrap) return;
+    if (!available) {
+      stockWrap.innerHTML = '<span class="stock-pill stock-out">Sold out</span>';
+    } else if (mgmt && inv !== '' && inv !== 'null' && parseInt(inv, 10) > 0 && parseInt(inv, 10) <= 10) {
+      stockWrap.innerHTML = '<span class="stock-pill stock-low">Only ' + inv + ' left in stock — order soon</span>';
+    } else {
+      stockWrap.innerHTML = '<span class="stock-pill stock-in"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><circle cx="5" cy="5" r="4" fill="#22c55e"/></svg> In stock &amp; ready to ship</span>';
+    }
+  }
+
   // Variant selector
   var radios = document.querySelectorAll('.product-page-variant input');
-  var variantId = document.getElementById('product-variant-id');
-  if (radios.length > 0 && variantId) {
+  if (radios.length > 0 && variantInput) {
     radios.forEach(function(radio) {
-      radio.addEventListener('change', function() { variantId.value = this.value; });
+      radio.addEventListener('change', function() {
+        variantInput.value = this.value;
+        var price = parseInt(this.getAttribute('data-price'), 10) || 0;
+        var available = this.getAttribute('data-available') === 'true';
+        var inv = this.getAttribute('data-inventory');
+        var mgmt = this.getAttribute('data-inventory-mgmt');
+        if (priceEl) priceEl.textContent = formatMoney(price);
+        if (stickyPrice) stickyPrice.textContent = formatMoney(price);
+        setButtonState(available, price);
+        setStock(available, inv, mgmt);
+      });
     });
+  }
+
+  // Qty selector
+  if (qtyInput) {
+    var minus = document.querySelector('.product-page-qty .qty-minus');
+    var plus = document.querySelector('.product-page-qty .qty-plus');
+    if (minus) minus.addEventListener('click', function() {
+      var v = Math.max(1, parseInt(qtyInput.value, 10) - 1);
+      qtyInput.value = v;
+    });
+    if (plus) plus.addEventListener('click', function() {
+      var v = Math.min(99, parseInt(qtyInput.value, 10) + 1);
+      qtyInput.value = v;
+    });
+    qtyInput.addEventListener('change', function() {
+      var v = parseInt(qtyInput.value, 10);
+      if (isNaN(v) || v < 1) qtyInput.value = 1;
+      if (v > 99) qtyInput.value = 99;
+    });
+  }
+
+  // Sticky button submits form
+  if (stickyBtn && productForm) {
+    stickyBtn.addEventListener('click', function() {
+      if (stickyBtn.disabled) return;
+      if (typeof productForm.requestSubmit === 'function') {
+        productForm.requestSubmit();
+      } else {
+        productForm.submit();
+      }
+    });
+  }
+
+  // Sticky visibility: show once user scrolls past main ATC on mobile
+  var stickyEl = document.getElementById('pdp-sticky-atc');
+  if (stickyEl && addBtn) {
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          stickyEl.classList.remove('visible');
+          stickyEl.setAttribute('aria-hidden', 'true');
+        } else {
+          stickyEl.classList.add('visible');
+          stickyEl.setAttribute('aria-hidden', 'false');
+        }
+      });
+    }, { threshold: 0 });
+    io.observe(addBtn);
   }
 })();
 </script>
