@@ -1,1 +1,48 @@
-[]
+[
+  {
+    "name": "theme_info",
+    "theme_name": "MoveTogether",
+    "theme_version": "1.0.0",
+    "theme_author": "MoveTogether",
+    "theme_documentation_url": "https:\/\/movetogether.com",
+    "theme_support_email": "support@movetogether.com",
+    "theme_support_url": "https:\/\/movetogether.com"
+  },
+  {
+    "name": "Conversion",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Upsell & cross-sell"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_post_atc_modal",
+        "label": "Enable post-add-to-cart upsell modal",
+        "info": "Shows a small modal with complementary product suggestions right after the customer adds an item. Falls back to cart drawer if no recommendations are available.",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_cart_drawer_upsell",
+        "label": "Enable cart drawer upsell",
+        "info": "Shows a 'Complete your order' carousel inside the cart drawer, powered by Shopify's recommendations API.",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Free shipping"
+      },
+      {
+        "type": "range",
+        "id": "free_shipping_threshold_cents",
+        "label": "Free shipping threshold (cents)",
+        "info": "Amount in cents that unlocks free shipping. Example: 7500 = $75.",
+        "min": 0,
+        "max": 9999,
+        "step": 500,
+        "default": 7500
+      }
+    ]
+  }
+]
