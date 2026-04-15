@@ -59,7 +59,7 @@
           <details class="cart-accordion">
             <summary>Add a discount code</summary>
             <div class="cart-accordion-body">
-              <input type="text" name="discount" id="cart-discount-input" placeholder="Discount code" autocomplete="off">
+              <input type="text" name="discount" id="cart-discount-input" placeholder="Discount code" autocomplete="off" autocapitalize="characters" inputmode="text">
               <button type="button" id="cart-discount-apply">Apply</button>
               <p class="cart-discount-msg" id="cart-discount-msg" role="status"></p>
             </div>
@@ -162,15 +162,15 @@
   border-radius: 980px; overflow: hidden;
 }
 .qty-btn {
-  width: 36px; height: 36px; border: none; background: none;
+  width: 44px; height: 44px; border: none; background: none;
   font-size: 18px; cursor: pointer; color: #1a1a1a;
   display: flex; align-items: center; justify-content: center;
   transition: background 0.2s;
 }
 .qty-btn:hover { background: #f0f0f0; }
 .qty-input {
-  width: 40px; height: 36px; border: none; text-align: center;
-  font-size: 14px; font-weight: 600; -moz-appearance: textfield;
+  width: 48px; height: 44px; border: none; text-align: center;
+  font-size: 16px; font-weight: 600; -moz-appearance: textfield;
   font-family: inherit;
 }
 .qty-input::-webkit-outer-spin-button,
@@ -243,7 +243,7 @@
 .cart-accordion-body textarea {
   flex: 1; min-width: 180px; padding: 10px 14px;
   border: 1px solid #ddd; border-radius: 8px; font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
 }
 .cart-accordion-body textarea { width: 100%; resize: vertical; }
 .cart-accordion-body button {

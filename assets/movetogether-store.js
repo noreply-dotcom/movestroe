@@ -771,17 +771,32 @@ document.addEventListener('DOMContentLoaded', function() {
     var postAtcModal = document.getElementById('post-atc-modal');
     var postAtcList = document.getElementById('post-atc-list');
 
+    var postAtcLastFocus = null;
+    function focusableIn(el) {
+      return Array.prototype.slice.call(el.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      )).filter(function(n) { return !n.disabled && n.offsetParent !== null; });
+    }
+
     function closePostAtc() {
       if (!postAtcModal) return;
       postAtcModal.classList.remove('active');
       setTimeout(function() { postAtcModal.hidden = true; }, 220);
       document.body.style.overflow = '';
+      if (postAtcLastFocus && typeof postAtcLastFocus.focus === 'function') {
+        postAtcLastFocus.focus();
+      }
     }
 
     function openPostAtc() {
       if (!postAtcModal) return;
+      postAtcLastFocus = document.activeElement;
       postAtcModal.hidden = false;
-      requestAnimationFrame(function() { postAtcModal.classList.add('active'); });
+      requestAnimationFrame(function() {
+        postAtcModal.classList.add('active');
+        var first = focusableIn(postAtcModal)[0];
+        if (first) first.focus();
+      });
       document.body.style.overflow = 'hidden';
     }
 
@@ -797,7 +812,19 @@ document.addEventListener('DOMContentLoaded', function() {
         });
       }
       document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && !postAtcModal.hidden) closePostAtc();
+        if (postAtcModal.hidden) return;
+        if (e.key === 'Escape') { closePostAtc(); return; }
+        if (e.key === 'Tab') {
+          var items = focusableIn(postAtcModal);
+          if (!items.length) return;
+          var first = items[0];
+          var last = items[items.length - 1];
+          if (e.shiftKey && document.activeElement === first) {
+            e.preventDefault(); last.focus();
+          } else if (!e.shiftKey && document.activeElement === last) {
+            e.preventDefault(); first.focus();
+          }
+        }
       });
     }
 
