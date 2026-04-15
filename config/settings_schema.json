@@ -40,7 +40,7 @@
         "info": "Amount in cents that unlocks free shipping. Example: 7500 = $75.",
         "min": 0,
         "max": 9999,
-        "step": 500,
+        "step": 1,
         "default": 7500
       }
     ]
